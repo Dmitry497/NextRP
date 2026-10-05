@@ -1,0 +1,245 @@
+/* ===== HEADER ===== */
+.Header_wrapper__5sewT {
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, .25);
+}
+.Header_wrapper__5sewT:after {
+    content: "";
+    height: 2px;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background: radial-gradient(50% 900% at 50% 50%, hsla(0,0%,100%,.1) 0, hsla(0,0%,100%,.05) 100%);
+}
+.Header_header__T4nh2 {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 100%;
+}
+@media screen and (max-width: 1440px) { .Header_header__T4nh2 { padding: 0 24px; } }
+@media screen and (max-width: 960px) { .Header_header__T4nh2 { justify-content: space-between; } }
+@media screen and (max-width: 768px) { .Header_header__T4nh2 { padding: 0 12px; } }
+
+.Header_divider__TZopV { height: 32px !important; }
+
+.Header_logo___rmP6 {
+    padding-top: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.Header_logo___rmP6 img {
+    width: 145px;
+    height: 64px;
+    object-fit: contain;
+}
+
+/* ===== NAVBAR ===== */
+.NavBar_nav__rNNWg { display: flex; align-items: center; height: 100%; }
+.NavBar_navList__0GjYK { display: flex; gap: 32px; height: inherit; }
+.NavBar_navItem__9y262 {
+    position: relative;
+    cursor: pointer;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    transition: all .3s ease;
+    height: inherit;
+}
+.NavBar_navItem__9y262:before, .NavBar_navItem__9y262:after {
+    content: "";
+    position: absolute;
+    z-index: 0;
+    width: 100%;
+    bottom: 0;
+    transition: all .3s ease;
+    opacity: 0;
+}
+.NavBar_navItem__9y262:before {
+    background: radial-gradient(50% 100% at 50% 100%, rgba(255,58,58,.15) 0, rgba(27,27,27,0) 100%);
+    height: 24px;
+    left: -50%;
+    transform: translateX(50%);
+}
+.NavBar_navItem__9y262:after { background: red; height: 2px; left: 0; }
+.NavBar_navItem__9y262:hover {
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.NavBar_navItem__9y262:hover:after, .NavBar_navItem__9y262:hover:before { opacity: 1; }
+.NavBar_navLink__m_hCl {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21.79px;
+    text-align: left;
+    text-decoration: none;
+    color: #f4e9e9;
+    text-transform: uppercase;
+    height: inherit;
+    display: flex;
+    align-items: center;
+}
+
+/* ===== SOCIALS ===== */
+.Socials_socials__nN8pJ { display: flex; gap: 12px; }
+.Socials_link__nauKt {
+    width: 32px;
+    height: 32px;
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.Socials_link__nauKt svg {
+    width: 100%;
+    height: 100%;
+    transition: all .3s ease;
+}
+.Socials_link__nauKt svg path { fill: #F4E9E9; }
+.Socials_link__nauKt:hover:before {
+    content: "";
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    right: 50%;
+    top: 0;
+    transform: translateX(50%);
+    z-index: -1;
+    background: radial-gradient(51.55% 50% at 50% 50%, rgba(255,58,58,.15) 0, rgba(27,27,27,0) 100%);
+}
+.Socials_link__nauKt:hover svg path { fill: url(#bgHover); }
+
+/* ===== BURGER ===== */
+.BurgerMenu_wrapper__YQoUZ {
+    height: 100%; width: auto;
+    position: relative;
+    z-index: 999;
+    display: none;
+}
+@media screen and (max-width: 960px) { .BurgerMenu_wrapper__YQoUZ { display: block; } }
+.BurgerMenu_btn__EaQgZ {
+    width: auto; height: 100%;
+    padding: 0;
+    display: flex; align-items: center;
+    border: 0; background: none;
+    color: red; font-size: 40px;
+    cursor: pointer;
+}
+.BurgerMenu_content__Ud1Vq {
+    width: 320px;
+    height: 100vh;
+    background: rgba(0,0,0,.75);
+    border-right: 2px solid hsla(0,0%,100%,.051);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 24px 0;
+    left: -344px;
+    position: absolute;
+    z-index: 999;
+    transition: left .3s ease;
+}
+.BurgerMenu_content__Ud1Vq.BurgerMenu_open__osOpx { left: -24px; }
+.BurgerMenu_content__Ud1Vq .BurgerMenu_title__7Oj3S {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.79px;
+    text-align: center;
+    opacity: .5;
+    padding: 8px 0;
+    position: relative;
+}
+.BurgerMenu_list__WwhVg {
+    width: 100%; height: auto;
+    display: flex; flex-direction: column; align-items: center;
+}
+.BurgerMenu_listItem__Qz_PK {
+    font-size: 16px; width: 100%;
+    font-weight: 700;
+    line-height: 21.79px;
+    text-align: center;
+    padding: 8px 0;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+.BurgerMenu_listItem__Qz_PK a {
+    height: 100%; width: 100%;
+    color: inherit; text-decoration: none;
+    display: flex; align-items: center; justify-content: center;
+}
+.BurgerMenu_listItem__Qz_PK svg {
+    width: 32px; height: 32px;
+    margin-right: 8px;
+}
+
+/* ===== PersonalAccount ===== */
+.PersonalAccount_wrapper__Vkm05 {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    flex: 1 1;
+}
+@media screen and (max-width: 960px) { .PersonalAccount_wrapper__Vkm05 { flex: 0 1; } }
+.PersonalAccount_btns__xQv_A { gap: 16px; display: flex; }
+
+/* ===== КНОПКА С ЧЕЛОВЕЧКОМ ===== */
+.PersonalAccount_userBtn__FNOgH {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    padding: 0 !important;
+    background: hsla(0, 0%, 100%, .03);
+    border: 2px solid hsla(0, 0%, 100%, .1) !important;
+    box-shadow: none !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .3s ease, border-color .3s ease;
+}
+.PersonalAccount_userBtn__FNOgH div {
+    padding: 0 !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.PersonalAccount_userBtn__FNOgH .Button_text__AWlPI {
+    padding: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+.PersonalAccount_userBtn__FNOgH svg {
+    width: 20px;
+    height: 20px;
+    transition: fill .3s ease;
+}
+.PersonalAccount_userBtn__FNOgH svg path {
+    fill: #ff3a3a;
+    transition: fill .3s ease;
+}
+
+/* Ховер — красная заливка, белая иконка, светлый бордер */
+.PersonalAccount_userBtn__FNOgH:hover {
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33) !important;
+    border-color: hsla(0, 0%, 100%, .3) !important;
+}
+.PersonalAccount_userBtn__FNOgH:hover svg path {
+    fill: #ffffff;
+}
+
+/* Кнопка "Пополнить счёт" */
+.PersonalAccount_topUpBtn__i9rUG { width: 228px; }
+@media screen and (max-width: 1140px) { .PersonalAccount_topUpBtn__i9rUG { display: none !important; } }

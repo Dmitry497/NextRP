@@ -1,0 +1,305 @@
+/* ===== DEVELOP ===== */
+.DevelopBlock_wrapper__l26DJ {
+    background: radial-gradient(60.55% 50% at 50% 50%, rgba(255,58,58,.15) 0, rgba(27,27,27,.15) 100%);
+}
+.DevelopBlock_btnWrapper__40lAp { padding-top: 40px; }
+
+/* ===== СЛАЙДЕР С ПАРАМЕТРАМИ ===== */
+.sliderWithParamsWrapper { position: relative; }
+
+.sliderWithParams {
+    position: relative;
+    top: 0; left: 0;
+    width: 100%;
+    height: 720px;
+}
+@media screen and (max-width: 768px) {
+    .sliderWithParams { height: 100vw; }
+}
+.sliderWithParams .swiper-slide {
+    position: relative;
+    height: auto;
+}
+.sliderWithParams .swiper-slide .slideImg {
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: auto;
+    max-width: 720px;
+    max-height: 720px;
+}
+.sliderWithParams .swiper-slide .slideImg img {
+    width: 100%; height: 100%;
+}
+
+/* Стрелки слайдера */
+.sliderWithParams .swiper-button-prev { left: calc(50% - 360px + 75px); }
+.sliderWithParams .swiper-button-next { right: calc(50% - 360px + 75px); }
+@media screen and (max-width: 1140px) {
+    .sliderWithParams .swiper-button-prev { left: calc(50% - 360px + 120px); }
+    .sliderWithParams .swiper-button-next { right: calc(50% - 360px + 120px); }
+}
+.sliderWithParams .swiper-button-next,
+.sliderWithParams .swiper-button-prev {
+    background: rgba(0,0,0,.75);
+    border-radius: 44px;
+    width: 40px; height: 40px;
+    border: 2px solid hsla(0,0%,100%,.1);
+    transition: all .3s ease;
+}
+@media screen and (max-width: 900px) {
+    .sliderWithParams .swiper-button-next,
+    .sliderWithParams .swiper-button-prev { display: none; }
+}
+.sliderWithParams .swiper-button-next:after,
+.sliderWithParams .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: 700;
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sliderWithParams .swiper-button-next:hover,
+.sliderWithParams .swiper-button-prev:hover {
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+    box-shadow: 0 16px 32px 0 rgba(253,59,57,.25);
+    border: 2px solid hsla(0,42%,94%,.3);
+}
+.sliderWithParams .swiper-button-next:hover:after,
+.sliderWithParams .swiper-button-prev:hover:after {
+    background: #f6e9e9;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===== БЛОК РЕЙТИНГОВ (панель слева) ===== */
+.ratingsBlock {
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 223px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-left: -120px;
+    z-index: 10;
+}
+@media screen and (max-width: 1140px) {
+    .ratingsBlock { margin-left: 20px; }
+}
+@media screen and (max-width: 768px) {
+    .ratingsBlock { display: none; }
+}
+.ratingsBlockTitleWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    border-radius: 4px;
+    padding: 0 16px;
+}
+.ratingsBlockTitleWrapper:before {
+    content: "";
+    position: absolute;
+    border-radius: 4px;
+    box-shadow: -2px 0 0 hsla(0,42%,94%,.5);
+    left: 0; top: 2px;
+    height: 100%;
+    width: 5px;
+}
+.ratingsBlockTitle {
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 32.68px;
+    text-align: left;
+}
+.ratingsBlockDescription {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.79px;
+    text-align: left;
+}
+.ratingsBlock .ratings {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.ratingsBlock .rating {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    position: relative;
+    padding: 0 16px;
+}
+.ratingsBlock .rating:before {
+    content: "";
+    position: absolute;
+    border-radius: 4px;
+    left: 0; top: 2px;
+    height: 100%;
+    width: 5px;
+}
+.ratingsBlock .rating:first-of-type:before { box-shadow: -2px 0 0 rgba(85,215,98,.5); }
+.ratingsBlock .rating:nth-of-type(2):before { box-shadow: -2px 0 0 rgba(215,140,85,.5); }
+.ratingsBlock .rating:nth-of-type(3):before { box-shadow: -2px 0 0 rgba(85,137,215,.5); }
+.ratingsBlock .ratingTitle {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 21.79px;
+    text-align: left;
+}
+.ratingsBlock .ratingIcons {
+    display: flex;
+    gap: 4px;
+    width: 100%;
+    height: 4px;
+}
+.ratingsBlock .ratingIcon {
+    width: 32px;
+    height: 100%;
+    border-radius: 2px;
+    background: hsla(0,42%,94%,.3);
+}
+.ratingsBlock .ratingIcon.filled {
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+}
+
+/* ===== АЛЬБОМ (иконки внизу) ===== */
+.sliderWithParamsAlbumWrapper { position: relative; }
+
+.sliderWithParamsAlbum {
+    width: 100%;
+    height: 175px;
+    margin: -160px auto auto;
+    position: relative;
+    padding: 0 20px;
+    overflow: visible !important;
+}
+
+/* Обёртка Swiper — строго по центру */
+.sliderWithParamsAlbum .swiper-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+    width: 100% !important;
+    margin: 0 auto;
+    position: relative;
+    transform: none !important;
+}
+
+/* Линии по бокам от иконок */
+.sliderWithParamsAlbum .swiper-wrapper:after,
+.sliderWithParamsAlbum .swiper-wrapper:before {
+    content: "";
+    position: absolute;
+    height: 2px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 150px;
+    opacity: .1;
+    border-radius: 2px;
+    background: linear-gradient(90deg, hsla(0,33%,94%,0), #f4e9e9);
+    pointer-events: none;
+}
+.sliderWithParamsAlbum .swiper-wrapper:before {
+    right: calc(50% + 120px);
+}
+.sliderWithParamsAlbum .swiper-wrapper:after {
+    left: calc(50% + 120px);
+    transform: rotate(180deg) translateY(-50%);
+}
+@media screen and (max-width: 768px) {
+    .sliderWithParamsAlbum .swiper-wrapper:after,
+    .sliderWithParamsAlbum .swiper-wrapper:before { width: 19.53vw; }
+}
+
+/* Каждая иконка */
+.sliderWithParamsAlbum .swiper-slide {
+    width: 51px !important;
+    height: 51px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    background: linear-gradient(0deg, #291f1f, #302020);
+    margin: 0 8px;
+    transition: all .3s ease;
+    cursor: pointer;
+    position: relative;
+    transform: none !important;
+}
+.sliderWithParamsAlbum .swiper-slide:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    left: -2px; top: -2px;
+    background: linear-gradient(180deg, hsla(0,0%,100%,.019), hsla(0,0%,100%,.1));
+    z-index: -1;
+    border-radius: 6px;
+    transition: all .3s ease;
+}
+.sliderWithParamsAlbum .swiper-slide:hover:not(.swiper-slide-thumb-active):before {
+    box-shadow: 0 16px 32px 0 rgba(253,59,57,.251);
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+}
+.sliderWithParamsAlbum .swiper-slide:hover:not(.swiper-slide-thumb-active) svg path {
+    fill: url(#bgHover);
+}
+
+/* SVG внутри иконки */
+.sliderWithParamsAlbum .swiper-slide svg {
+    width: 32px;
+    height: 32px;
+    display: block;
+}
+.sliderWithParamsAlbum .swiper-slide svg path {
+    fill: #F4E9E9;
+    transition: fill .3s ease;
+}
+
+/* Активная иконка */
+.sliderWithParamsAlbum .swiper-slide-thumb-active {
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+    width: 60px !important;
+    height: 60px;
+    box-shadow: 0 16px 32px 0 rgba(253,59,57,.251);
+}
+.sliderWithParamsAlbum .swiper-slide-thumb-active:before {
+    background: linear-gradient(0deg, #ea4d39, #f37f73);
+}
+.sliderWithParamsAlbum .swiper-slide-thumb-active svg path {
+    fill: #f6e9e9;
+}
+
+/* Стрелки альбома — скрыты, т.к. перетаскивание отключено */
+.sliderWithParamsAlbum .swiper-button-next,
+.sliderWithParamsAlbum .swiper-button-prev {
+    display: none;
+}
+
+/* Подписи под иконками */
+.sliderWithParamsAlbumWrapper .slide-title,
+.sliderWithParamsAlbumWrapper .slide-description {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+}
+.sliderWithParamsAlbumWrapper .slide-title {
+    top: 15px;
+    opacity: .7;
+}
+.sliderWithParamsAlbumWrapper .slide-description {
+    top: 125px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.79px;
+    opacity: .5;
+}

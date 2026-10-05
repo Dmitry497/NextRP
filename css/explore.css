@@ -1,0 +1,151 @@
+/* ===== EXPLORE ===== */
+.ExploreBlock_title___zVXp { position: relative; }
+.ExploreBlock_btnWrapper__yTtvU { padding-top: 40px; }
+
+.sliderAlbum {
+    width: 100%;
+    padding-top: 30px;
+    position: relative;
+}
+.sliderAlbum .swiper-slide {
+    background-position: 50%;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    max-width: 853px;
+    max-height: 480px;
+    border-radius: 8px;
+    transition: filter .4s ease, transform .4s ease;
+}
+.sliderAlbum .swiper-slide-active {
+    filter: brightness(1);
+    transform: scale(1);
+}
+.sliderAlbum .swiper-slide:not(.swiper-slide-active) {
+    filter: brightness(.3);
+    transform: scale(0.75);
+}
+@media screen and (max-width: 1024px) {
+    .sliderAlbum .swiper-slide { width: 90%; }
+}
+@media screen and (max-width: 768px) {
+    .sliderAlbum .swiper-slide { width: 100%; }
+}
+.sliderAlbum .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+}
+
+/* Стрелки */
+.sliderAlbum .swiper-button-next,
+.sliderAlbum .swiper-button-prev {
+    background: rgba(0,0,0,.75);
+    border-radius: 44px;
+    width: 40px;
+    height: 40px;
+    border: 2px solid hsla(0,0%,100%,.1);
+    transition: all .3s ease;
+}
+.sliderAlbum .swiper-button-next:after,
+.sliderAlbum .swiper-button-prev:after {
+    font-size: 16px;
+    font-weight: 700;
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: all .3s ease;
+}
+.sliderAlbum .swiper-button-next:hover,
+.sliderAlbum .swiper-button-prev:hover {
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+    box-shadow: 0 0 20px 4px rgba(255, 58, 58, 0.45), 0 16px 32px 0 rgba(253,59,57,.25);
+    border: 2px solid hsla(0,42%,94%,.3);
+}
+.sliderAlbum .swiper-button-next:hover:after,
+.sliderAlbum .swiper-button-prev:hover:after {
+    background: #f6e9e9;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.sliderAlbum .swiper-button-prev { left: calc(50% - 390px); }
+.sliderAlbum .swiper-button-next { right: calc(50% - 390px); }
+@media screen and (max-width: 900px) {
+    .sliderAlbum .swiper-button-prev { left: 50px; }
+    .sliderAlbum .swiper-button-next { right: 50px; }
+}
+@media screen and (max-width: 768px) {
+    .sliderAlbum .swiper-button-next,
+    .sliderAlbum .swiper-button-prev { display: none; }
+}
+
+/* Миниатюры */
+.sliderAlbumCarrousel {
+    height: 104px;
+    width: 1024px;
+    max-width: calc(100% - 40px);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-sizing: border-box;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    background: hsla(0,0%,100%,.05);
+    box-shadow: 0 0 32px 0 rgba(0,0,0,.25);
+    margin: -30px auto 0;
+    align-items: center;
+}
+@media screen and (max-width: 1024px) {
+    .sliderAlbumCarrousel {
+        width: calc(100% - 24px);
+        max-width: calc(100% - 24px);
+    }
+}
+@media screen and (max-width: 768px) {
+    .sliderAlbumCarrousel { width: 100%; max-width: 100%; margin: -30px 0 0; }
+}
+.sliderAlbumCarrousel .swiper-wrapper {
+    align-items: center;
+    justify-content: center;
+    padding: 4px 16px;
+}
+.sliderAlbumCarrousel .swiper-slide {
+    width: 128px !important;
+    height: 72px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+}
+.sliderAlbumCarrousel .swiper-slide img {
+    display: block;
+    width: 100%; height: 100%;
+    border-radius: inherit;
+    transition: all .3s ease;
+}
+.sliderAlbumCarrousel .swiper-slide-thumb-active:before {
+    content: "";
+    position: absolute;
+    left: -4px; top: -4px;
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+    width: calc(100% + 8px);
+    height: calc(100% + 8px);
+    z-index: -1;
+    border-radius: 10px;
+    transition: all .3s ease;
+    box-shadow: 0 16px 32px 0 rgba(255,58,58,.25);
+}
+
+/* Кнопка — по центру */
+.ExploreBlock_btnWrapper__yTtvU {
+    width: 100%;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center;
+    padding-top: 40px;
+    margin: 0 auto;
+}
+.ExploreBlock_btnWrapper__yTtvU button {
+    margin: 0 auto;
+}

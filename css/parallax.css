@@ -1,0 +1,35 @@
+/* ===== PARALLAX ===== */
+.ParallaxChild_child___vz_a {
+    position: absolute;
+    background: hsla(0,0%,100%,.05);
+    border: 1px solid hsla(0,0%,100%,.15);
+    border-radius: 4px;
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    backdrop-filter: blur(25px) saturate(180%);
+    transform: skew(-23deg) rotate(-15deg);
+    will-change: transform;
+    box-shadow: inset 0 0 20px hsla(0,0%,100%,.06);
+    pointer-events: none;
+    z-index: 5;
+}
+
+@supports (-webkit-backdrop-filter: blur(25px)) {
+    .ParallaxChild_child___vz_a {
+        -webkit-backdrop-filter: blur(30px) saturate(200%);
+    }
+}
+
+.WelcomeBlock_wrapper__LP6lb,
+.DevelopBlock_wrapper__l26DJ,
+.FightBlock_wrapper__WHDiV,
+.ExploreBlock_title___zVXp,
+.StandOutBlock_wrapper__HNI2u,
+.WinBlock_wrapper__KcjTt {
+    overflow: visible !important;
+}
+
+@media screen and (max-width: 768px) {
+    .ParallaxChild_child___vz_a {
+        display: none;
+    }
+}

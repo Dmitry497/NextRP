@@ -1,0 +1,26 @@
+/* ===== WIN ===== */
+.WinBlock_wrapper__KcjTt {
+    background: linear-gradient(180deg, #000, transparent);
+    position: relative;
+    overflow: hidden;
+}
+.WinBlock_title__HHuOr {
+    padding-top: 10px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Поднимаем карточки вверх как в fight */
+.WinBlock_wrapper__KcjTt .ThreeCards_cards__msRla {
+    margin-top: -160px;   /* ← было -100px, стало -160px */
+}
+
+/* Кнопка */
+.WinBlock_wrapper__KcjTt .btnWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    position: relative;
+    z-index: 2;
+}

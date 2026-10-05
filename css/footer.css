@@ -1,0 +1,137 @@
+/* ===== FOOTER ===== */
+.Footer_wrapper__XVuLU {
+    width: 100%;
+    height: auto;
+    background: rgba(0,0,0,.251);
+    color: inherit;
+    border-top: 2px solid hsla(0,0%,100%,.1);
+}
+.Footer_wrapper__XVuLU a {
+    color: inherit;
+    text-decoration: none;
+}
+.Footer_container__rvM4J {
+    padding: 88px 80px 30px !important;
+}
+@media screen and (max-width: 1140px) {
+    .Footer_container__rvM4J { padding: 20px 57px 30px !important; }
+}
+.Footer_logo___CKMq {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    margin: auto 0;
+    cursor: pointer;
+}
+@media screen and (max-width: 1140px) {
+    .Footer_logo___CKMq {
+        flex: 1 1;
+        width: 100%;
+        justify-content: center;
+    }
+}
+.Footer_divider__Rx4_N { display: block; }
+@media screen and (max-width: 900px) {
+    .Footer_divider__Rx4_N {
+        width: 100% !important;
+        height: 2px !important;
+        margin: 16px 0;
+    }
+}
+.Footer_upper__RMQF8 {
+    display: flex;
+    justify-content: space-between;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 27.24px;
+    text-align: left;
+    height: 100%;
+}
+@media screen and (max-width: 1140px) { .Footer_upper__RMQF8 { flex-wrap: wrap; } }
+@media screen and (max-width: 900px) {
+    .Footer_upper__RMQF8 { flex-direction: column; }
+}
+.Footer_nav__LoIij, .Footer_socials__Xz2Pe, .Footer_links__TzdIy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.Footer_nav__LoIij li, .Footer_socials__Xz2Pe li, .Footer_links__TzdIy li {
+    display: flex;
+    flex-direction: column;
+}
+.Footer_nav__LoIij a, .Footer_socials__Xz2Pe a { opacity: .7; }
+.Footer_nav__LoIij a:hover, .Footer_socials__Xz2Pe a:hover { opacity: 1; }
+.Footer_nav__LoIij span, .Footer_socials__Xz2Pe span { opacity: .7; }
+.Footer_nav__LoIij .Footer_subtitle__bRcSD,
+.Footer_socials__Xz2Pe .Footer_subtitle__bRcSD {
+    opacity: 1;
+    font-size: 16px;
+    line-height: 19px;
+}
+.Footer_links__TzdIy { max-width: 30%; }
+@media screen and (max-width: 900px) { .Footer_links__TzdIy { max-width: 100%; } }
+.Footer_links__TzdIy a { opacity: .3; text-decoration: underline; }
+.Footer_links__TzdIy a:hover { opacity: 1; }
+.Footer_socialsLink__vOT6D { display: flex; align-items: center; }
+.Footer_socialsLink__vOT6D svg {
+    width: 24px; height: 24px;
+    opacity: .7;
+    margin-right: 4px;
+}
+
+/* ===== FOOTER LOWER ===== */
+.Footer_lower__M0xkI {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.79px;
+}
+
+/* Ссылки в нижнем блоке — тот же цвет, что и текст рядом.
+   Прозрачность через color (hsla), НЕ через opacity,
+   чтобы не накапливалась двойная прозрачность. */
+.Footer_lower__M0xkI a {
+    color: inherit;
+    text-decoration: underline;
+    transition: color .3s ease;
+}
+.Footer_lower__M0xkI a:hover {
+    color: #ff3a3a;
+}
+
+/* Копирайт — приглушённый через color, без opacity */
+.Footer_lower__M0xkI p {
+    color: hsla(0, 42%, 94%, .3);
+}
+
+/* Левый блок «Как удалить NEXTRP Launcher:» — тот же приглушённый цвет */
+.Footer_lowerLeft__EBKCw {
+    display: flex;
+    color: hsla(0, 42%, 94%, .3);
+}
+
+/* Ссылка «Инструкция» внутри — наследует цвет родителя,
+   но не темнеет дважды, т.к. opacity нигде не задана */
+.Footer_lowerLeft__EBKCw a {
+    text-decoration: underline;
+    margin-left: 4px;
+    transition: 0.1s ease;
+}
+.Footer_lowerLeft__EBKCw a:hover {
+    color: #e9e2e2;
+}
+
+@media screen and (max-width: 900px) {
+    .Footer_lower__M0xkI {
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        text-align: center;
+    }
+}
+@media screen and (max-width: 768px) {
+    .Footer_lowerLeft__EBKCw { display: block; text-align: center; }
+}

@@ -1,0 +1,30 @@
+/* ===== STANDOUT ===== */
+.StandOutBlock_wrapper__HNI2u {
+    background: linear-gradient(180deg, transparent, #000);
+    position: relative;
+    overflow: hidden;
+}
+.StandOutBlock_title___yhfT {
+    position: relative;
+    z-index: 10;
+    margin-bottom: -120px;
+    padding-top: 40px;
+}
+@media screen and (max-width: 1140px) {
+    .StandOutBlock_title___yhfT { margin-bottom: -25px; }
+}
+
+/* Поднимаем карточки вверх как в fight */
+.StandOutBlock_wrapper__HNI2u .ThreeCards_cards__msRla {
+    margin-top: -160px;   /* ← было -100px, стало -160px */
+}
+
+/* Кнопка */
+.StandOutBlock_wrapper__HNI2u .btnWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    position: relative;
+    z-index: 20;
+}

@@ -1,0 +1,361 @@
+/* ===== RESET ===== */
+*, :after, :before { box-sizing: border-box; }
+
+a, b, blockquote, body, canvas, caption, code, div, em, embed, fieldset, figure,
+footer, form, h1, h2, h3, h4, h5, h6, header, html, i, iframe, img, label, li,
+main, nav, object, ol, p, pre, section, small, span, strike, strong, sub, sup,
+table, tbody, td, tfoot, th, thead, tr, tt, u, ul, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: none;
+}
+footer, header, main, nav, section { display: block; }
+body { line-height: 1; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:after, blockquote:before, q:after, q:before { content: ""; content: none; }
+table { border-collapse: collapse; border-spacing: 0; }
+input { -webkit-appearance: none; border-radius: 0; }
+a.active.focus, a.active:focus, a.focus, a:active.focus, a:active:focus, a:focus {
+    outline: 0 !important;
+}
+
+/* ===== ШРИФТЫ ПОДКЛЮЧАЮТСЯ В index.html =====
+   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?..."> */
+
+/* ===== HTML / BODY ===== */
+html {
+    width: 100%;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+body {
+    color: #f6e9e9;
+    background: #1d1c1d;
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-style: normal;
+    overflow-x: hidden;
+}
+body.ReactModal__Body--open { overflow-y: hidden; }
+
+/* ===== КОНТЕЙНЕР ===== */
+.container {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+    height: 100%;
+}
+@media screen and (max-width: 1488px) { .container { padding: 0 24px; } }
+@media screen and (max-width: 768px) { .container { padding: 0 12px; } }
+
+/* ===== СЕКЦИЯ ===== */
+.section {
+    padding: 24px 0;
+    position: relative;
+    overflow: visible;
+    width: 100%;
+}
+@media screen and (max-width: 768px) {
+    .section { padding: 16px 0; }
+}
+
+/* ===== FULL-BLEED ===== */
+.full-bleed {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    max-width: 100vw;
+}
+.full-bleed img,
+.full-bleed picture,
+.full-bleed video {
+    width: 100%;
+    display: block;
+}
+@media screen and (max-width: 768px) {
+    .full-bleed {
+        left: 0;
+        transform: none;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* ===== ЗАГОЛОВОК ===== */
+.title {
+    margin: auto;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding-top: 40px;
+    position: relative;
+}
+.title-small {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 39.68px;
+    letter-spacing: .1em;
+    text-align: center;
+}
+
+/* ===== ТИПОГРАФИКА ===== */
+.Typography_h1__wpyhI {
+    font-family: 'Unbounded', sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 59.52px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-shadow: 0 4px 0 hsla(0,33%,94%,.251);
+    text-align: center;
+    z-index: 2;
+}
+@media screen and (max-width: 428px) {
+    .Typography_h1__wpyhI { font-size: 42px; line-height: 50px; }
+}
+.Typography_h2__4yi4m {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    line-height: 54.47px;
+    letter-spacing: .05em;
+    text-align: center;
+    text-transform: uppercase;
+    text-shadow: 0 4px 0 hsla(0,33%,94%,.251);
+    color: #f6e9e9;
+}
+@media screen and (max-width: 428px) { .Typography_h2__4yi4m { font-size: 38px; } }
+.Typography_p__ok94t {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 27.24px;
+    text-align: center;
+    color: #f6e9e9;
+    z-index: 2;
+}
+
+/* ===== УТИЛИТЫ ===== */
+button { font-family: inherit; color: inherit; }
+.color-red { color: #ff3a3a; }
+.color-blue { color: #4f95ff; }
+.bold { font-weight: 700; }
+.image { width: 100%; height: 100%; }
+.linkBtn { text-decoration: none; }
+.linkBtn:hover { color: #f6e9e9; }
+.textLink { text-decoration: underline; font-weight: 600; color: hsla(0,42%,94%,.5); }
+.textLink:hover {
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+::selection { color: #528dea; background-color: transparent; }
+.pb0 { padding-bottom: 0 !important; }
+.bdb0 { border-bottom: 0 !important; }
+
+/* ===== КНОПКИ ===== */
+
+/* ----- FILLED (главная кнопка ИГРАТЬ) ----- */
+.Button_filled__Cd2SJ {
+    box-shadow: inset 0 0 6px 0 rgba(255,58,58,.502);
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.Button_filled__Cd2SJ, .Button_filled__Cd2SJ div {
+    width: 200px; height: 100%;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Button_filled__Cd2SJ div {
+    min-width: 100px;
+    min-height: 52px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 27.24px;
+    color: #f6e9e9;
+    text-shadow: 0 2px 0 rgba(0,0,0,.251);
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+    border: 1px solid hsla(0,0%,100%,.3);
+    border-radius: 4px;
+    margin: 8px;
+    pointer-events: none;
+    box-shadow: 0 16px 32px 0 rgba(253,59,57,.25);
+}
+.Button_filled__Cd2SJ:hover { box-shadow: none; }
+.Button_filled__Cd2SJ:hover div {
+    margin: 0;
+    min-width: 200px;
+    width: 100%;
+    min-height: 68px;
+    height: 100%;
+    border: 2px solid #ff3a3a;
+    box-shadow: none;
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: none;
+}
+
+/* ----- UNDERLINE (ссылки-кнопки подчёркнутые) ----- */
+.Button_ordinary__sGmA_, .Button_underline__qQfLS {
+    border: 0; padding: 0; margin: 0;
+    background: transparent;
+    outline: 0;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.79px;
+    text-align: center;
+    transition: .4s;
+    cursor: pointer;
+}
+.Button_ordinary__sGmA_ div, .Button_underline__qQfLS div { pointer-events: none; }
+.Button_ordinary__sGmA_:hover, .Button_underline__qQfLS:hover {
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.Button_underline__qQfLS span { text-decoration: underline; }
+
+/* ----- OUTLINED (обводка, ховер — заливка) ----- */
+.Button_outlined__nLYRi, .Button_withIcon__0c1_c {
+    height: 44px;
+    border-radius: 4px;
+    border: 2px solid #ff3a3a;
+    background: transparent;
+    color: inherit;
+    box-shadow: 0 2px 0 0 rgba(0,0,0,.251);
+    cursor: pointer;
+    overflow: hidden;
+    display: flex;
+    padding: 0;
+    position: relative;
+    z-index: 10;
+    transition: border-color .3s ease, box-shadow .3s ease;
+}
+.Button_outlined__nLYRi div, .Button_withIcon__0c1_c div {
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: inherit;
+    line-height: 24px;
+    text-align: center;
+    text-transform: uppercase;
+    white-space: nowrap;
+    padding: 8px 16px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: inherit;
+    transition:
+        -webkit-text-fill-color .3s ease,
+        color .3s ease,
+        padding .3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+/* Градиентный фон — изначально скрыт */
+.Button_outlined__nLYRi:before, .Button_withIcon__0c1_c:before {
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+    opacity: 0;
+    transition: opacity .3s ease;
+    z-index: 0;
+}
+
+/* ----- ХОВЕР: заливка + белый текст, светлый бордер, БЕЗ тени ----- */
+.Button_outlined__nLYRi:hover,
+.Button_withIcon__0c1_c:hover {
+    border-color: hsla(0, 33%, 94%, .3);   /* ← светлый, как у карточек обновлений */
+    box-shadow: none;                       /* ← убираем красную тень */
+}
+.Button_outlined__nLYRi:hover:before,
+.Button_withIcon__0c1_c:hover:before {
+    opacity: 1;
+}
+.Button_outlined__nLYRi:hover div,
+.Button_withIcon__0c1_c:hover div {
+    -webkit-text-fill-color: #fff;
+    color: #fff;
+    text-shadow: none;                      /* ← без тени у текста */
+}
+
+/* ----- WITHICON: иконка внутри кнопки ----- */
+.Button_withIcon__0c1_c .Button_icon__c39Qd {
+    display: flex;
+    align-items: center;
+    height: 24px;
+    overflow: hidden;
+    max-width: 40px;
+    opacity: 1;
+    border-left: 1px solid #ff3a3a;
+    padding-left: 8px;
+    margin-left: 8px;
+    transition:
+        max-width .3s ease,
+        opacity .3s ease,
+        margin .3s ease,
+        padding .3s ease,
+        border-color .3s ease;
+}
+.Button_withIcon__0c1_c .Button_icon__c39Qd img {
+    transition: filter .3s ease;
+}
+
+/* ----- ХОВЕР: иконка плавно исчезает ----- */
+.Button_withIcon__0c1_c:hover .Button_icon__c39Qd {
+    max-width: 0;
+    opacity: 0;
+    margin-left: 0;
+    padding-left: 0;
+    border-left-color: transparent;
+}
+
+/* ----- ХОВЕР: текст занимает всю ширину ----- */
+.Button_withIcon__0c1_c:hover div {
+    padding: 8px 24px;
+    -webkit-text-fill-color: #fff;
+    color: #fff;
+    text-shadow: none;
+}
+
+/* ===== СКРОЛЛБАР ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+    background-color: hsla(0,42%,94%,.5);
+    border-radius: 5px;
+    border: 3px solid transparent;
+}
+
+/* ===== РАЗДЕЛИТЕЛЬ ===== */
+.Divider_wrapper__R1uUp {
+    width: 2px;
+    height: auto;
+    background: #f4e9e9;
+    opacity: .1;
+}

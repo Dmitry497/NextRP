@@ -1,0 +1,43 @@
+/* ===== COOKIES ===== */
+.CookiesBlock_wrapper__hi1Rf {
+    width: 100%;
+    background: rgba(42,43,44,.502);
+    position: fixed;
+    bottom: 0;
+    padding: 16px 120px 16px 32px;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    transition: transform .5s ease-in-out;
+    transform: translateY(0);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: hsla(0,42%,94%,.5);
+    z-index: 999;
+}
+@media screen and (max-width: 768px) {
+    .CookiesBlock_wrapper__hi1Rf { padding: 16px 100px 16px 16px; gap: 16px; }
+}
+.CookiesBlock_wrapper__hi1Rf.CookiesBlock_hidden__5ZqDo {
+    transform: translateY(100%);
+}
+.CookiesBlock_wrapper__hi1Rf:before {
+    content: "";
+    height: 2px;
+    width: 100%;
+    left: 0; top: -2px;
+    position: absolute;
+    background: radial-gradient(50% 900% at 50% 50%, hsla(0,0%,100%,.1) 0, hsla(0,0%,100%,.05) 100%);
+}
+.CookiesBlock_wrapper__hi1Rf .CookiesBlock_text__Bb7Hz {
+    font-size: 14px;
+    line-height: 20px;
+    text-align: left;
+}
+.CookiesBlock_wrapper__hi1Rf .CookiesBlock_btn__iG6tx {
+    color: #f6e9e9;
+    font-weight: 600;
+    font-size: 17px;
+    text-align: left;
+    width: max-content;
+}

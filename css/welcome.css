@@ -1,0 +1,204 @@
+/* ===== WELCOME ===== */
+.WelcomeBlock_wrapper__LP6lb {
+    position: relative;
+    width: 100%;
+    min-height: 100vh;
+    height: auto;
+    background: linear-gradient(180deg, rgba(27,27,27,0) 83.4%, #1b1b1b);
+    padding: 0 0 30px;
+    border-bottom: 1px solid #222020;
+}
+
+.WelcomeBlock_container__hI9ia {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+@media screen and (max-height: 752px) {
+    .WelcomeBlock_container__hI9ia { padding-top: 80px; }
+}
+
+.WelcomeBlock_bg___7VT3 {
+    position: absolute;
+    width: 100%; height: 100%;
+    z-index: -1;
+    overflow-y: hidden;
+}
+.WelcomeBlock_bg___7VT3 img {
+    width: 100%; height: 100%;
+    z-index: -1;
+    opacity: 25%;
+}
+.WelcomeBlock_bg___7VT3:after {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 22.08vw;
+    height: 22.08vw;
+    top: 2.14vw;
+    right: 0;
+    background: url(https://nextrp.ru/_next/static/media/welcome-vector-right.563630cd.svg) no-repeat 50%/100%;
+    z-index: 1;
+}
+
+.WelcomeBlock_content__FTOi6 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* ===== КАРТИНКА (опускаем на 20px) ===== */
+.WelcomeBlock_logo__fme2x {
+    width: 1008px;
+    height: 448px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;                /* ← опускаем картинку вниз */
+}
+@media screen and (max-width: 1440px) {
+    .WelcomeBlock_logo__fme2x {
+        width: 100%;
+        max-width: 720px;
+        height: 320px;
+    }
+}
+
+/* ===== МОЛНИЯ СЛЕВА ===== */
+.WelcomeBlock_logo__fme2x:before {
+    content: "";
+    display: block;
+    position: absolute;
+    width: 25.26vw;
+    height: 16.41vw;
+    top: 75%;
+    right: 100%;
+    transform: translateY(-50%);
+    background: url(https://nextrp.ru/_next/static/media/welcome-vector-left.c6ac54cd.svg) no-repeat 50%/100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.WelcomeBlock_logo__fme2x img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== ЗАГОЛОВОК (компенсируем опускание картинки через top) ===== */
+.WelcomeBlock_mainTitle__new {
+    position: absolute;
+    top: 84%;                        /* ← было 89%, поднял на 5% */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    font-family: 'Unbounded', sans-serif;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-align: center;
+    color: #ffffff;
+    text-shadow: 0 4px 0 hsla(0,33%,94%,.251), 0 8px 32px rgba(0,0,0,.6);
+    z-index: 2;
+    pointer-events: none;
+    margin: 0;
+}
+
+/* Строка 1 — "НАЧНИ" */
+.WelcomeBlock_mainTitleLine1__new {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 34px;
+    line-height: 1;
+
+}
+
+/* Строка 2 — "СВОЮ ИСТОРИЮ" */
+.WelcomeBlock_mainTitleLine2__new {
+    display: block;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 48px;
+    line-height: 1;
+    margin: 0;
+}
+
+/* ===== АДАПТИВ ЗАГОЛОВКА ===== */
+@media screen and (max-width: 1440px) {
+    .WelcomeBlock_mainTitleLine1__new { font-size: 30px; }
+    .WelcomeBlock_mainTitleLine2__new { font-size: 42px; }
+}
+@media screen and (max-width: 1024px) {
+    .WelcomeBlock_mainTitleLine1__new { font-size: 26px; }
+    .WelcomeBlock_mainTitleLine2__new { font-size: 36px; }
+}
+@media screen and (max-width: 768px) {
+    .WelcomeBlock_mainTitleLine1__new { font-size: 20px; }
+    .WelcomeBlock_mainTitleLine2__new { font-size: 30px; }
+}
+@media screen and (max-width: 428px) {
+    .WelcomeBlock_mainTitleLine1__new { font-size: 16px; }
+    .WelcomeBlock_mainTitleLine2__new { font-size: 22px; }
+}
+
+/* ===== ТЕКСТ + КНОПКИ (поднимаем на 20px) ===== */
+.WelcomeBlock_textBtns__2_pqw {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+@media screen and (max-width: 768px) {
+    .WelcomeBlock_textBtns__2_pqw {
+        width: 100%;
+        margin-top: 15px;
+    }
+}
+
+.WelcomeBlock_subtitle__ily2i {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+}
+@media screen and (max-width: 768px) {
+    .WelcomeBlock_subtitle__ily2i {
+        font-size: 20px;
+        line-height: 27.24px;
+    }
+}
+
+.WelcomeBlock_btn__IQDTQ { margin-top: 30px !important; }
+.WelcomeBlock_btn1__xOHm0 {
+    margin-top: 12px !important;
+    position: relative;
+    width: auto;
+}
+.WelcomeBlock_btn1__xOHm0:after {
+    content: "";
+    position: absolute;
+    bottom: 2px; left: 0;
+    width: 100%; height: 1px;
+    background: linear-gradient(94.67deg, #ff3a3a, #d75a33);
+}
+.WelcomeBlock_btn1__xOHm0 span {
+    background: -webkit-linear-gradient(0deg, #ff3a3a, #d75a33);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.WelcomeBlock_btn2__mw31s {
+    margin-top: 8px !important;
+    text-decoration-color: hsla(0,42%,94%,.5);
+}
+.WelcomeBlock_btn2__mw31s span { color: hsla(0,42%,94%,.5); }

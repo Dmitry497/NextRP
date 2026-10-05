@@ -5,829 +5,312 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEXTRP - ИГРА ПРО РОССИЮ</title>
     <meta name="description" content="Для тебя открыт целый мир. Играй по своим правилам">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style> 
-        /* ===== RESET & BASE ===== */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; } 
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #141416; 
-            color: #fff;
-            overflow-x: hidden;
-        }
-        a { text-decoration: none; color: inherit; }
-        ul { list-style: none; }
-        button { font-family: inherit; }
-        img { display: block; max-width: 100%; }
-        .container { max-width: 1440px; margin: 0 auto; padding: 0 20px; }
-        .section { position: relative; overflow: hidden; }
+    <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;800;900&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 
-        /* ===== BUTTON (BEM block) ===== */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            border-radius: 4px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            border: none;
-        }
-        .btn--filled {
-            background: linear-gradient(135deg, #ff5a5a, #cc0000);
-            color: #fff;
-            font-size: 20px;
-            font-weight: 800;
-            padding: 16px 60px;
-            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
-        }
-        .btn--filled:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 40px rgba(255, 0, 0, 0.6);
-        }
-        .btn--outlined {
-            border: 1px solid #ff3a3a;
-            color: #ff3a3a;
-            padding: 14px 40px;
-            background: transparent;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        .btn--outlined:hover {
-            background: #ff3a3a;
-            color: #fff;
-            transform: none;
-        }
-        .btn--ghost {
-            background: transparent;
-            color: #ff4d4d;
-            font-size: 16px;
-            padding: 4px 0;
-        }
-        .btn--ghost:hover { color: #fff; }
-        .btn--ghost-gray { color: #888; }
-        .btn--ghost-gray:hover { color: #fff; }
-        .btn--underline {
-            background: transparent;
-            border: none;
-            color: #8f8d8d;
-            font-weight: 700;
-            font-size: 16px;
-            padding: 4px 0;
-        }
-        .btn--underline:hover { color: #fff; }
-        .btn-wrapper { text-align: center; margin-top: 30px; }
-
-        /* ===== SECTION TITLE (shared) ===== */
-        .section-title { text-align: center; margin-bottom: 0; }
-        .section-title__heading {
-            font-size: 36px;
-            font-weight: 800;
-            text-transform: uppercase;
-        }
-        .section-title__text {
-            color: #d0d0d0;
-            margin-top: 10px;
-            font-size: 18px;
-            line-height: 1.5;
-        }
-        .section-title__accent--blue { color: #4d9eff; }
-        .section-title__accent--red { color: #ff3a3a; }
-
-        /* ===== PARALLAX STRIPS ===== */
-        .parallax {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 2;
-            overflow: hidden;
-        }
-        .parallax__item {
-            position: absolute;
-            background: rgba(226, 224, 224, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 6px;
-            transform: skew(-23deg) rotate(-15deg);
-            transition: transform 0.02s ease-out;
-        }
-
-          /* ===== HEADER ===== */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 75px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 40px;
-            background: rgba(18, 18, 20, 0.4);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-            z-index: 1000;
-        }
-        .header__logo img { height: 50px; display: block; }
-        .header__left { display: flex; align-items: center; gap: 30px; }
-        .header__socials { display: flex; gap: 15px; border-left: 1px solid #444; padding-left: 30px; }
-        .header__social-link { color: #fff; font-size: 24px; transition: 0.3s; }
-        .header__social-link:hover { color: #ff3a3a; }
-        .header__menu { display: flex; gap: 30px; border-left: 1px solid #444; padding-left: 30px; }
-        .header__menu-link { color: #fff; font-weight: 700; font-size: 16px; text-transform: uppercase; transition: 0.3s; }
-        .header__menu-link:hover { color: #ff3a3a; }
-        .header__right { display: flex; align-items: center; gap: 20px; }
-        .header__donate-btn {
-            border: 1px solid #ff3a3a;
-            color: #ff3a3a;
-            padding: 8px 20px;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 14px;
-            background: transparent;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .header__donate-btn:hover { background: #ff3a3a; color: #fff; }
-        .header__profile {
-            width: 38px; height: 38px;
-            border: 2px solid #fff;
-            border-radius: 4px;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff;
-            transition: 0.3s;
-        }
-        .header__profile:hover { border-color: #ff3a3a; color: #ff3a3a; }
-
-        /* ===== WELCOME ===== */
-        .welcome {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            padding-top: 105px;
-        }
-        .welcome__bg {
-            position: absolute;
-            inset: 0;
-            object-fit: cover;
-            z-index: 0;
-            opacity: 0.5;
-        }
-        .welcome__vector {
-            position: absolute;
-            z-index: 1;
-            pointer-events: none;
-            opacity: 0.6;
-        }
-        .welcome__vector--left { left: 0; top: 20%; width: 280px; }
-        .welcome__vector--right { right: 0; top: 15%; width: 280px; }
-        .welcome__characters {
-            position: relative;
-            z-index: 3;
-            width: 1200px;
-            max-width: 90%;
-            pointer-events: none;
-            margin-bottom: -60px;
-        }
-        .welcome__content {
-            position: relative;
-            z-index: 4;
-            text-align: center;
-            margin-top: -20px;
-        }
-        .welcome__title {
-            font-size: 64px;
-            font-weight: 900;
-            line-height: 1.1;
-            text-transform: uppercase;
-            text-shadow: 0 0 40px rgba(0, 0, 0, 0.9);
-        }
-        .welcome__title-small {
-            font-size: 40px;
-            font-weight: 400;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .welcome__subtitle {
-            font-size: 24px;
-            color: #d0d0d0;
-            margin-top: 15px;
-            margin-bottom: 30px;
-            text-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-        }
-        .welcome__links {
-            margin-top: 15px;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            align-items: center;
-        }
-
-        /* ===== UPDATES ===== */
-        .updates { padding: 80px 0; background: #0c0c0c; }
-        .updates__title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-        .update-card {
-            background: #1a1a1c;
-            border-radius: 10px;
-            overflow: hidden;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-        .update-card:hover { transform: translateY(-4px); }
-        .update-card__img { width: 100%; height: 200px; object-fit: cover; }
-        .update-card__text {
-            display: flex;
-            justify-content: space-between;
-            padding: 12px 15px;
-            font-size: 14px;
-            gap: 10px;
-        }
-        .update-card__name { font-weight: 600; }
-        .update-card__date { color: #888; flex-shrink: 0; }
-        .updates__slider { padding-bottom: 40px; }
-        .updates__slider .swiper-scrollbar {
-            background: rgba(255, 255, 255, 0.1);
-            height: 4px;
-            border-radius: 2px;
-        }
-        .updates__slider .swiper-scrollbar-drag { background: #ff3a3a; border-radius: 2px; }
-
-        /* ===== DEVELOP ===== */
-        .develop { padding: 80px 0; background: #0c0c0c; }
-        .develop__slider-wrap { position: relative; margin-bottom: 30px; }
-        .develop__slide-img {
-            width: 100%;
-            border-radius: 15px;
-            aspect-ratio: 1;
-            object-fit: cover;
-        }
-        .develop__ratings {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 10px;
-            padding: 25px 30px;
-            margin-bottom: 20px;
-        }
-        .develop__ratings-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
-        .develop__ratings-desc { color: #888; font-size: 14px; margin-bottom: 20px; }
-        .develop__ratings-list { display: flex; flex-wrap: wrap; gap: 25px; }
-        .develop-rating__label { font-size: 13px; color: #888; margin-bottom: 8px; }
-        .develop-rating__icons { display: flex; gap: 6px; }
-        .develop-rating__icon {
-            width: 14px;
-            height: 14px;
-            border-radius: 2px;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        .develop-rating__icon--filled { background: #ff3a3a; }
-        .develop__thumbs { margin-top: 15px; }
-        .develop__thumb {
-            width: 48px;
-            height: 48px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 2px solid transparent;
-        }
-        .develop__thumb svg { width: 28px; height: 28px; }
-        .develop__thumb--active,
-        .develop__thumb:hover { border-color: #ff3a3a; background: rgba(255, 58, 58, 0.15); }
-        .develop__slide-info { text-align: center; margin-top: 15px; }
-        .develop__slide-info-title { font-weight: 700; font-size: 18px; }
-        .develop__slide-info-desc { color: #888; font-size: 14px; margin-top: 4px; }
-
-        /* ===== THREE-CARDS (fight / standout / win) ===== */
-        .three-cards { position: relative; margin: 0 auto; max-width: 1200px; }
-        .three-cards__image img { width: 100%; border-radius: 8px; }
-        .three-cards__list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: -100px;
-            position: relative;
-            z-index: 5;
-            flex-wrap: wrap;
-        }
-        .three-cards__item { width: 330px; position: relative; }
-        .three-cards__item--up { transform: translateY(-20px); }
-        .three-cards__number {
-            position: absolute;
-            top: -28px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(36, 30, 30, 0.85);
-            backdrop-filter: blur(4px);
-            padding: 4px 16px;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 24px;
-            font-weight: 800;
-            z-index: 2;
-            white-space: nowrap;
-        }
-        .three-cards__card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(4px);
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 25px 20px;
-            text-align: center;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            min-height: 90px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-        .three-cards__title { font-size: 20px; font-weight: 700; }
-        .three-cards__desc { font-size: 14px; color: #b0b0b0; line-height: 1.4; margin-top: 6px; }
-
-        /* ===== FIGHT ===== */
-        .fight { padding: 80px 0; background: #0c0c0c; }
-        .fight .three-cards__list { margin-top: -120px; }
-
-        /* ===== EXPLORE ===== */
-        .explore { padding: 80px 0; background: #0c0c0c; }
-        .explore__main { margin-bottom: 20px; }
-        .explore__main .swiper-slide img {
-            width: 100%;
-            border-radius: 15px;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-        }
-        .explore__thumbs .swiper-slide {
-            opacity: 0.5;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .explore__thumbs .swiper-slide-thumb-active { opacity: 1; }
-        .explore__thumbs img {
-            width: 100%;
-            border-radius: 8px;
-            aspect-ratio: 16/9;
-            object-fit: cover;
-        }
-
-        /* ===== STANDOUT ===== */
-        .standout {
-            padding: 80px 0;
-             background: linear-gradient(to bottom, #141416 35%, rgb(0, 0, 0) 100%);
-        }
-        .standout .section-title__heading {
-            font-size: 48px;
-            font-weight: 900;
-            letter-spacing: 1px;
-            text-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        }
-        .standout .three-cards__list { margin-top: -140px; }
-        .standout .three-cards__item:nth-child(1) { transform: translateY(-20px); }
-        .standout .three-cards__item:nth-child(2) { transform: translateY(20px); }
-        .standout .three-cards__item:nth-child(3) { transform: translateY(-20px); }
-
-        /* ===== WIN ===== */
-        .win {
-            padding: 80px 0;
-             background: linear-gradient(to top, #141416 35%, rgb(0, 0, 0) 100%);
-        }
-        .win .section-title__heading {
-            font-size: 48px;
-            font-weight: 900;
-            letter-spacing: 1px;
-        }
-        .win .three-cards__item:nth-child(1) { transform: translateY(-25px); }
-        .win .three-cards__item:nth-child(3) { transform: translateY(-20px); }
-        .win .three-cards__card { min-height: 110px; }
-        .win .three-cards__item:nth-child(2) .three-cards__card { min-height: 90px; }
-
-        /* ===== УВЕЛИЧЕНИЕ КАРТИНОК ===== */
-/* ===== СТАРЫЕ СТИЛИ КАРТИНОК (ОГРОМНЫЕ, КАК НАМ НРАВИЛОСЬ) ===== */
-.win__image img,
-.standout__image img {
-    width: 100%;                /* Растягиваем на всю доступную ширину */
-    height: auto;               /* Высота подстраивается автоматически */
-    object-fit: cover;          /* Чтобы картинка не искажалась */
-    display: block;             /* Убираем лишние отступы снизу */
-    max-width: 100%;            /* Чтобы не вылетала за пределы контейнера */
-}
-
-        /* ===== SIDE NAV ===== */
-        .side-nav {
-            position: fixed;
-            right: 30px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 900;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 0;
-        }
-        .side-nav__line {
-            width: 2px;
-            height: 30px;
-            background: rgba(255, 255, 255, 0.15);
-            margin-right: 6px;
-        }
-        .side-nav__list { display: flex; flex-direction: column; gap: 8px; }
-        .side-nav__item { cursor: pointer; text-align: right; }
-        .side-nav__link {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.35);
-            transition: 0.3s;
-            letter-spacing: 0.5px;
-            white-space: nowrap;
-        }
-        .side-nav__item--active .side-nav__link,
-        .side-nav__item:hover .side-nav__link { color: #ff3a3a; }
-
-        /* ===== FOOTER ===== */
-        .footer {
-            position: relative;
-            background: rgba(32, 32, 32, 0.25);
-            border-top: 2px solid hsla(0, 0%, 100%, 0.1);
-            min-height: 450px;
-            display: flex;
-            flex-direction: column;
-            z-index: 1;
-        }
-        .footer::before {
-            content: '';
-            position: absolute;
-            bottom: 100%;
-            left: 0;
-            width: 100%;
-            height: 400px;
-            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, hsla(0, 16%, 52%, 0.1));
-            pointer-events: none;
-        }
-        .footer .container {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 30px 20px 20px;
-            max-width: 1600px;
-        }
-        .footer__top {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        .footer__col { display: flex; flex-direction: column; gap: 15px; align-self: flex-start; }
-        .footer__logo img { height: 60px; }
-        .footer__divider {
-            width: 2px;
-            height: 250px;
-            background: #2a2a2c;
-            flex-shrink: 0;
-        }
-        .footer__link {
-            color: #929090;
-            font-weight: 700;
-            font-size: 20px;
-            transition: 0.3s;
-        }
-        .footer__link:hover { color: #fff; }
-        .footer__label { color: #929090; font-size: 18px; }
-        .footer__email { color: #e7e6e6; font-size: 16px; transition: 0.3s; }
-        .footer__email:hover { color: #fff; }
-        .footer__social {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-        .footer__social a {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            color: #928e8e;
-            transition: 0.3s;
-        }
-        .footer__social a:hover { color: #fff; }
-        .footer__social i { font-size: 22px; }
-        .footer__social-text { font-weight: 600; font-size: 16px; }
-        .footer__link-underline {
-            opacity: 0.3;
-            font-size: 20px;
-            text-decoration: underline;
-            color: #929090;
-            transition: 0.3s;
-        }
-        .footer__link-underline:hover { opacity: 1; color: #fff; }
-        .footer__bottom {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            color: #737373;
-            font-size: 18px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .footer__bottom a { color: inherit; text-decoration: underline; transition: 0.3s; }
-        .footer__bottom a:hover { color: #fff; }
-
-        /* ===== COOKIES ===== */
-        .cookies {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(25, 25, 26, 0.85);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            padding: 20px 40px;
-            display: none;
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 6px;
-            z-index: 9999;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            font-size: 14px;
-            line-height: 1.5;
-            color: #8f8d8d;
-            transition: transform 0.6s, opacity 0.6s;
-        }
-        .cookies--visible { display: flex; }
-        .cookies--hidden {
-            transform: translateY(100%);
-            opacity: 0;
-            pointer-events: none;
-        }
-        .cookies__text a { color: #8f8d8d; text-decoration: underline; transition: 0.3s; }
-        .cookies__text a:hover { color: #fdfdfd; }
-
-        /* ===== MODAL ===== */
-        .modal {
-            position: fixed;
-            inset: 0;
-            z-index: 10000;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .modal--open { display: flex; }
-        .modal__overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(4px);
-        }
-        .modal__content {
-            position: relative;
-            background: #1a1a1c;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            max-width: 900px;
-            width: 100%;
-            max-height: 90vh;
-            overflow-y: auto;
-            padding: 30px;
-            z-index: 1;
-        }
-        .modal__close {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 28px;
-            cursor: pointer;
-            line-height: 1;
-            transition: 0.3s;
-        }
-        .modal__close:hover { color: #ff3a3a; }
-        .modal__title { font-size: 24px; font-weight: 800; margin-bottom: 20px; text-transform: uppercase; }
-        .modal__video {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 8px;
-        }
-        .modal__video iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .modal__table { width: 100%; border-collapse: collapse; font-size: 14px; }
-        .modal__table th,
-        .modal__table td {
-            padding: 10px 12px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: left;
-        }
-        .modal__table th { background: rgba(255, 255, 255, 0.05); font-weight: 700; }
-
-        /* ===== SWIPER NAV ===== */
-        .swiper-button-prev,
-        .swiper-button-next {
-            color: #fff;
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            transition: 0.3s;
-        }
-        .swiper-button-prev::after,
-        .swiper-button-next::after { font-size: 16px; font-weight: 900; }
-        .swiper-button-prev:hover,
-        .swiper-button-next:hover { background: rgba(255, 58, 58, 0.3); border-color: #ff3a3a; }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 1200px) {
-            .side-nav { display: none; }
-        }
-        @media (max-width: 1024px) {
-            .header__socials { display: none; }
-            .header { padding: 0 20px; }
-            .welcome__title { font-size: 48px; }
-            .welcome__title-small { font-size: 32px; }
-            .welcome__characters { width: 800px; }
-            .welcome__subtitle { font-size: 20px; }
-            .btn--filled { font-size: 18px; padding: 14px 50px; }
-            .footer__divider { display: none; }
-            .three-cards__item { width: 280px; }
-            .standout .section-title__heading,
-            .win .section-title__heading { font-size: 36px; }
-        }
-        @media (max-width: 768px) {
-            .header { height: 60px; padding: 0 15px; }
-            .header__menu { display: none; }
-            .header__burger { display: flex; }
-            .welcome { padding-top: 80px; }
-            .welcome__title { font-size: 32px; }
-            .welcome__title-small { font-size: 24px; }
-            .welcome__characters { width: 500px; margin-bottom: -30px; }
-            .welcome__subtitle { font-size: 16px; }
-            .btn--filled { font-size: 16px; padding: 12px 40px; }
-            .welcome__vector { display: none; }
-            .section-title__heading { font-size: 28px; }
-            .updates, .develop, .fight, .explore, .standout, .win { padding: 60px 0; }
-            .three-cards__list {
-                flex-direction: column;
-                align-items: center;
-                margin-top: -40px;
-            }
-            .three-cards__item,
-            .standout .three-cards__item,
-            .win .three-cards__item { transform: none !important; width: 100%; max-width: 360px; }
-            .develop__ratings-list { flex-direction: column; gap: 15px; }
-            .footer { min-height: auto; }
-            .footer__top { flex-direction: column; align-items: flex-start; }
-            .footer__bottom { flex-direction: column; align-items: flex-start; }
-            .cookies { padding: 16px 20px; font-size: 13px; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/parallax.css">
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/welcome.css">
+    <link rel="stylesheet" href="css/updates.css">
+    <link rel="stylesheet" href="css/develop.css">
+    <link rel="stylesheet" href="css/fight.css">
+    <link rel="stylesheet" href="css/explore.css">
+    <link rel="stylesheet" href="css/standout.css">
+    <link rel="stylesheet" href="css/win.css">
+    <link rel="stylesheet" href="css/side-nav.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/cookies.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
-    <!-- HEADER -->
-    <header class="header" id="header">
-        <div class="header__left">
-            <a href="/" class="header__logo">
-                <img src="https://nextrp.ru/_next/static/media/logo.f979b8ae.png" alt="NEXTRP">
+   <header class="Header_wrapper__5sewT" id="header">
+    <div class="container">
+        <div class="Header_header__T4nh2">
+            <a href="/" class="Header_logo___rmP6">
+                <img src="https://nextrp.ru/_next/static/media/logo.f979b8ae.png" alt="logo" width="145" height="64">
             </a>
-            <div class="header__socials">
-                <a href="https://vk.com/nextrp" class="header__social-link" target="_blank" rel="noopener"><i class="fa-brands fa-vk"></i></a>
-                <a href="https://t.me/nextrpnews" class="header__social-link" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i></a>
-                <a href="https://discord.gg/nextrp" class="header__social-link" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i></a>
-                <a href="https://www.youtube.com/@nextrp" class="header__social-link" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
+            <div class="Divider_wrapper__R1uUp Header_divider__TZopV"></div>
+            <div class="Socials_socials__nN8pJ">
+                <a href="https://vk.com/nextmta" class="Socials_link__nauKt" target="_blank" rel="noopener" aria-label="VK">
+                    <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="bgHover" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#FF3A3A;stop-opacity:1"></stop><stop offset="100%" style="stop-color:#D75A33;stop-opacity:1"></stop></linearGradient></defs><path fill-rule="evenodd" clip-rule="evenodd" d="M6.81178 6.81177C4 9.62355 4 14.149 4 23.2V24.8C4 33.851 4 38.3764 6.81178 41.1882C9.62355 44 14.149 44 23.2 44H24.8C33.851 44 38.3764 44 41.1882 41.1882C44 38.3764 44 33.851 44 24.8V23.2C44 14.149 44 9.62355 41.1882 6.81177C38.3764 4 33.851 4 24.8 4H23.2C14.149 4 9.62355 4 6.81178 6.81177ZM10.6667 16.25C10.8808 26.6551 16.3461 32.9167 25.3543 32.9167H25.8769V26.9641C29.1577 27.2971 31.6043 29.7498 32.6031 32.9167H37.3333C36.0501 28.1792 32.723 25.56 30.6551 24.5593C32.7214 23.3217 35.6458 20.3214 36.3346 16.25H32.031C31.1281 19.5609 28.4418 22.5612 25.8753 22.8462V16.25H21.503V27.7982C18.8423 27.1322 15.3713 23.8933 15.2291 16.25H10.6667Z" fill="currentColor"/></svg>
+                </a>
+                <a href="https://t.me/nextrpnews" class="Socials_link__nauKt" target="_blank" rel="noopener" aria-label="Telegram">
+                    <svg width="32" height="32" viewBox="0 0 33 32" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M29.9509 16C29.9509 23.3638 23.9814 29.3333 16.6176 29.3333C9.25378 29.3333 3.28424 23.3638 3.28424 16C3.28424 8.63619 9.25378 2.66666 16.6176 2.66666C23.9814 2.66666 29.9509 8.63619 29.9509 16ZM17.0954 12.5099C15.7985 13.0493 13.2066 14.1658 9.31965 15.8593C8.68847 16.1103 8.35784 16.3558 8.32774 16.5959C8.27687 17.0017 8.78501 17.1615 9.47696 17.379C9.57109 17.4086 9.66861 17.4393 9.76859 17.4718C10.4494 17.6931 11.3651 17.952 11.8412 17.9623C12.273 17.9716 12.755 17.7936 13.2871 17.4282C16.9188 14.9767 18.7935 13.7376 18.9112 13.7109C18.9943 13.692 19.1093 13.6683 19.1873 13.7376C19.2653 13.8069 19.2576 13.9381 19.2493 13.9733C19.199 14.1879 17.2044 16.0423 16.1721 17.002C15.8503 17.3012 15.6221 17.5134 15.5754 17.5618C15.4709 17.6704 15.3644 17.7731 15.262 17.8718C14.6295 18.4815 14.1552 18.9387 15.2882 19.6853C15.8327 20.0441 16.2684 20.3408 16.703 20.6368C17.1777 20.9601 17.6512 21.2825 18.2638 21.6841C18.4199 21.7864 18.5689 21.8927 18.7141 21.9962C19.2665 22.39 19.7628 22.7438 20.376 22.6874C20.7323 22.6546 21.1003 22.3196 21.2872 21.3204C21.7289 18.9591 22.5971 13.8427 22.7978 11.7344C22.8154 11.5497 22.7933 11.3133 22.7755 11.2095C22.7577 11.1058 22.7206 10.9579 22.5857 10.8484C22.426 10.7188 22.1794 10.6915 22.0691 10.6934C21.5676 10.7023 20.7982 10.9698 17.0954 12.5099Z" fill="currentColor"/></svg>
+                </a>
+                <a href="https://discord.gg/nextrp" class="Socials_link__nauKt" target="_blank" rel="noopener" aria-label="Discord">
+                    <svg width="32" height="32" viewBox="0 0 48 48" fill="none"><path d="M37.8617 11.2829C35.3122 10.1131 32.5783 9.25125 29.7198 8.75762C29.6678 8.7481 29.6158 8.77191 29.589 8.81952C29.2374 9.44488 28.8479 10.2607 28.5752 10.902C25.5007 10.4417 22.442 10.4417 19.4305 10.902C19.1577 10.2465 18.7541 9.44488 18.401 8.81952C18.3741 8.77349 18.3221 8.74969 18.2701 8.75762C15.4132 9.24967 12.6793 10.1115 10.1282 11.2829C10.1061 11.2924 10.0872 11.3083 10.0746 11.3289C4.88899 19.0762 3.46842 26.633 4.1653 34.0962C4.16845 34.1327 4.18895 34.1676 4.21733 34.1898C7.63868 36.7024 10.9528 38.2278 14.2055 39.2388C14.2575 39.2547 14.3127 39.2356 14.3458 39.1928C15.1152 38.1421 15.8011 37.0342 16.3891 35.8691C16.4238 35.8009 16.3907 35.7199 16.3198 35.6929C15.2319 35.2803 14.196 34.7771 13.1995 34.2057C13.1207 34.1597 13.1144 34.047 13.1869 33.993C13.3966 33.8359 13.6064 33.6724 13.8066 33.5073C13.8428 33.4772 13.8933 33.4708 13.9359 33.4898C20.4821 36.4786 27.5692 36.4786 34.0383 33.4898C34.0808 33.4692 34.1313 33.4756 34.1691 33.5057C34.3694 33.6708 34.5791 33.8359 34.7904 33.993C34.8629 34.047 34.8581 34.1597 34.7793 34.2057C33.7829 34.7882 32.747 35.2803 31.6575 35.6914C31.5866 35.7183 31.555 35.8009 31.5897 35.8691C32.1904 37.0325 32.8763 38.1404 33.6315 39.1912C33.663 39.2356 33.7198 39.2547 33.7718 39.2388C37.0402 38.2278 40.3544 36.7024 43.7757 34.1898C43.8057 34.1676 43.8246 34.1343 43.8278 34.0978C44.6618 25.4696 42.4308 17.9747 37.9137 11.3305C37.9026 11.3083 37.8838 11.2924 37.8617 11.2829ZM17.3667 29.5519C15.3958 29.5519 13.7719 27.7425 13.7719 25.5204C13.7719 23.2982 15.3643 21.4888 17.3667 21.4888C19.3848 21.4888 20.993 23.3141 20.9615 25.5204C20.9615 27.7425 19.369 29.5519 17.3667 29.5519ZM30.6579 29.5519C28.6871 29.5519 27.0632 27.7425 27.0632 25.5204C27.0632 23.2982 28.6556 21.4888 30.6579 21.4888C32.6761 21.4888 34.2842 23.3141 34.2527 25.5204C34.2527 27.7425 32.6761 29.5519 30.6579 29.5519Z" fill="currentColor"/></svg>
+                </a>
+                <a href="https://www.youtube.com/channel/UCCCszAQexNNVOGD9XRG1b-g" class="Socials_link__nauKt" target="_blank" rel="noopener" aria-label="YouTube">
+                    <svg width="32" height="32" viewBox="0 0 48 48" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.5841 10.8294C41.3042 11.2915 42.665 12.6523 43.1271 14.3724C43.9743 17.5046 44 24.0001 44 24.0001C44 24.0001 44 30.5213 43.1528 33.6279C42.6906 35.348 41.3299 36.7087 39.6098 37.1709C36.5032 38.0181 24 38.0181 24 38.0181C24 38.0181 11.4968 38.0181 8.39025 37.1709C6.67009 36.7087 5.30937 35.348 4.84724 33.6279C4 30.4957 4 24.0001 4 24.0001C4 24.0001 4 17.5046 4.82157 14.3981C5.2837 12.6779 6.64442 11.3172 8.36457 10.8551C11.4711 10.0078 23.9743 9.98218 23.9743 9.98218C23.9743 9.98218 36.4775 9.98218 39.5841 10.8294ZM30.3671 24.0002L19.9949 30.0079V17.9925L30.3671 24.0002Z" fill="currentColor"/></svg>
+                </a>
             </div>
-            <ul class="header__menu">
-                <li><a href="https://forum.nextrp.ru" class="header__menu-link" target="_blank" rel="noopener">Форум</a></li>
-                <li><a href="#footer" class="header__menu-link">Контакты</a></li>
-            </ul>
-        </div>
-        <button class="header__burger" id="burgerBtn" aria-label="Меню">
-            <span></span><span></span><span></span>
-        </button>
-    </header>
-
-    <nav class="header__mobile" id="mobileMenu">
-        <a href="https://forum.nextrp.ru" class="header__mobile-link" target="_blank" rel="noopener">Форум</a>
-        <a href="#footer" class="header__mobile-link">Контакты</a>
-        <div class="header__mobile-socials">
-            <a href="https://vk.com/nextrp" target="_blank" rel="noopener"><i class="fa-brands fa-vk"></i></a>
-            <a href="https://t.me/nextrpnews" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i></a>
-            <a href="https://discord.gg/nextrp" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i></a>
-            <a href="https://www.youtube.com/@nextrp" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i></a>
-        </div>
-    </nav>
-
-    <main>
-        <!-- WELCOME -->
-        <section class="welcome section" id="welcome">
-            <img src="https://nextrp.ru/_next/static/media/welcome-bg.7e95567f.jpg" alt="" class="welcome__bg">
-            <img src="image/welcome-vector-left.svg" alt="" class="welcome__vector welcome__vector--left">
-            <img src="image/welcome-vector-right.svg" alt="" class="welcome__vector welcome__vector--right">
-            <img src="https://nextrp.ru/_next/static/media/welcome-logo.3e42795a.png" alt="Персонажи NEXTRP" class="welcome__characters">
-
-            <div class="parallax" data-parallax>
-                <div class="parallax__item" style="width:80px;height:20px;top:15%;left:10%;"></div>
-                <div class="parallax__item" style="width:150px;height:40px;top:25%;left:80%;"></div>
-                <div class="parallax__item" style="width:100px;height:25px;top:45%;left:20%;"></div>
-                <div class="parallax__item" style="width:200px;height:50px;top:65%;left:70%;"></div>
-                <div class="parallax__item" style="width:60px;height:15px;top:80%;left:40%;"></div>
-                <div class="parallax__item" style="width:120px;height:30px;top:10%;left:60%;"></div>
-                <div class="parallax__item" style="width:180px;height:45px;top:55%;left:5%;"></div>
-                <div class="parallax__item" style="width:90px;height:22px;top:35%;left:90%;"></div>
-                <div class="parallax__item" style="width:70px;height:18px;top:75%;left:15%;"></div>
-                <div class="parallax__item" style="width:160px;height:35px;top:50%;left:50%;"></div>
-            </div>
-
-            <div class="welcome__content">
-                <h1 class="welcome__title">
-                    <span class="welcome__title-small">НАЧНИ</span>
-                    СВОЮ ИСТОРИЮ
-                </h1>
-                <p class="welcome__subtitle">
-                    Для тебя открыт целый мир.<br>
-                    Играй по своим правилам.
-                </p>
-                <button class="btn btn--filled" id="playBtn">ИГРАТЬ</button>
-                <div class="welcome__links">
-                    <button class="btn btn--ghost" id="trailerBtn">Смотреть трейлер</button>
-                    <button class="btn btn--ghost btn--ghost-gray" id="systemBtn">Системные требования</button>
+            <div class="Divider_wrapper__R1uUp Header_divider__TZopV"></div>
+            <nav class="NavBar_nav__rNNWg">
+                <ul class="NavBar_navList__0GjYK">
+                    <li class="NavBar_navItem__9y262"><a class="NavBar_navLink__m_hCl" href="https://forum.nextrp.ru/">Форум</a></li>
+                    <li class="NavBar_navItem__9y262"><a class="NavBar_navLink__m_hCl" href="#footer">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="PersonalAccount_wrapper__Vkm05">
+                <div class="PersonalAccount_btns__xQv_A">
+                    <button class="Button_withIcon__0c1_c PersonalAccount_topUpBtn__i9rUG" type="button">
+                        <div>
+                            <span class="Button_text__AWlPI">Пополнить счёт</span>
+                            <span class="Button_icon__c39Qd"><img src="https://nextrp.ru/_next/static/media/credit-card-red.de8a4b67.svg" alt="icon" width="24" height="24"></span>
+                        </div>
+                    </button>
+                    <button class="Button_outlined__nLYRi PersonalAccount_userBtn__FNOgH" type="button">
+                        <div>
+                            <span class="Button_text__AWlPI">
+                                <svg width="20" height="20" viewBox="0 0 16 16" fill="none">
+                                    <path d="M8 2.66667C6.52724 2.66667 5.33333 3.86058 5.33333 5.33334C5.33333 6.8061 6.52724 8 8 8C9.47276 8 10.6667 6.8061 10.6667 5.33334C10.6667 3.86058 9.47276 2.66667 8 2.66667ZM4 5.33334C4 3.1242 5.79086 1.33334 8 1.33334C10.2091 1.33334 12 3.1242 12 5.33334C12 7.54247 10.2091 9.33334 8 9.33334C5.79086 9.33334 4 7.54247 4 5.33334ZM5.33333 12C4.22876 12 3.33333 12.8954 3.33333 14C3.33333 14.3682 3.03486 14.6667 2.66667 14.6667C2.29848 14.6667 2 14.3682 2 14C2 12.1591 3.49239 10.6667 5.33333 10.6667H10.6667C12.5076 10.6667 14 12.1591 14 14C14 14.3682 13.7015 14.6667 13.3333 14.6667C12.9651 14.6667 12.6667 14.3682 12.6667 14C12.6667 12.8954 11.7712 12 10.6667 12H5.33333Z" fill="#ff3a3a"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </button>
                 </div>
             </div>
-        </section>
+            <div class="BurgerMenu_wrapper__YQoUZ">
+                <button class="BurgerMenu_btn__EaQgZ" id="burgerBtn">☰</button>
+                <div class="BurgerMenu_content__Ud1Vq" id="burgerContent">
+                    <div class="BurgerMenu_title__7Oj3S">Меню</div>
+                    <ul class="BurgerMenu_list__WwhVg">
+                        <li class="BurgerMenu_listItem__Qz_PK"><a href="https://forum.nextrp.ru">Форум</a></li>
+                        <li class="BurgerMenu_listItem__Qz_PK"><a href="#footer">Контакты</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+    <main>
+<!-- WELCOME -->
+<section class="WelcomeBlock_wrapper__LP6lb section" id="welcome">
+    <div class="WelcomeBlock_bg___7VT3">
+        <img src="https://nextrp.ru/_next/static/media/welcome-bg.7e95567f.jpg" alt="">
+    </div>
+
+    <div class="ParallaxChild_child___vz_a" style="width:79.19px;height:21.63px;top:140.5px;left:71.3333vw;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:279.79px;height:36.83px;top:616.41px;left:149.75px;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:67.71px;height:21.24px;top:716.52px;left:295.16px;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:111.57px;height:21.24px;top:279.88px;left:80.16px;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:67.71px;height:21.24px;top:571.52px;left:33.16px;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:62.43px;height:32.01px;top:572.16px;left:87.4486vw;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:67.71px;height:21.24px;top:428.39px;left:83.9417vw;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:152.19px;height:46.78px;top:580.39px;left:69.9139vw;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:133.31px;height:22.77px;top:203.5px;left:80.3vw;"></div>
+    <div class="ParallaxChild_child___vz_a" style="width:172.16px;height:34.62px;top:177.56px;left:262.52px;"></div>
+
+    <div class="WelcomeBlock_container__hI9ia">
+        <div class="WelcomeBlock_content__FTOi6">
+            <div class="WelcomeBlock_logo__fme2x">
+                <img src="image/welcome-image.png" alt="Персонажи NEXTRP">
+                <h1 class="WelcomeBlock_mainTitle__new">
+                    <span class="WelcomeBlock_mainTitleLine1__new">Начни</span>
+                    <br>
+                    <span class="WelcomeBlock_mainTitleLine2__new">свою историю</span>
+                </h1>
+            </div>
+            <div class="WelcomeBlock_textBtns__2_pqw">
+                <p class="WelcomeBlock_subtitle__ily2i">Для тебя открыт целый мир.<br>Играй по своим правилам.</p>
+                <button class="Button_filled__Cd2SJ WelcomeBlock_btn__IQDTQ" id="playBtn" type="button"><div>ИГРАТЬ</div></button>
+                <button class="Button_underline__qQfLS WelcomeBlock_btn1__xOHm0" id="trailerBtn" type="button"><span>Смотреть трейлер</span></button>
+                <button class="Button_underline__qQfLS WelcomeBlock_btn2__mw31s" id="systemBtn" type="button"><span>Системные требования</span></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА: ТРЕЙЛЕР (полноэкранное видео) -->
+    <div class="modal modal--trailer" id="trailerModal">
+        <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+        <video
+            id="trailerVideo"
+            class="modal__video"
+            src="nextrpTrailer.mp4"
+            controls
+            playsinline
+            preload="metadata"
+        ></video>
+    </div>
+
+    <!-- МОДАЛКА: СИСТЕМНЫЕ ТРЕБОВАНИЯ -->
+    <div class="modal modal--system" id="systemModal">
+        <div class="modal__content">
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Системные требования</h3>
+
+            <div class="sysreq">
+                <div class="sysreq__head">
+                    <div class="sysreq__headCol">Минимальные</div>
+                    <div class="sysreq__headCol">Рекомендуемые</div>
+                </div>
+
+                <div class="sysreq__body">
+
+                    <!-- ОС -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-1.f7292998.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Операционная система:</span>
+                            </div>
+                            <p class="sysreq__value">Windows 10 x64</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-1.f7292998.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Операционная система:</span>
+                            </div>
+                            <p class="sysreq__value">Windows 11 x64</p>
+                        </div>
+                    </div>
+
+                    <!-- Процессор -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-2.567b0ae0.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Процессор:</span>
+                            </div>
+                            <p class="sysreq__value">Intel Core 2 Duo 2.2 GHz, AMD Phenom 2.2 GHz</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-2.567b0ae0.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Процессор:</span>
+                            </div>
+                            <p class="sysreq__value">Intel Core i5 3GHz, AMD Ryzen 3GHz</p>
+                        </div>
+                    </div>
+
+                    <!-- Видеокарта -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-3.6cf63854.svg" alt="" class="sysreq__icon" width="40" height="29">
+                                <span class="sysreq__label">Видеокарта:</span>
+                            </div>
+                            <p class="sysreq__value">GTX 550 Ti, ATI Radeon HD 4800</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-3.6cf63854.svg" alt="" class="sysreq__icon" width="40" height="29">
+                                <span class="sysreq__label">Видеокарта:</span>
+                            </div>
+                            <p class="sysreq__value">nVidia GTX 1050 Ti, AMD RX 460</p>
+                        </div>
+                    </div>
+
+                    <!-- ОЗУ -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-4.5f8d5d3e.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Оперативная память:</span>
+                            </div>
+                            <p class="sysreq__value">8ГБ DDR2</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-4.5f8d5d3e.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Оперативная память:</span>
+                            </div>
+                            <p class="sysreq__value">16ГБ DDR4</p>
+                        </div>
+                    </div>
+
+                    <!-- Разрешение -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-5.6e6c0d44.svg" alt="" class="sysreq__icon" width="40" height="33">
+                                <span class="sysreq__label">Разрешение экрана:</span>
+                            </div>
+                            <p class="sysreq__value">1280x720</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-5.6e6c0d44.svg" alt="" class="sysreq__icon" width="40" height="33">
+                                <span class="sysreq__label">Разрешение экрана:</span>
+                            </div>
+                            <p class="sysreq__value">1920x1080</p>
+                        </div>
+                    </div>
+
+                    <!-- Звук -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-6.f3c3d427.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Звуковая карта:</span>
+                            </div>
+                            <p class="sysreq__value">Совместимая с DirectX 9</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-6.f3c3d427.svg" alt="" class="sysreq__icon" width="40" height="40">
+                                <span class="sysreq__label">Звуковая карта:</span>
+                            </div>
+                            <p class="sysreq__value">Совместимая с DirectX 9</p>
+                        </div>
+                    </div>
+
+                    <!-- Интернет -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-7.8482d4ce.svg" alt="" class="sysreq__icon" width="40" height="30">
+                                <span class="sysreq__label">Интернет-соединение:</span>
+                            </div>
+                            <p class="sysreq__value">8 мбит/сек</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-7.8482d4ce.svg" alt="" class="sysreq__icon" width="40" height="30">
+                                <span class="sysreq__label">Интернет-соединение:</span>
+                            </div>
+                            <p class="sysreq__value">50 мбит/сек</p>
+                        </div>
+                    </div>
+
+                    <!-- Диск -->
+                    <div class="sysreq__item">
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-8.d6e26425.svg" alt="" class="sysreq__icon" width="32" height="40">
+                                <span class="sysreq__label">Свободное место на накопителе:</span>
+                            </div>
+                            <p class="sysreq__value">20ГБ</p>
+                        </div>
+                        <div class="sysreq__half">
+                            <div class="sysreq__cardHead">
+                                <img src="https://nextrp.ru/_next/static/media/systemIcon-8.d6e26425.svg" alt="" class="sysreq__icon" width="32" height="40">
+                                <span class="sysreq__label">Свободное место на накопителе:</span>
+                            </div>
+                            <p class="sysreq__value">48ГБ</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
         <!-- UPDATES -->
-        <section class="updates section" id="updates">
-            <div class="container">
-                <h2 class="updates__title">ОБНОВЛЕНИЯ</h2>
-                <div class="updates__slider swiper">
+        <section class="UpdatesBlock_wrapper__J7mmW section" id="updates">
+            <div class="container UpdatesBlock_container__dWvRl">
+                <h2 class="Typography_h2__4yi4m UpdatesBlock_title__o96wr">Обновления</h2>
+                <div class="carrousel swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <article class="update-card">
-                                <img src="https://nextrp.ru/_next/static/media/slider-with-params-3.b74b6eca.png" alt="" class="update-card__img">
-                                <div class="update-card__text">
-                                    <span class="update-card__name">Событие «Мастерская»</span>
-                                    <span class="update-card__date">04.06.2026</span>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="swiper-slide">
-                            <article class="update-card">
-                                <img src="https://nextrp.ru/_next/static/media/slider-with-params-1.1f2e004b.png" alt="" class="update-card__img">
-                                <div class="update-card__text">
-                                    <span class="update-card__name">NextPass 37 сезон</span>
-                                    <span class="update-card__date">28.05.2026</span>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="swiper-slide">
-                            <article class="update-card">
-                                <img src="https://nextrp.ru/_next/static/media/slider-with-params-2.66f892f0.png" alt="" class="update-card__img">
-                                <div class="update-card__text">
-                                    <span class="update-card__name">Обновление античита</span>
-                                    <span class="update-card__date">21.05.2026</span>
-                                </div>
-                            </article>
-                        </div>
-                        <div class="swiper-slide">
-                            <article class="update-card">
-                                <img src="https://nextrp.ru/_next/static/media/explore-1.7273084a.png" alt="" class="update-card__img">
-                                <div class="update-card__text">
-                                    <span class="update-card__name">Новые локации</span>
-                                    <span class="update-card__date">14.05.2026</span>
-                                </div>
-                            </article>
-                        </div>
+                        <!-- Карточки рендерятся из js/swipers.js -->
                     </div>
                     <div class="swiper-scrollbar"></div>
                 </div>
@@ -835,148 +318,143 @@
         </section>
 
         <!-- DEVELOP -->
-        <section class="develop section" id="develop">
+        <section class="DevelopBlock_wrapper__l26DJ section" id="develop">
+            <div class="ParallaxChild_child___vz_a" style="width: 271.56px; height: 11.69px; top: 668.28px; left: -138.81px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 144.41px; height: 47.42px; top: 534.38px; left: 75.3354vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 124.42px; height: 42.59px; top: 97.2px; left: 80.9951vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 52.91px; height: 18.09px; top: 624.7px; left: 219.84px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 52.91px; height: 18.09px; top: 134.7px; left: 93.7389vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 52.91px; height: 18.09px; top: 189.7px; left: 72.2806vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 80.66px; height: 21.4px; top: 64.88px; left: 301.18px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 56.26px; height: 18.09px; top: 305.56px; left: 352.84px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 170.76px; height: 41.02px; top: 167.2px; left: -42.83px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 123.16px; height: 24.29px; top: 287.87px; left: 65.1715vw;"></div>
+
             <div class="container">
-                <div class="section-title">
-                    <h2 class="section-title__heading">Развивайся</h2>
-                    <p class="section-title__text">Выбирай любимый вид деятельности<br>и становись успешным</p>
+                <div class="title">
+                    <h2 class="Typography_h2__4yi4m">Развивайся</h2>
+                    <p class="Typography_p__ok94t">Выбирай любимый вид деятельности <br>и становись успешным</p>
                 </div>
 
-                <div class="develop__slider-wrap">
-                    <div class="develop__slider swiper">
+                <div class="sliderWithParamsWrapper">
+                    <div class="swiper sliderWithParams">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="https://nextrp.ru/_next/static/media/slider-with-params-3.b74b6eca.png" alt="Работы" class="develop__slide-img">
+                                <div class="slideImg">
+                                    <img src="https://nextrp.ru/_next/static/media/slider-with-params-3.b74b6eca.png" alt="Бизнес">
+                                </div>
                             </div>
                             <div class="swiper-slide">
-                                <img src="https://nextrp.ru/_next/static/media/slider-with-params-1.1f2e004b.png" alt="Бизнес" class="develop__slide-img">
+                                <div class="slideImg">
+                                    <img src="https://nextrp.ru/_next/static/media/slider-with-params-1.1f2e004b.png" alt="Работы">
+                                </div>
                             </div>
                             <div class="swiper-slide">
-                                <img src="https://nextrp.ru/_next/static/media/slider-with-params-2.66f892f0.png" alt="Гонки" class="develop__slide-img">
+                                <div class="slideImg">
+                                    <img src="https://nextrp.ru/_next/static/media/slider-with-params-2.66f892f0.png" alt="Гонки">
+                                </div>
                             </div>
                         </div>
-                        <div class="swiper-button-prev develop__prev"></div>
-                        <div class="swiper-button-next develop__next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
                     </div>
-                </div>
 
-                <div class="develop__ratings" id="developRatings">
-                    <p class="develop__ratings-title" id="developRatingTitle">Работы</p>
-                    <p class="develop__ratings-desc" id="developRatingDesc">Выбери занятие себе по душе</p>
-                    <div class="develop__ratings-list">
-                        <div class="develop-rating">
-                            <p class="develop-rating__label">Заработок</p>
-                            <div class="develop-rating__icons" id="ratingEarn"></div>
+                    <div class="ratingsBlock">
+                        <div class="ratingsBlockTitleWrapper">
+                            <p class="ratingsBlockTitle" id="developRatingTitle">Бизнес</p>
+                            <p class="ratingsBlockDescription" id="developRatingDesc">Поднимайся с низов в топы</p>
                         </div>
-                        <div class="develop-rating">
-                            <p class="develop-rating__label">Время</p>
-                            <div class="develop-rating__icons" id="ratingTime"></div>
-                        </div>
-                        <div class="develop-rating">
-                            <p class="develop-rating__label">Сложность</p>
-                            <div class="develop-rating__icons" id="ratingDiff"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="develop__thumbs swiper" id="developThumbs">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide develop__thumb develop__thumb--active">
-                            <svg viewBox="0 0 32 32" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.33 6.33C12.54 6.33 11.77 6.65 11.21 7.21C10.65 7.77 10.33 8.54 10.33 9.33C10.33 10.13 10.65 10.89 11.21 11.45C11.77 12.02 12.54 12.33 13.33 12.33C14.13 12.33 14.89 12.02 15.45 11.45C16.02 10.89 16.33 10.13 16.33 9.33C16.33 8.54 16.02 7.77 15.45 7.21C14.89 6.65 14.13 6.33 13.33 6.33ZM9.8 5.8C10.74 4.86 12.01 4.33 13.33 4.33C14.66 4.33 15.93 4.86 16.87 5.8C17.81 6.74 18.33 8.01 18.33 9.33C18.33 10.66 17.81 11.93 16.87 12.87C15.93 13.81 14.66 14.33 13.33 14.33C12.01 14.33 10.74 13.81 9.8 12.87C8.86 11.93 8.33 10.66 8.33 9.33C8.33 8.01 8.86 6.74 9.8 5.8Z" fill="#F4E9E9"/></svg>
-                        </div>
-                        <div class="swiper-slide develop__thumb">
-                            <svg viewBox="0 0 32 32" fill="none"><path d="M7.57 21.65C7.43 20.3 7.41 18.72 7.4 17.08L5.4 16.04L5.58 21.85L6.04 24.28L7.14 26.16H24.86L22.84 25.11C22.42 25.3 21.88 25.43 21.15 25.52C19.91 25.67 18.29 25.67 16 25.67C13.71 25.67 12.09 25.67 10.85 25.52C9.64 25.37 8.95 25.1 8.47 24.67C8.31 24.53 8.12 24.23 7.95 23.68C7.78 23.15 7.65 22.46 7.57 21.65Z" fill="#F4E9E9"/></svg>
-                        </div>
-                        <div class="swiper-slide develop__thumb">
-                            <svg viewBox="0 0 32 32" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.21 4.33H20.87C21.61 4.34 22.33 4.57 22.94 5C23.54 5.42 24 6.02 24.26 6.7L25.69 10.23L27.29 8.63C27.68 8.24 28.32 8.24 28.71 8.63C29.1 9.02 29.1 9.65 28.71 10.04L26.04 12.71C25.8 12.94 25.46 13.05 25.13 12.98C24.81 12.91 24.53 12.69 24.41 12.38L22.41 7.44C22.28 7.1 22.07 6.83 21.79 6.64C21.52 6.44 21.19 6.34 20.86 6.33H11.2C10.84 6.33 10.5 6.42 10.22 6.61C9.94 6.8 9.72 7.07 9.59 7.38L7.6 12.37C7.47 12.68 7.2 12.91 6.87 12.98C6.54 13.05 6.2 12.95 5.96 12.71L3.29 10.04C2.9 9.65 2.9 9.02 3.29 8.63C3.68 8.24 4.32 8.24 4.71 8.63L6.3 10.22L7.73 6.64C8.01 5.94 8.49 5.35 9.12 4.94C9.74 4.53 10.47 4.32 11.21 4.33Z" fill="#F4E9E9"/></svg>
+                        <div class="ratings">
+                            <div class="rating">
+                                <p class="ratingTitle">Заработок</p>
+                                <div class="ratingIcons" id="ratingEarn"></div>
+                            </div>
+                            <div class="rating">
+                                <p class="ratingTitle">Время</p>
+                                <div class="ratingIcons" id="ratingTime"></div>
+                            </div>
+                            <div class="rating">
+                                <p class="ratingTitle">Сложность</p>
+                                <div class="ratingIcons" id="ratingDiff"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="develop__slide-info">
-                    <p class="develop__slide-info-title" id="developInfoTitle">Работы</p>
-                    <p class="develop__slide-info-desc" id="developInfoDesc">+50 видов деятельности и развлечений</p>
+                <div class="sliderWithParamsAlbumWrapper">
+                    <div class="swiper sliderWithParamsAlbum" id="developThumbs">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7.57043 21.6452C7.43128 20.3029 7.40575 18.7226 7.40107 17.0772L5.40002 16.0357L5.58109 21.8514L6.0394 24.2846L7.14139 26.1638H24.8587L22.8352 25.1106C22.4173 25.2966 21.8794 25.4301 21.1484 25.5175C19.9146 25.665 18.2882 25.6667 16 25.6667C13.7124 25.6667 12.086 25.665 10.8521 25.5175C9.63594 25.3721 8.95374 25.0991 8.47008 24.669C8.3132 24.5296 8.12053 24.2341 7.94685 23.6832C7.77767 23.1466 7.6549 22.46 7.57043 21.6452Z" fill="#F4E9E9"/><path d="M7.14139 26.1638C8.06353 26.9837 9.21654 27.3362 10.6147 27.5033C11.9813 27.6667 13.7274 27.6667 15.9329 27.6667H16.0672C18.2732 27.6667 20.0193 27.6667 21.3858 27.5033C22.7839 27.3362 23.9366 26.9836 24.8587 26.1638H7.14139Z" fill="#F4E9E9"/><path d="M24.0532 23.6832C23.8795 24.2341 23.6865 24.5299 23.5297 24.6692C23.3368 24.8408 23.1124 24.9873 22.8352 25.1106L24.8587 26.1638C25.4045 25.6787 25.739 24.9877 25.9607 24.2846C26.1869 23.567 26.3277 22.7318 26.419 21.8514C26.6 20.1046 26.6 18.0208 26.6 16.0356V16H24.6C24.6 18.0265 24.5989 20.012 24.4296 21.6452C24.3452 22.46 24.2224 23.1466 24.0532 23.6832Z" fill="#F4E9E9"/><path d="M6.0394 24.2846C6.26108 24.9877 6.59552 25.6787 7.14139 26.1638L6.0394 24.2846Z" fill="#F4E9E9"/><path d="M5.58109 21.8514C5.67235 22.7318 5.81318 23.567 6.0394 24.2846L5.58109 21.8514Z" fill="#F4E9E9"/><path d="M5.40002 16.0357C5.40002 18.0209 5.40001 20.1046 5.58109 21.8514L5.40002 16.0357Z" fill="#F4E9E9"/><path d="M26.1168 8.47546L21.8898 7.53661L22.6695 9.552C23.029 9.56402 23.3407 9.58378 23.6173 9.61628C24.2871 9.695 24.6208 9.83653 24.8547 10.0269C24.9713 10.1218 25.0781 10.2285 25.173 10.3452C25.3633 10.5791 25.505 10.9129 25.5838 11.5828C25.665 12.2744 25.6667 13.1853 25.6667 14.5163C25.6667 14.8683 25.6655 15.0579 25.6517 15.1941C25.6498 15.2131 25.6478 15.2285 25.646 15.2408C25.6348 15.246 25.6207 15.2523 25.603 15.2596C25.4763 15.312 25.2953 15.3676 24.9586 15.4689L27.1484 16.5758L26.244 9.47407L26.1168 8.47546Z" fill="#F4E9E9"/><path fill-rule="evenodd" clip-rule="evenodd" d="M14.2767 6.33536C14.2975 6.33395 14.3291 6.33338 14.4853 6.33338H17.5125C17.6692 6.33338 17.7006 6.33394 17.7233 6.33546L17.7296 6.33583C17.9437 6.34876 18.1498 6.42218 18.3238 6.54757C18.4978 6.67296 18.6327 6.84517 18.7127 7.04418L18.7155 7.0509C18.7237 7.07075 18.7327 7.09695 18.7836 7.24961L18.7848 7.2533L18.8131 7.3371L18.8273 7.37977L18.8331 7.39712C18.8382 7.41254 18.8478 7.44165 18.8604 7.47489C18.8675 7.49451 18.8749 7.51401 18.8825 7.53338H13.1175C13.1263 7.51081 13.1349 7.48808 13.1432 7.46518L13.1464 7.45618L13.1869 7.33729L13.2169 7.24476C13.2589 7.11789 13.2753 7.0721 13.2876 7.04047C13.3679 6.84303 13.5022 6.67218 13.6751 6.54757C13.8492 6.42218 14.0552 6.34879 14.2693 6.33586L14.2767 6.33536ZM23.8507 7.62995C23.2939 7.56452 22.6422 7.54341 21.8898 7.53661L21.8899 7.53368C21.3622 7.52086 20.8764 7.1691 20.7378 6.78559L20.7334 6.77323L20.7327 6.77166L20.7317 6.76841L20.7287 6.75929C20.7238 6.74452 20.716 6.72068 20.7069 6.69394L20.6809 6.61716L20.6804 6.61547L20.6689 6.58095C20.6352 6.47955 20.6031 6.38307 20.5671 6.29489C20.3457 5.74593 19.9732 5.2709 19.4929 4.92486C19.0126 4.57881 18.4441 4.37592 17.8532 4.33966C17.7559 4.33332 17.6533 4.33335 17.5379 4.33338L17.5125 4.33338H14.4853L14.4596 4.33338C14.346 4.33334 14.2421 4.33331 14.1454 4.33968C13.5547 4.37598 12.9863 4.57886 12.506 4.92486C12.0248 5.27152 11.6519 5.74761 11.4306 6.2978L11.4276 6.30533C11.3933 6.39275 11.3625 6.48258 11.3172 6.6194L11.291 6.70025L11.2596 6.79268C11.1178 7.17296 10.6341 7.52092 10.109 7.53368L10.1091 7.53663C9.35763 7.54345 8.70664 7.56458 8.15034 7.62995C7.29327 7.73067 6.53269 7.94798 5.8846 8.47514C5.66102 8.65679 5.4576 8.86006 5.27639 9.08329C4.74858 9.73135 4.53092 10.492 4.43004 11.3492C4.33327 12.1714 4.33329 13.2005 4.33332 14.4549L4.33332 14.5163L4.33332 14.5549C4.33327 14.8531 4.33322 15.146 4.35838 15.3951C4.38675 15.6759 4.45345 15.9888 4.64239 16.2949L4.6504 16.3077C4.70546 16.394 4.77099 16.4843 4.84963 16.5736L4.85219 16.5765C5.09111 16.8456 5.37166 16.9996 5.63249 17.1076C5.86297 17.203 6.14234 17.287 6.42648 17.3724L6.46603 17.3843L12.8754 19.3067L13.4499 17.391L7.04221 15.4691C6.70571 15.3679 6.52409 15.3121 6.39762 15.2597C6.37961 15.2523 6.36523 15.2458 6.35393 15.2405C6.35213 15.2283 6.35017 15.213 6.34826 15.1941C6.3345 15.0579 6.33332 14.8683 6.33332 14.5163C6.33332 13.1853 6.33494 12.2745 6.41633 11.5829C6.49514 10.9133 6.63681 10.5798 6.82742 10.3459L6.82882 10.3442C6.92263 10.2286 7.02831 10.1228 7.14578 10.0274C7.37969 9.83701 7.71391 9.695 8.38377 9.61628C9.07545 9.535 9.98632 9.53338 11.3173 9.53338H20.6837C21.4825 9.53338 22.1299 9.53397 22.6695 9.552L21.8898 7.53661L26.1168 8.47546L27.1484 16.5758L24.9586 15.4689L18.55 17.391L19.1246 19.3067L25.5758 17.3717C25.8589 17.2866 26.1377 17.2028 26.3677 17.1077C26.6278 17 26.9094 16.846 27.1484 16.5758C27.225 16.4894 27.2944 16.3964 27.3555 16.2984L27.3576 16.2949C27.5465 15.9888 27.6132 15.6759 27.6416 15.3951C27.6668 15.146 27.6667 14.8532 27.6667 14.5549L27.6667 14.455C27.6667 13.2005 27.6667 12.1715 27.5701 11.3493C27.4693 10.4921 27.252 9.73138 26.7246 9.0832C26.5434 8.86042 26.3396 8.65666 26.1168 8.47546C25.4687 7.94806 24.7079 7.73069 23.8507 7.62995Z" fill="#F4E9E9"/><path fill-rule="evenodd" clip-rule="evenodd" d="M12.7824 15.9824C13.07 15.6949 13.46 15.5333 13.8666 15.5333H18.1333C18.54 15.5333 18.93 15.6949 19.2175 15.9824C19.5051 16.27 19.6666 16.66 19.6666 17.0667V19.3728C19.6666 19.679 19.5748 19.9784 19.4032 20.232C19.2316 20.4856 18.988 20.682 18.7037 20.796L17.9565 21.0948C16.7006 21.5973 15.2994 21.5974 14.0435 21.0949L13.2969 20.7962C13.0126 20.6823 12.7684 20.4856 12.5968 20.232C12.4251 19.9784 12.3334 19.6792 12.3333 19.373V17.0667C12.3333 16.66 12.4949 16.27 12.7824 15.9824ZM14.3333 17.5333V19.0567L14.7863 19.2379C15.5653 19.5496 16.4345 19.5497 17.2135 19.238L17.6666 19.0567V17.5333H14.3333Z" fill="#F4E9E9"/></svg>
+                            </div>
+                            <div class="swiper-slide">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M13.3333 6.33337C12.5377 6.33337 11.7746 6.64944 11.212 7.21205C10.6494 7.77466 10.3333 8.53772 10.3333 9.33337C10.3333 10.129 10.6494 10.8921 11.212 11.4547C11.7746 12.0173 12.5377 12.3334 13.3333 12.3334C14.129 12.3334 14.892 12.0173 15.4547 11.4547C16.0173 10.8921 16.3333 10.129 16.3333 9.33337C16.3333 8.53772 16.0173 7.77466 15.4547 7.21205C14.892 6.64945 14.129 6.33337 13.3333 6.33337ZM9.7978 5.79784C10.7355 4.86016 12.0073 4.33337 13.3333 4.33337C14.6594 4.33337 15.9312 4.86016 16.8689 5.79784C17.8066 6.73552 18.3333 8.00729 18.3333 9.33337C18.3333 10.6595 17.8066 11.9312 16.8689 12.8689C15.9312 13.8066 14.6594 14.3334 13.3333 14.3334C12.0073 14.3334 10.7355 13.8066 9.7978 12.8689C8.86012 11.9312 8.33333 10.6595 8.33333 9.33337C8.33333 8.00729 8.86012 6.73552 9.7978 5.79784ZM19.801 10.1661C20.0774 9.68802 20.6891 9.52455 21.1672 9.80102C21.8195 10.1782 22.3781 10.6979 22.8013 11.3213C23.2245 11.9447 23.5013 12.6557 23.611 13.4012C23.7208 14.1466 23.6606 14.9072 23.4351 15.6261C23.2096 16.3451 22.8245 17.0037 22.3086 17.5529C21.7927 18.102 21.1593 18.5275 20.4559 18.7975C19.7525 19.0675 18.9971 19.175 18.2463 19.112C17.4954 19.049 16.7685 18.8171 16.1199 18.4336C15.4713 18.0502 14.9177 17.5251 14.5006 16.8977C14.1948 16.4378 14.3198 15.8171 14.7797 15.5113C15.2396 15.2055 15.8603 15.3305 16.1661 15.7904C16.4164 16.1669 16.7485 16.4819 17.1377 16.712C17.5269 16.942 17.963 17.0812 18.4135 17.119C18.864 17.1568 19.3172 17.0923 19.7393 16.9303C20.1613 16.7683 20.5413 16.513 20.8509 16.1835C21.1604 15.854 21.3915 15.4588 21.5268 15.0275C21.6621 14.5961 21.6982 14.1397 21.6324 13.6925C21.5665 13.2452 21.4004 12.8186 21.1465 12.4446C20.8926 12.0705 20.5575 11.7587 20.1661 11.5324C19.688 11.2559 19.5245 10.6442 19.801 10.1661ZM3 12C3 11.4478 3.44772 11 4 11H6.66667C7.21895 11 7.66667 11.4478 7.66667 12C7.66667 12.5523 7.21895 13 6.66667 13H5V24.3334H27V13H26C25.4477 13 25 12.5523 25 12C25 11.4478 25.4477 11 26 11H28C28.5523 11 29 11.4478 29 12V25.3334C29 25.8857 28.5523 26.3334 28 26.3334H4C3.44772 26.3334 3 25.8857 3 25.3334V12Z" fill="#F4E9E9"/></svg>
+                            </div>
+                            <div class="swiper-slide">
+                                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.2103 4.33408H20.8705C21.6115 4.34132 22.333 4.57297 22.9397 4.99842C23.5424 5.42102 24.0039 6.01517 24.2642 6.70345L25.6924 10.2265L27.292 8.62683C27.6826 8.23631 28.3157 8.23631 28.7063 8.62683C29.0968 9.01735 29.0968 9.65052 28.7063 10.041L26.0397 12.7076C25.8026 12.9447 25.4624 13.0472 25.1338 12.9806C24.8052 12.9139 24.5318 12.687 24.4058 12.3762L22.4059 7.44306C22.278 7.10177 22.0673 6.82936 21.7915 6.63597C21.5169 6.44342 21.1906 6.33822 20.8553 6.33408H11.1997C10.8372 6.32601 10.5034 6.42215 10.22 6.60935C9.93657 6.79655 9.71713 7.06588 9.59104 7.38125L7.59507 12.3719C7.47024 12.684 7.19695 12.9125 6.86766 12.9801C6.53838 13.0477 6.19716 12.9453 5.95947 12.7076L3.29289 10.041C2.90237 9.65052 2.90237 9.01735 3.29289 8.62683C3.68342 8.23631 4.31658 8.23631 4.70711 8.62683L6.30127 10.221L7.73396 6.63878C8.01138 5.94498 8.49419 5.35238 9.11767 4.94055C9.73774 4.53097 10.4675 4.31953 11.2103 4.33408ZM8.33315 17.3337C8.33315 16.7814 8.78086 16.3337 9.33315 16.3337H9.34648C9.89876 16.3337 10.3465 16.7814 10.3465 17.3337C10.3465 17.8859 9.89876 18.3337 9.34648 18.3337H9.33315C8.78086 18.3337 8.33315 17.8859 8.33315 17.3337ZM21.666 17.3337C21.666 16.7814 22.1137 16.3337 22.666 16.3337H22.6793C23.2316 16.3337 23.6793 16.7814 23.6793 17.3337C23.6793 17.8859 23.2316 18.3337 22.6793 18.3337H22.666C22.1137 18.3337 21.666 17.8859 21.666 17.3337Z" fill="#F4E9E9"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.66657 13.0005C5.74615 13.0005 5 13.7466 5 14.6671V20.0002C5 20.9206 5.74615 21.6668 6.66657 21.6668H25.3326C26.253 21.6668 26.9992 20.9206 26.9992 20.0002V14.6671C26.9992 13.7466 26.253 13.0005 25.3326 13.0005H6.66657ZM3 14.6671C3 12.6421 4.64158 11.0005 6.66657 11.0005H25.3326C27.3576 11.0005 28.9992 12.6421 28.9992 14.6671V20.0002C28.9992 22.0252 27.3576 23.6668 25.3326 23.6668H6.66657C4.64158 23.6668 3 22.0252 3 20.0002V14.6671Z" fill="#F4E9E9"/><path fill-rule="evenodd" clip-rule="evenodd" d="M6.66656 21.6667C7.21885 21.6667 7.66656 22.1145 7.66656 22.6667V25.3333C7.66656 25.8856 7.21885 26.3333 6.66656 26.3333C6.11428 26.3333 5.66656 25.8856 5.66656 25.3333V22.6667C5.66656 22.1145 6.11428 21.6667 6.66656 21.6667ZM25.3326 21.6667C25.8849 21.6667 26.3326 22.1145 26.3326 22.6667V25.3333C26.3326 25.8856 25.8849 26.3333 25.3326 26.3333C24.7803 26.3333 24.3326 25.8856 24.3326 25.3333V22.6667C24.3326 22.1145 24.7803 21.6667 25.3326 21.6667Z" fill="#F4E9E9"/></svg>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="Typography_p__ok94t slide-title" id="developInfoTitle">Бизнес</p>
+                    <p class="Typography_p__ok94t slide-description" id="developInfoDesc">+50 видов деятельности и развлечений</p>
                 </div>
-            </div>
-
-            <div class="parallax" data-parallax>
-                <div class="parallax__item" style="width:272px;height:12px;top:668px;left:-5%;"></div>
-                <div class="parallax__item" style="width:144px;height:47px;top:534px;left:75%;"></div>
-                <div class="parallax__item" style="width:124px;height:43px;top:97px;left:81%;"></div>
-                <div class="parallax__item" style="width:53px;height:18px;top:625px;left:15%;"></div>
-                <div class="parallax__item" style="width:171px;height:41px;top:167px;left:-3%;"></div>
             </div>
         </section>
 
         <!-- FIGHT -->
-        <section class="fight section" id="fight">
+        <section class="FightBlock_wrapper__WHDiV section" id="fight">
+            <div class="ParallaxChild_child___vz_a" style="width: 419.13px; height: 18.8px; top: 310.86px; left: -209.45px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 36.59px; height: 13.38px; top: 330.47px; left: 771.36px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 49.66px; height: 13.38px; top: 398.85px; left: 75.9278vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 86.28px; height: 26.93px; top: 442.33px; left: 490.74px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 156.44px; height: 25.84px; top: 60.51px; left: 214.63px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 227.2px; height: 87.43px; top: 62px; left: 90.6181vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 100.18px; height: 13.34px; top: 223.93px; left: 75.2333vw;"></div>
+
             <div class="container">
-                <div class="section-title">
-                    <h2 class="section-title__heading">СРАЖАЙСЯ</h2>
-                    <p class="section-title__text">
-                        Кто тебе ближе:<br>
-                        <span class="section-title__accent--blue">полиция</span> или <span class="section-title__accent--red">криминал?</span>
-                    </p>
+                <div class="title FightBlock_title__1UASx">
+                    <h2 class="Typography_h2__4yi4m">Сражайся</h2>
+                    <p class="Typography_p__ok94t">Кто тебе ближе:<br><span class="color-blue">полиция</span> или <span class="color-red">криминал?</span></p>
                 </div>
-
-                <div class="three-cards">
-                    <div class="three-cards__image">
-                        <img src="https://nextrp.ru/_next/static/media/fight-block.f8da5c43.png" alt="Сражайся">
-                    </div>
-                    <div class="three-cards__list">
-                        <div class="three-cards__item three-cards__item--up">
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Ограбления</p>
-                            </div>
-                        </div>
-                        <div class="three-cards__item">
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Рейды</p>
-                            </div>
-                        </div>
-                        <div class="three-cards__item three-cards__item--up">
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Битвы за картели</p>
-                            </div>
-                        </div>
+                <div class="ThreeCards_wrapper__TErXS">
+                    <div class="ThreeCards_image__NVqCA full-bleed"><img src="image/fight-block.png" alt="Сражайся"></div>
+                    <div class="ThreeCards_cards__msRla">
+                        <div class="ThreeCards_cardWrapper__e98k_"><div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Ограбления</p></div></div>
+                        <div class="ThreeCards_cardWrapper__e98k_"><div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Рейды</p></div></div>
+                        <div class="ThreeCards_cardWrapper__e98k_"><div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Битвы за картели</p></div></div>
                     </div>
                 </div>
-
-                <div class="btn-wrapper">
-                    <button class="btn btn--outlined" id="fightBtn">Выбрать сторону</button>
-                </div>
-            </div>
-
-            <div class="parallax" data-parallax>
-                <div class="parallax__item" style="width:419px;height:19px;top:311px;left:-10%;"></div>
-                <div class="parallax__item" style="width:116px;height:27px;top:342px;left:10%;"></div>
-                <div class="parallax__item" style="width:227px;height:87px;top:62px;left:91%;"></div>
-                <div class="parallax__item" style="width:100px;height:13px;top:224px;left:75%;"></div>
+                <div class="btnWrapper"><button class="Button_outlined__nLYRi" id="fightBtn" type="button"><div>Выбрать сторону</div></button></div>
             </div>
         </section>
 
         <!-- EXPLORE -->
-        <section class="explore section" id="explore">
+        <section class="ExploreBlock_title___zVXp section" id="explore">
+            <div class="ParallaxChild_child___vz_a" style="width: 80.59px; height: 27.11px; top: 106.86px; left: 94.775vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 133.06px; height: 27.62px; top: 153.44px; left: 68.5979vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 204.83px; height: 45.02px; top: 203.01px; left: -64.42px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 140.78px; height: 20.67px; top: 83.44px; left: 156.1px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 67.78px; height: 23.58px; top: 901.54px; left: 110.4px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 281.12px; height: 18.18px; top: 902.76px; left: 87.8653vw;"></div>
+
             <div class="container">
-                <div class="section-title">
-                    <h2 class="section-title__heading">ИССЛЕДУЙ</h2>
-                    <p class="section-title__text">В игре тебя ждут: здания, улицы и даже города из реальной жизни</p>
+                <div class="title">
+                    <h2 class="Typography_h2__4yi4m">Исследуй</h2>
+                    <p class="Typography_p__ok94t">В игре тебя ждут: здания, улицы и даже города из реальной жизни</p>
                 </div>
-
-                <div class="explore__main swiper">
+                <div class="sliderAlbum swiper">
                     <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-1.7273084a.png" alt="Локация 1"></div>
-                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-2.0800a4a6.png" alt="Локация 2"></div>
-                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-4.97cf4d8c.png" alt="Локация 3"></div>
-                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-5.2bbe85a5.png" alt="Локация 4"></div>
-                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-6.999fcd86.png" alt="Локация 5"></div>
-                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-7.d6742ff4.png" alt="Локация 6"></div>
+                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-1.7273084a.png" alt=""></div>
+                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-2.0800a4a6.png" alt=""></div>
+                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-4.97cf4d8c.png" alt=""></div>
+                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-5.2bbe85a5.png" alt=""></div>
+                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-6.999fcd86.png" alt=""></div>
+                        <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-7.d6742ff4.png" alt=""></div>
                     </div>
-                    <div class="swiper-button-prev explore__prev"></div>
-                    <div class="swiper-button-next explore__next"></div>
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
                 </div>
-
-                <div class="explore__thumbs swiper">
+                <div class="sliderAlbumCarrousel swiper">
                     <div class="swiper-wrapper">
                         <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-1.7273084a.png" alt=""></div>
                         <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-2.0800a4a6.png" alt=""></div>
@@ -986,428 +464,700 @@
                         <div class="swiper-slide"><img src="https://nextrp.ru/_next/static/media/explore-7.d6742ff4.png" alt=""></div>
                     </div>
                 </div>
-
-                <div class="btn-wrapper">
-                    <button class="btn btn--outlined" id="exploreBtn">Отправиться в родные места</button>
-                </div>
-            </div>
-
-            <div class="parallax" data-parallax>
-                <div class="parallax__item" style="width:81px;height:27px;top:107px;left:95%;"></div>
-                <div class="parallax__item" style="width:205px;height:45px;top:203px;left:-4%;"></div>
-                <div class="parallax__item" style="width:281px;height:18px;top:903px;left:88%;"></div>
+                <div class="btnWrapper ExploreBlock_btnWrapper__yTtvU"><button class="Button_outlined__nLYRi" id="exploreBtn" type="button"><div>Отправиться в родные места</div></button></div>
             </div>
         </section>
 
         <!-- STANDOUT -->
-        <section class="standout section" id="stand-out">
+        <section class="StandOutBlock_wrapper__HNI2u section" id="stand-out">
+            <div class="ParallaxChild_child___vz_a" style="width: 122.48px; height: 47.31px; top: 156.7px; left: 215.81px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 140.78px; height: 20.67px; top: 796.44px; left: 195.1px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 185.38px; height: 64.16px; top: 435.16px; left: -61.54px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 73.79px; height: 25.02px; top: 307.1px; left: 63.8576vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 77.87px; height: 32.72px; top: 191.15px; left: 84.7451vw;"></div>
+
             <div class="container">
-                <div class="section-title">
-                    <h2 class="section-title__heading">ВЫДЕЛЯЙСЯ</h2>
-                </div>
-
-                <div class="three-cards">
-                    <div class="three-cards__image">
-                        <img src="https://nextrp.ru/_next/static/media/stand-out-block.21ebee26.png" alt="Выделяйся">
-                    </div>
-                    <div class="three-cards__list">
-                        <div class="three-cards__item">
-                            <span class="three-cards__number">+20</span>
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Видов оружия</p>
-                                <p class="three-cards__desc">С возможностью улучшения и кастомизации</p>
-                            </div>
+                <div class="title StandOutBlock_title___yhfT"><h2 class="Typography_h2__4yi4m">Выделяйся</h2></div>
+                <div class="ThreeCards_wrapper__TErXS">
+                    <div class="ThreeCards_image__NVqCA full-bleed"><img src="image/stand-out-block.png" alt="Выделяйся"></div>
+                    <div class="ThreeCards_cards__msRla">
+                        <div class="ThreeCards_cardWrapper__e98k_">
+                            <span class="ThreeCards_number__kNqgh">+20</span>
+                            <div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Видов оружия</p><p class="ThreeCards_description__wdASp">С возможностью улучшения и кастомизации</p></div>
                         </div>
-                        <div class="three-cards__item">
-                            <span class="three-cards__number">+600</span>
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Видов техники</p>
-                                <p class="three-cards__desc">Включая вертолёты и яхты</p>
-                            </div>
+                        <div class="ThreeCards_cardWrapper__e98k_">
+                            <span class="ThreeCards_number__kNqgh">+600</span>
+                            <div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Видов техники</p><p class="ThreeCards_description__wdASp">Включая вертолёты и яхты</p></div>
                         </div>
-                        <div class="three-cards__item">
-                            <span class="three-cards__number">+300</span>
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Персонажей</p>
-                                <p class="three-cards__desc">От суровых мужчин до аниме-девочек</p>
-                            </div>
+                        <div class="ThreeCards_cardWrapper__e98k_">
+                            <span class="ThreeCards_number__kNqgh">+300</span>
+                            <div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Персонажей</p><p class="ThreeCards_description__wdASp">От суровых мужчин до аниме-девочек</p></div>
                         </div>
                     </div>
+                    <div class="btnWrapper"><button class="Button_outlined__nLYRi" id="standoutBtn" type="button"><div>Начать выделяться</div></button></div>
                 </div>
-
-                <div class="btn-wrapper">
-                    <button class="btn btn--outlined" id="standoutBtn">Начать выделяться</button>
-                </div>
-            </div>
-
-            <div class="parallax" data-parallax>
-                <div class="parallax__item" style="width:122px;height:47px;top:157px;left:15%;"></div>
-                <div class="parallax__item" style="width:185px;height:64px;top:435px;left:-4%;"></div>
-                <div class="parallax__item" style="width:78px;height:33px;top:191px;left:85%;"></div>
             </div>
         </section>
 
         <!-- WIN -->
-        <section class="win section" id="win">
+        <section class="WinBlock_wrapper__KcjTt section" id="win">
+            <div class="ParallaxChild_child___vz_a" style="width: 67.78px; height: 23.58px; top: 558.54px; left: 85.7917vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 65.27px; height: 24.47px; top: 345.89px; left: 71.3535vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 48.64px; height: 25.22px; top: 239.59px; left: 567.57px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 224.17px; height: 33.59px; top: 140.6px; left: 89.88px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 134.33px; height: 47.64px; top: 145.38px; left: 76.9514vw;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 67.78px; height: 23.58px; top: 702.54px; left: 34.4px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 70.05px; height: 31.84px; top: 336.13px; left: 797.24px;"></div>
+            <div class="ParallaxChild_child___vz_a" style="width: 96.24px; height: 30.25px; top: 505.91px; left: 91.08px;"></div>
+
             <div class="container">
-                <div class="section-title">
-                    <h2 class="section-title__heading">ПОБЕЖДАЙ</h2>
-                    <p class="section-title__text">Против других игроков в различных баталиях</p>
-                </div>
-
-                <div class="three-cards">
-                    <div class="three-cards__image">
-                        <img src="https://nextrp.ru/_next/static/media/win-block.1b42ed94.png" alt="Побеждай">
+                <div class="title WinBlock_title__HHuOr"><h2 class="Typography_h2__4yi4m">Побеждай</h2><p class="Typography_p__ok94t">Против других игроков в различных баталиях</p></div>
+                <div class="ThreeCards_wrapper__TErXS">
+                    <div class="ThreeCards_image__NVqCA full-bleed"><img src="image/win-block.webp" alt="Побеждай"></div>
+                    <div class="ThreeCards_cards__msRla">
+                        <div class="ThreeCards_cardWrapper__e98k_"><div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Каждый сам за себя</p><p class="ThreeCards_description__wdASp">Сотни игроков сражаются на одной карте</p></div></div>
+                        <div class="ThreeCards_cardWrapper__e98k_"><div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Королевская Битва</p><p class="ThreeCards_description__wdASp">Займи первое место</p></div></div>
+                        <div class="ThreeCards_cardWrapper__e98k_"><div class="ThreeCards_card__ZXXgD"><p class="ThreeCards_title__KzXx0">Войны за район</p><p class="ThreeCards_description__wdASp">Стань главным в городе</p></div></div>
                     </div>
-                    <div class="three-cards__list">
-                        <div class="three-cards__item">
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Каждый сам за себя</p>
-                                <p class="three-cards__desc">Сотни игроков сражаются на одной карте</p>
-                            </div>
-                        </div>
-                        <div class="three-cards__item">
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Королевская Битва</p>
-                                <p class="three-cards__desc">Займи первое место</p>
-                            </div>
-                        </div>
-                        <div class="three-cards__item">
-                            <div class="three-cards__card">
-                                <p class="three-cards__title">Войны за район</p>
-                                <p class="three-cards__desc">Стань главным в городе</p>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="btnWrapper"><button class="Button_outlined__nLYRi" id="winBtn" type="button"><div>Вступить в баталии</div></button></div>
                 </div>
-
-                <div class="btn-wrapper">
-                    <button class="btn btn--outlined" id="winBtn">Вступить в баталии</button>
-                </div>
-            </div>
-
-            <div class="parallax" data-parallax>
-                <div class="parallax__item" style="width:224px;height:34px;top:141px;left:6%;"></div>
-                <div class="parallax__item" style="width:134px;height:48px;top:145px;left:77%;"></div>
-                <div class="parallax__item" style="width:96px;height:30px;top:506px;left:7%;"></div>
-                <div class="parallax__item" style="width:68px;height:24px;top:559px;left:86%;"></div>
             </div>
         </section>
     </main>
 
-    <!-- SIDE NAV -->
-    <nav class="side-nav" id="sideNav" aria-label="Навигация по секциям">
-        <div class="side-nav__line"></div>
-        <ul class="side-nav__list">
-            <li class="side-nav__item side-nav__item--active" data-section="welcome"><span class="side-nav__link">Об игре</span></li>
-            <li class="side-nav__item" data-section="updates"><span class="side-nav__link">Обновления</span></li>
-            <li class="side-nav__item" data-section="develop"><span class="side-nav__link">Развивайся</span></li>
-            <li class="side-nav__item" data-section="fight"><span class="side-nav__link">Сражайся</span></li>
-            <li class="side-nav__item" data-section="explore"><span class="side-nav__link">Исследуй</span></li>
-            <li class="side-nav__item" data-section="stand-out"><span class="side-nav__link">Выделяйся</span></li>
-            <li class="side-nav__item" data-section="win"><span class="side-nav__link">Побеждай</span></li>
+    <nav class="Navigation_wrapper__GWxO6" id="sideNav">
+        <div class="Navigation_lineUpper__V7Sd0"></div>
+        <ul class="Navigation_list__F3L80">
+            <li class="Navigation_item__9Y5Ky Navigation_active__II_5V" data-section="welcome"><span class="Navigation_link__tBcOj">Об игре</span></li>
+            <li class="Navigation_item__9Y5Ky" data-section="updates"><span class="Navigation_link__tBcOj">Обновления</span></li>
+            <li class="Navigation_item__9Y5Ky" data-section="develop"><span class="Navigation_link__tBcOj">Развивайся</span></li>
+            <li class="Navigation_item__9Y5Ky" data-section="fight"><span class="Navigation_link__tBcOj">Сражайся</span></li>
+            <li class="Navigation_item__9Y5Ky" data-section="explore"><span class="Navigation_link__tBcOj">Исследуй</span></li>
+            <li class="Navigation_item__9Y5Ky" data-section="stand-out"><span class="Navigation_link__tBcOj">Выделяйся</span></li>
+            <li class="Navigation_item__9Y5Ky" data-section="win"><span class="Navigation_link__tBcOj">Побеждай</span></li>
         </ul>
-        <div class="side-nav__line"></div>
+        <div class="Navigation_lineLower__9nhId"></div>
     </nav>
 
-    <!-- FOOTER -->
-    <footer class="footer" id="footer">
-        <div class="container">
-            <div class="footer__top">
-                <div class="footer__logo">
-                    <img src="https://nextrp.ru/_next/static/media/logo.f979b8ae.png" alt="NEXTRP">
-                </div>
-                <div class="footer__divider"></div>
-                <div class="footer__col">
-                    <a href="https://forum.nextrp.ru" class="footer__link" target="_blank" rel="noopener">Форум</a>
-                    <div>
-                        <span class="footer__label">Служба Поддержки</span><br>
-                        <a href="mailto:techsupport@nextrp.ru" class="footer__email">techsupport@nextrp.ru</a>
-                    </div>
-                    <div>
-                        <span class="footer__label">Вакансии</span><br>
-                        <a href="mailto:support_job@nextrp.ru" class="footer__email">support_job@nextrp.ru</a>
-                    </div>
-                    <div>
-                        <span class="footer__label">Сотрудничество для блогеров</span><br>
-                        <a href="http://t.me/nextrpmediabot" class="footer__email" target="_blank" rel="noopener">Telegram: @nextrpmediabot</a>
-                    </div>
-                    <a href="https://forms.gle/k88cKLAtzSEM3JsR6" class="footer__link" target="_blank" rel="noopener">Сообщить об ошибках</a>
-                </div>
-                <div class="footer__divider"></div>
-                <div class="footer__col">
-                    <div class="footer__social"><a href="https://vk.com/nextrp" target="_blank" rel="noopener"><i class="fa-brands fa-vk"></i><span class="footer__social-text">ВКонтакте</span></a></div>
-                    <div class="footer__social"><a href="https://t.me/nextrpnews" target="_blank" rel="noopener"><i class="fa-brands fa-telegram"></i><span class="footer__social-text">Telegram</span></a></div>
-                    <div class="footer__social"><a href="https://discord.gg/nextrp" target="_blank" rel="noopener"><i class="fa-brands fa-discord"></i><span class="footer__social-text">Discord</span></a></div>
-                    <div class="footer__social"><a href="https://www.youtube.com/@nextrp" target="_blank" rel="noopener"><i class="fa-brands fa-youtube"></i><span class="footer__social-text">YouTube</span></a></div>
-                </div>
-                <div class="footer__divider"></div>
-                <div class="footer__col">
-                    <a href="https://nextrp.ru/policy-privacy" class="footer__link-underline">Политика конфиденциальности</a>
-                    <a href="https://nextrp.ru/agreement" class="footer__link-underline">Лицензионное соглашение</a>
-                    <a href="https://nextrp.ru/personal-data" class="footer__link-underline">Согласие на обработку данных</a>
-                    <a href="https://nextrp.ru/refund-policy" class="footer__link-underline">Политика возвратов платежей</a>
-                    <a href="https://nextrp.ru/interaction-policy" class="footer__link-underline">Политика этичного взаимодействия в <br> игровом пространстве</a>
-                </div>
+<footer class="Footer_wrapper__XVuLU" id="footer">
+    <div class="container Footer_container__rvM4J">
+        <div class="Footer_upper__RMQF8">
+            <div class="Footer_logo___CKMq">
+                <img src="https://nextrp.ru/_next/static/media/logo.f979b8ae.png" alt="NEXTRP" width="145" height="64">
             </div>
-            <div class="footer__bottom">
-                <div>
-                    Как удалить NEXTRP Launcher:
-                    <a href="https://nextrp.ru/delete-launcher">Инструкция</a>
-                </div>
-                <span>Copyright © 2025 NEXTRP. All Rights reserved</span>
-            </div>
-        </div>
-    </footer>
 
-    <!-- COOKIES -->
-    <div class="cookies" id="cookies">
-        <p class="cookies__text">
-            Мы <a href="https://nextrp.ru/cookies-info">используем cookies</a> в целях предоставления идеального пользовательского опыта для посетителей нашего сайта, анализа трафика, персонализации контента и запуска интернет-рекламы.
-            Оставаясь на сайте, вы соглашаетесь с нашей <a href="https://nextrp.ru/policy-privacy">политикой конфиденциальности</a>.
-        </p>
-        <button class="btn btn--underline" id="cookiesAccept">Принять</button>
+            <div class="Divider_wrapper__R1uUp Footer_divider__Rx4_N"></div>
+
+            <ul class="Footer_nav__LoIij">
+                <li><a href="https://forum.nextrp.ru" target="_blank" rel="noopener">Форум</a></li>
+                <li><span class="Footer_subtitle__bRcSD">Служба Поддержки</span><a href="mailto:techsupport@nextrp.ru">techsupport@nextrp.ru</a></li>
+                <li><span class="Footer_subtitle__bRcSD">Вакансии</span><a href="mailto:support_job@nextrp.ru">support_job@nextrp.ru</a></li>
+                <li><span class="Footer_subtitle__bRcSD">Сотрудничество для блогеров</span><a href="http://t.me/nextrpmediabot" target="_blank" rel="noopener">Telegram: @nextrpmediabot</a></li>
+                <li><a href="https://forms.gle/k88cKLAtzSEM3JsR6" target="_blank" rel="noopener">Сообщить об ошибках</a></li>
+            </ul>
+
+            <div class="Divider_wrapper__R1uUp Footer_divider__Rx4_N"></div>
+
+            <ul class="Footer_socials__Xz2Pe">
+                <li>
+                    <a href="https://vk.com/nextrp" class="Footer_socialsLink__vOT6D" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M6.81178 6.81177C4 9.62355 4 14.149 4 23.2V24.8C4 33.851 4 38.3764 6.81178 41.1882C9.62355 44 14.149 44 23.2 44H24.8C33.851 44 38.3764 44 41.1882 41.1882C44 38.3764 44 33.851 44 24.8V23.2C44 14.149 44 9.62355 41.1882 6.81177C38.3764 4 33.851 4 24.8 4H23.2C14.149 4 9.62355 4 6.81178 6.81177ZM10.6667 16.25C10.8808 26.6551 16.3461 32.9167 25.3543 32.9167H25.8769V26.9641C29.1577 27.2971 31.6043 29.7498 32.6031 32.9167H37.3333C36.0501 28.1792 32.723 25.56 30.6551 24.5593C32.7214 23.3217 35.6458 20.3214 36.3346 16.25H32.031C31.1281 19.5609 28.4418 22.5612 25.8753 22.8462V16.25H21.503V27.7982C18.8423 27.1322 15.3713 23.8933 15.2291 16.25H10.6667Z" fill="currentColor"></path></svg>
+                        <span>ВКонтакте</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://t.me/nextrpnews" class="Footer_socialsLink__vOT6D" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 33 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M29.9509 16C29.9509 23.3638 23.9814 29.3333 16.6176 29.3333C9.25378 29.3333 3.28424 23.3638 3.28424 16C3.28424 8.63619 9.25378 2.66666 16.6176 2.66666C23.9814 2.66666 29.9509 8.63619 29.9509 16ZM17.0954 12.5099C15.7985 13.0493 13.2066 14.1658 9.31965 15.8593C8.68847 16.1103 8.35784 16.3558 8.32774 16.5959C8.27687 17.0017 8.78501 17.1615 9.47696 17.379C9.57109 17.4086 9.66861 17.4393 9.76859 17.4718C10.4494 17.6931 11.3651 17.952 11.8412 17.9623C12.273 17.9716 12.755 17.7936 13.2871 17.4282C16.9188 14.9767 18.7935 13.7376 18.9112 13.7109C18.9943 13.692 19.1093 13.6683 19.1873 13.7376C19.2653 13.8069 19.2576 13.9381 19.2493 13.9733C19.199 14.1879 17.2044 16.0423 16.1721 17.002C15.8503 17.3012 15.6221 17.5134 15.5754 17.5618C15.4709 17.6704 15.3644 17.7731 15.262 17.8718C14.6295 18.4815 14.1552 18.9387 15.2882 19.6853C15.8327 20.0441 16.2684 20.3408 16.703 20.6368C17.1777 20.9601 17.6512 21.2825 18.2638 21.6841C18.4199 21.7864 18.5689 21.8927 18.7141 21.9962C19.2665 22.39 19.7628 22.7438 20.376 22.6874C20.7323 22.6546 21.1003 22.3196 21.2872 21.3204C21.7289 18.9591 22.5971 13.8427 22.7978 11.7344C22.8154 11.5497 22.7933 11.3133 22.7755 11.2095C22.7577 11.1058 22.7206 10.9579 22.5857 10.8484C22.426 10.7188 22.1794 10.6915 22.0691 10.6934C21.5676 10.7023 20.7982 10.9698 17.0954 12.5099Z" fill="currentColor"></path></svg>
+                        <span>Telegram</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://discord.gg/nextrp" class="Footer_socialsLink__vOT6D" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M37.8617 11.2829C35.3122 10.1131 32.5783 9.25125 29.7198 8.75762C29.6678 8.7481 29.6158 8.77191 29.589 8.81952C29.2374 9.44488 28.8479 10.2607 28.5752 10.902C25.5007 10.4417 22.442 10.4417 19.4305 10.902C19.1577 10.2465 18.7541 9.44488 18.401 8.81952C18.3741 8.77349 18.3221 8.74969 18.2701 8.75762C15.4132 9.24967 12.6793 10.1115 10.1282 11.2829C10.1061 11.2924 10.0872 11.3083 10.0746 11.3289C4.88899 19.0762 3.46842 26.633 4.1653 34.0962C4.16845 34.1327 4.18895 34.1676 4.21733 34.1898C7.63868 36.7024 10.9528 38.2278 14.2055 39.2388C14.2575 39.2547 14.3127 39.2356 14.3458 39.1928C15.1152 38.1421 15.8011 37.0342 16.3891 35.8691C16.4238 35.8009 16.3907 35.7199 16.3198 35.6929C15.2319 35.2803 14.196 34.7771 13.1995 34.2057C13.1207 34.1597 13.1144 34.047 13.1869 33.993C13.3966 33.8359 13.6064 33.6724 13.8066 33.5073C13.8428 33.4772 13.8933 33.4708 13.9359 33.4898C20.4821 36.4786 27.5692 36.4786 34.0383 33.4898C34.0808 33.4692 34.1313 33.4756 34.1691 33.5057C34.3694 33.6708 34.5791 33.8359 34.7904 33.993C34.8629 34.047 34.8581 34.1597 34.7793 34.2057C33.7829 34.7882 32.747 35.2803 31.6575 35.6914C31.5866 35.7183 31.555 35.8009 31.5897 35.8691C32.1904 37.0325 32.8763 38.1404 33.6315 39.1912C33.663 39.2356 33.7198 39.2547 33.7718 39.2388C37.0402 38.2278 40.3544 36.7024 43.7757 34.1898C43.8057 34.1676 43.8246 34.1343 43.8278 34.0978C44.6618 25.4696 42.4308 17.9747 37.9137 11.3305C37.9026 11.3083 37.8838 11.2924 37.8617 11.2829ZM17.3667 29.5519C15.3958 29.5519 13.7719 27.7425 13.7719 25.5204C13.7719 23.2982 15.3643 21.4888 17.3667 21.4888C19.3848 21.4888 20.993 23.3141 20.9615 25.5204C20.9615 27.7425 19.369 29.5519 17.3667 29.5519ZM30.6579 29.5519C28.6871 29.5519 27.0632 27.7425 27.0632 25.5204C27.0632 23.2982 28.6556 21.4888 30.6579 21.4888C32.6761 21.4888 34.2842 23.3141 34.2527 25.5204C34.2527 27.7425 32.6761 29.5519 30.6579 29.5519Z" fill="currentColor"></path></svg>
+                        <span>Discord</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.youtube.com/@nextrp" class="Footer_socialsLink__vOT6D" target="_blank" rel="noopener">
+                        <svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M39.5841 10.8294C41.3042 11.2915 42.665 12.6523 43.1271 14.3724C43.9743 17.5046 44 24.0001 44 24.0001C44 24.0001 44 30.5213 43.1528 33.6279C42.6906 35.348 41.3299 36.7087 39.6098 37.1709C36.5032 38.0181 24 38.0181 24 38.0181C24 38.0181 11.4968 38.0181 8.39025 37.1709C6.67009 36.7087 5.30937 35.348 4.84724 33.6279C4 30.4957 4 24.0001 4 24.0001C4 24.0001 4 17.5046 4.82157 14.3981C5.2837 12.6779 6.64442 11.3172 8.36457 10.8551C11.4711 10.0078 23.9743 9.98218 23.9743 9.98218C23.9743 9.98218 36.4775 9.98218 39.5841 10.8294ZM30.3671 24.0002L19.9949 30.0079V17.9925L30.3671 24.0002Z" fill="currentColor"></path></svg>
+                        <span>YouTube</span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="Divider_wrapper__R1uUp Footer_divider__Rx4_N"></div>
+
+            <ul class="Footer_links__TzdIy">
+                <li><a href="#" data-modal="policyPrivacy">Политика конфиденциальности</a></li>
+                <li><a href="#" data-modal="agreement">Лицензионное соглашение</a></li>
+                <li><a href="#" data-modal="personalData">Согласие на обработку данных</a></li>
+                <li><a href="#" data-modal="refundPolicy">Политика возвратов платежей</a></li>
+                <li><a href="#" data-modal="interactionPolicy">Политика этичного взаимодействия в <br> игровом пространстве</a></li>
+            </ul>
+        </div>
+
+        <div class="Footer_lower__M0xkI">
+            <div class="Footer_lowerLeft__EBKCw">Как удалить NEXTRP Launcher: <a href="#" data-modal="deleteLauncher">Инструкция</a></div>
+            <p>Copyright © 2025 NEXTRP. All Rights reserved</p>
+        </div>
     </div>
 
-    <!-- MODAL: TRAILER -->
-    <div class="modal" id="trailerModal">
-        <div class="modal__overlay" data-close></div>
+    <!-- МОДАЛКА: Как удалить NEXTRP Launcher -->
+    <div class="modal modal--delete-launcher" id="deleteLauncherModal">
         <div class="modal__content">
-            <button class="modal__close" data-close>&times;</button>
-            <h3 class="modal__title">Трейлер NEXTRP</h3>
-            <div class="modal__video">
-                <iframe id="trailerFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Как удалить программу NEXTRP Launcher?</h3>
+            <p class="modal__text">
+                Чтобы удалить программу, перейдите в папку C:\Program Files, и удалите папку NEXTRP Launcher, далее на рабочем столе вручную удалите ярлык NEXTRP Launcher.
+            </p>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА: Политика конфиденциальности -->
+    <div class="modal modal--text" id="policyPrivacyModal">
+        <div class="modal__content">
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Политика конфиденциальности</h3>
+            <div class="modal__text">
+                <p class="modal__dates">
+                    <strong>Дата опубликования:</strong> 01.10.2020 г.<br>
+                    <strong>Дата последнего обновления:</strong> 20.07.2023 г.
+                </p>
+
+                <p>Настоящий документ определяет политику Индивидуального предпринимателя Миллера Вячеслава Евгеньевича (далее — Администрация) в области обработки и защиты персональных данных (далее — Политика) на сервисе NEXT RP, расположенного по адресу: <a href="https://nextrp.ru">https://nextrp.ru</a> (далее - Сервис).</p>
+
+                <p>Термины Политики толкуются в значении, определенном в Соглашении.</p>
+
+                <p>В Политике указаны все способы обработки персональных данных при использовании Сервиса.</p>
+
+                <p>Политика разработана Администрацией в соответствии с Федеральным законом от 27.07.2006 г. №152-ФЗ «О персональных данных» (далее — Закон) с учетом условий других нормативных правовых актов в области персональных данных.</p>
+
+                <p>Политика является частью лицензионного соглашения, расположенного по адресу: <a href="https://nextrp.ru/agreement">https://nextrp.ru/agreement</a>, и используется совместно с соответствующим согласием на обработку персональных данных (далее — Согласие), размещенным на по адресу: <a href="https://nextrp.ru/privacy-policy">https://nextrp.ru/privacy-policy</a>.</p>
+
+                <h4 class="modal__heading">1. Общие положения</h4>
+
+                <p>1.1. Персональными данными является любая информация, относящаяся к прямо или косвенно определенному или определяемому физическому лицу.</p>
+
+                <p>К персональным данным относится и техническая информация, если ее можно соотнести с физическим лицом. Например, это IP-адрес хоста, вид операционной системы, тип браузера, географическое положение, поставщик услуг интернета, тип устройства (персональный компьютер, мобильный телефон, планшет), данные, полученные в результате доступа к камере, микрофону и т.п. устройств; сведения о посещенных страницах Сервиса; информация, автоматически получаемая при доступе к Сервису с использованием закладок (cookies); информация, полученная в результате действий пользователя на Сервисе.</p>
+
+                <p>Информация не будет считаться персональными данными, если Администрация не может соотнести ее и определенное физическое лицо.</p>
+
+                <p>1.2. Администрация является оператором персональных данных в отношении информации, которая относится к физическому лицу, использующему Сервис (далее - Пользователь). Пользователь понимает, что Администрация обрабатывает только предоставленные им персональные данные.</p>
+
+                <p>1.3. Политика размещена по адресу: <a href="https://nextrp.ru/privacy-policy">https://nextrp.ru/privacy-policy</a> и предоставляется Администрацией любому лично обратившемуся лицу.</p>
+
+                <p>1.4. Основная цель Администрации обеспечить защиту прав и свобод человека и гражданина при обработке его персональных данных, в том числе защиты прав на неприкосновенность частной жизни, личную и семейную тайну, четкое и неукоснительное соблюдение требований, в первую очередь, российского законодательства в области персональных данных.</p>
+
+                <p>1.5. Действие Политики распространяется на все персональные данные физических лиц, обрабатываемые Администрацией, а также связанные с обработкой персональных данных процессы, в том числе, но не ограничиваясь: сбор, запись, систематизация, накопление, хранение, уточнение (обновление, изменение), электронное копирование, извлечение, использование, передача (распространение, предоставление, доступ), обезличивание, блокирование, удаление и уничтожение персональных данных.</p>
+
+                <p>1.6. Администрация может обрабатывать персональные данные как с применением средств автоматизации, так и без их применения.</p>
+
+                <p>1.7. Администрация осуществляет обработку персональных данных, в том числе хранит их, с помощью находящихся на территории Российской Федерации серверов.</p>
+
+                <p>1.8 Администрация вправе по мере необходимости вносить изменения в Политику. Политика подлежит пересмотру при существенных изменениях международного или национального законодательства в сфере персональных данных. Новая редакция Политики вступает в силу с момента ее публикации на Сервисе.</p>
+
+                <p>1.9. Администрация не проверяет достоверность предоставленных персональных данных и дееспособность лица, их предоставившего. Вы гарантируете, что все данные являются достоверными, актуальными и не нарушают законодательство РФ.</p>
+
+                <h4 class="modal__heading">2. Цели обработки персональных данных</h4>
+
+                <p>2.1. Администрация руководствуется принципом достаточности, разумности и целесообразности обработки персональных данных.</p>
+
+                <p>2.2. Данные собираются в целях заключения и исполнения Оферты, в том числе для:</p>
+
+                <p>2.2.1. регистрации и авторизации на Сервисе;</p>
+
+                <p>2.2.2. предоставления доступа к Сервису;</p>
+
+                <p>2.2.3. установления и поддержания связи с Пользователем;</p>
+
+                <p>2.2.4. работоспособности и безопасности Сервиса;</p>
+
+                <p>2.2.5. исполнения требований российского законодательства.</p>
+
+                <h4 class="modal__heading">3. Перечень обрабатываемых персональных данных и согласие на их обработку</h4>
+
+                <p>3.1. Администрация может обрабатывать следующие персональные данные:</p>
+
+                <p>3.1.1. Общие персональные данные: адрес электронной почты.</p>
+
+                <p>3.2. Иная информация, обрабатываемая Администрацией:</p>
+
+                <p>3.2.1. Данные о технических средствах (устройствах): IP-адрес хоста, вид операционной системы, тип браузера, географическое положение, поставщик услуг интернета, тип устройства (персональный компьютер, мобильный телефон, планшет), данные, полученные в результате доступа к камере, микрофону и т.п. устройств; сведения о посещенных страницах Сервиса; информация;</p>
+
+                <p>3.2.2. Информация, автоматически получаемая при доступе к Сервису, в том числе с использованием cookies. Файлы cookies представляют собой фрагменты текста, который автоматически сохраняется в память интернет-браузера Пользователя. Это позволяет Сервису в необходимых случаях обращаться к сохраненной информации на компьютере Пользователя и извлекать ее. Вы вправе изменить настройки своего интернет-браузера и отказаться от сохранения файлов cookies.</p>
+
+                <p>3.2.3. Информация, полученная в результате действий Пользователя на Сервисе.</p>
+
+                <p>3.3. Пользователь дает свое согласие на обработку персональных данных, указанных в этом разделе Политики, свободно, своей волей и в своем интересе.</p>
+
+                <h4 class="modal__heading">4. Принципы обработки персональных данных</h4>
+
+                <p>Главный принцип, которого придерживается Администрация при обработке персональных данных - достаточность. Персональные данные не будут обработаны, если этого не требуется.</p>
+
+                <p>Обработка персональных данных осуществляется в соответствии со следующими принципами:</p>
+
+                <p>4.1. Законность и справедливость обработки персональных данных.</p>
+
+                <p>4.2. Обработка персональных данных в соответствии с конкретными, заранее определенными и законными целями.</p>
+
+                <p>4.3. Недопущение объединения баз данных, содержащих персональные данные, обработка которых осуществляется в целях, несовместимых между собой.</p>
+
+                <p>4.4. Обработке только тех персональных данных, которые отвечают целям их обработки.</p>
+
+                <p>4.5. Соответствие содержания и объема персональных данных заявленным целям обработки.</p>
+
+                <p>4.6. Точность, достаточность, актуальность и достоверность персональных данных.</p>
+
+                <p>4.7. Законность технических мер, направленных на обработку персональных данных.</p>
+
+                <p>4.8. Разумность и целесообразность обработки персональных данных.</p>
+
+                <p>4.9. Хранение персональных данных в позволяющей определить физическое лицо форме возможно не дольше, чем того требуют цели их обработки, либо в течение срока согласия физического лица.</p>
+
+                <p>4.10. Обрабатываемые персональные данные подлежат уничтожению либо обезличиванию незамедлительно в указанных в Политике случаях.</p>
+
+                <h4 class="modal__heading">5. Обработка персональных данных</h4>
+
+                <p>5.1. Сбор персональных данных.</p>
+
+                <p>Сбор персональных данных осуществляется следующими способами:</p>
+
+                <p>5.1.1. предоставление персональных данных при заполнении форм на Сервисе;</p>
+
+                <p>5.1.2. автоматический сбор информации с помощью технологий и сервисов: веб-протоколы, файлов "cookie", веб-отметки, которые запускаются только при вводе вами своих данных;</p>
+
+                <p>5.1.3. предоставление Пользователем персональных данных в письменной форме, в том числе с помощью средств связи.</p>
+
+                <p>5.2. Хранение и использование персональных данных.</p>
+
+                <p>5.2.1. Персональные данные хранятся исключительно на должным образом защищенных носителях, в том числе электронных, и обрабатываются как с применением средств автоматизации, так и без применения таких средств.</p>
+
+                <p>5.2.2. Администрация, при автоматизированной обработке персональных данных, обеспечивает использование баз данных, находящихся на территории Российской Федерации.</p>
+
+                <p>5.3. Передача персональных данных.</p>
+
+                <p>5.3.1. Администрация не передает персональные данные третьим лицам без согласия Пользователя, за исключением случаев, когда передача осуществляется для обеспечения соблюдения требований законодательства Российской Федерации, предупреждения, пресечения незаконных действий и защиты законных интересов Администрации и третьих лиц.</p>
+
+                <p>5.3.2. Передача персональных данных третьим лицам осуществляется для достижения указанных выше целей. При этом третьи лица обязуются использовать персональные данные исключительно, для исполнения заключенного с ними договора.</p>
+
+                <p>5.4. Уничтожение персональных данных.</p>
+
+                <p>5.4.1. Администрация уничтожает персональные данные в следующих случаях:</p>
+
+                <p>● Наличие угрозы безопасности Сервиса.</p>
+                <p>● Нарушение Пользователем Соглашения.</p>
+                <p>● Прекращение действия или расторжение заключенного Соглашения.</p>
+                <p>● Истечение срока хранения персональных данных.</p>
+                <p>● По запросу Пользователя.</p>
+
+                <h4 class="modal__heading">6. Права Пользователя</h4>
+
+                <p>6.1. Пользователь имеет право на получение информации об обработке персональных данных, в том числе содержащей:</p>
+
+                <p>● подтверждение факта обработки персональных данных;</p>
+                <p>● правовые основания обработки персональных данных;</p>
+                <p>● цели и применяемые Администрацией способы обработки пользовательских персональных данных;</p>
+                <p>● какие именно персональные данные обрабатываются и источник их получения;</p>
+                <p>● сроки обработки персональных данных, в том числе сроки их хранения;</p>
+                <p>● порядок осуществления прав, предусмотренных законодательством Российской Федерации;</p>
+                <p>● информацию об осуществленной или о предполагаемой трансграничной передаче данных;</p>
+                <p>● сведения о лицах, которым могут быть раскрыты персональные данные на основании договора с Администрацией или в соответствии с законодательством Российской Федерации;</p>
+                <p>● наименование или фамилию, имя, отчество и адрес лица, осуществляющего обработку персональных данных по поручению Администрации, если обработка поручена или будет поручена такому лицу;</p>
+                <p>● иные сведения, предусмотренные законодательством Российской Федерации.</p>
+
+                <p>Вы вправе получать такие сведения неограниченное количество раз. Для этого необходимо направить Администрации соответствующий запрос в порядке, предусмотренном Политикой.</p>
+
+                <h4 class="modal__heading">7. Обязанности Администрации</h4>
+
+                <p>7.1. В соответствии с требованиями Закона Администрация обязана:</p>
+
+                <p>7.1.1. предоставлять по запросу Пользователя информацию об обработке персональных данных или обоснованный отказ;</p>
+
+                <p>7.1.2. принимать меры, необходимые и достаточные для обеспечения выполнения обязанностей, предусмотренных Законом;</p>
+
+                <p>7.1.3. по требованию Пользователя уточнять обрабатываемые персональные данные, блокировать или удалять их, если они являются неполными, устаревшими, неточными, незаконно полученными или ненужными для заявленной цели обработки;</p>
+
+                <p>7.1.4. обеспечить правомерность обработки персональных данных. В случае, если обеспечить правомерность обработки персональных данных невозможно, Администрация в срок, не превышающий 10 (десять) рабочих дней с даты выявления неправомерной обработки персональных данных, обязан их уничтожить или обеспечить их уничтожение;</p>
+
+                <p>7.1.5. в случае прекращения действия заключенного с Пользователем Соглашения или отзыва Пользователем согласия на обработку персональных данных, прекратить их обработку и уничтожить их в срок, не превышающий 30 (тридцать) рабочих дней с даты поступления от Пользователя отзыва. Исключения составляют случаи, когда обработка может быть продолжена в соответствии с законодательством Российской Федерации.</p>
+
+                <h4 class="modal__heading">8. Сведения о защите персональных данных</h4>
+
+                <p>8.1. Администрация обеспечивает реализацию правовых, организационных и технических мер, необходимых и достаточных для обеспечения защиты персональных данных.</p>
+
+                <p>8.2. Правовые меры включают в себя:</p>
+
+                <p>8.2.1. разработку локальных нормативных актов, реализующих требования российского законодательства, в том числе Политики и ее размещение в открытом доступе;</p>
+
+                <p>8.2.2. отказ от любых способов обработки персональных данных, не соответствующих целям, заранее предопределенным Администрацией.</p>
+
+                <p>8.3. Организационные меры включают в себя:</p>
+
+                <p>8.3.1. назначение лица, ответственного за организацию обработки персональных данных.</p>
+
+                <p>8.3.2. ограничение состава работников Администрации, имеющих доступ к персональным данным, и организацию разрешительной системы доступа к ним.</p>
+
+                <p>8.3.3. периодическая оценка рисков, касающихся процесса обработки персональных данных.</p>
+
+                <p>8.3.4. проведение внутренних расследований для обнаружения фактов, связанных с несанкционированным доступом к персональным данным.</p>
+
+                <p>8.3.5.ознакомление работников Администрации с положениями законодательства Российской Федерации о персональных данных, в том числе с требованиями к защите персональных данных, с локальными актами Администрации по вопросам обработки персональных данных.</p>
+
+                <h4 class="modal__heading">10. Ограничение действия Политики</h4>
+
+                <p>10.1. Рекомендуем Вам разумно и ответственно подходить к размещению в открытом доступе собственных персональных данных, в том числе при оставлении отзывов и комментариев.</p>
+
+                <p>10.2. Администрация не несет ответственности за действия третьих лиц, получивших доступ к персональным данным Пользователя по его вине.</p>
+
+                <p>10.3. Политика не применяется к ресурсам Администрации, если она на них не размещена.</p>
+
+                <h4 class="modal__heading">11. Обращения Субъекта персональных данных</h4>
+
+                <p>11.1. Вы вправе направлять Администрации свои запросы относительно использования ваших персональных данных:</p>
+
+                <p>11.1.1. в письменной форме по адресу для направления корреспонденции: 125167, г. Москва, Ленинградский проспект, 56, а/я №3;</p>
+
+                <p>11.1.2. в форме электронного документа по адресу электронной почты: lawyer@nextrp.ru</p>
+
+                <p>11.2. Администрация обязуется рассмотреть и направить ответ на поступивший запрос на указанный в запросе адрес в течение 30 (тридцати) календарных дней с момента поступления обращения.</p>
+
+                <p>11.3. Вся корреспонденция, полученная Администрацией, (обращения в письменной или электронной форме), относится к информации ограниченного доступа и не разглашается без письменного согласия Пользователя.</p>
+
+                <p>E-mail: lawyer@nextrp.ru</p>
             </div>
         </div>
     </div>
 
-    <!-- MODAL: SYSTEM -->
-    <div class="modal" id="systemModal">
-        <div class="modal__overlay" data-close></div>
+    <!-- МОДАЛКА: Лицензионное соглашение -->
+    <div class="modal modal--text" id="agreementModal">
         <div class="modal__content">
-            <button class="modal__close" data-close>&times;</button>
-            <h3 class="modal__title">Системные требования</h3>
-            <table class="modal__table">
-                <thead>
-                    <tr><th></th><th>Минимальные</th><th>Рекомендуемые</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>ОС</td><td>Windows 10 (64-bit)</td><td>Windows 10/11 (64-bit)</td></tr>
-                    <tr><td>Процессор</td><td>Intel Core i3 / AMD Ryzen 3</td><td>Intel Core i5 / AMD Ryzen 5</td></tr>
-                    <tr><td>Оперативная память</td><td>8 GB RAM</td><td>16 GB RAM</td></tr>
-                    <tr><td>Видеокарта</td><td>2 GB VRAM</td><td>4 GB VRAM</td></tr>
-                    <tr><td>Место на диске</td><td>20 GB</td><td>30 GB SSD</td></tr>
-                    <tr><td>Интернет</td><td colspan="2">Широкополосное подключение</td></tr>
-                </tbody>
-            </table>
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Лицензионное соглашение</h3>
+            <div class="modal__text">
+                <p class="modal__dates">
+                    <strong>Дата опубликования:</strong> 01.10.2020 г.<br>
+                    <strong>Дата последнего обновления:</strong> 20.07.2023 г.
+                </p>
+
+                <p><strong>ЕСЛИ ВЫ СКАЧИВАЕТЕ, ЗАГРУЖАЕТЕ, КОПИРУЕТЕ ЛИБО ЛЮБЫМ ИНЫМ РАЗРЕШЕННЫМ СПОСОБОМ ИСПОЛЬЗУЕТЕ ИГРУ NEXT RP ИЛИ ЕЕ ЧАСТИ, В ТОМ ЧИСЛЕ, ЕСЛИ ВЫ НАЧИНАЕТЕ УЧАСТВОВАТЬ В ИГРОВОМ ПРОЦЕССЕ, ТО ЭТИМ ВЫ ПОДТВЕРЖДАЕТЕ, ЧТО ПОЛНОСТЬЮ ПРОЧИТАЛИ, ПОНЯЛИ, СОГЛАСНЫ И ПРИНИМАЕТЕ НИЖЕИЗЛОЖЕННОЕ ЛИЦЕНЗИОННОЕ СОГЛАШЕНИЕ, ОБЯЗУЕТЕСЬ ЕГО СОБЛЮДАТЬ И НЕСТИ ОТВЕТСТВЕННОСТЬ ЗА ЕГО НАРУШЕНИЕ.</strong></p>
+
+                <p>Настоящее лицензионное соглашение (далее – «Соглашение») регулирует отношения между Вами – лицензиатом Игры на основании неисключительной лицензии (далее – «Пользователь») и, лицензиаром – ИП Миллер В. Е. (далее по тексту – «NEXT RP»). Пользователь и NEXT RP по отдельности могут также именоваться «Сторона», а совместно – «Стороны».</p>
+
+                <h4 class="modal__heading">1. Термины в Соглашении</h4>
+                <p>1.1. Аккаунт – создаваемая Пользователем и принадлежащая NEXT RP учетная запись Пользователя, которая представляет собой совокупность данных о Пользователе, необходимых для использования Пользователем Игры в соответствии с настоящим Соглашением, а именно: авторизации (аутентификации) Пользователя в Игре, доступа к информации о Пользователе, настройкам, игровым ценностям, статистическим показателям и иной подобной информации.</p>
+                <p>1.2. Игра – соответствующая онлайн игра NEXT RP, являющаяся программой для ЭВМ и представляющая собой совокупность данных, команд и порождаемых ею аудиовизуальных отображений («данные» и «команды»), активируемых последовательно для получения Пользователем определенного результата, предусмотренного сценарием Игры, без внесения платы (активированные данные и команды) или после внесения платежа (неактивированные данные и команды).</p>
+                <p>Права использования Игры предоставляются Пользователю на условиях, определенных настоящим Соглашением.</p>
+                <p>Игра также включает в себя (помимо прочего): (а) Игровой чат, (б) серверы, (в) серверное и иное программное обеспечение, (г) Сайт Игры, (д) Форум Игры, и другие ресурсы, необходимые для использования Игры в рамках настоящего Соглашения.</p>
+                <p>1.3. Клиентская часть Игры – программное обеспечение, подлежащее установке на персональный компьютер Пользователя, необходимое для использования Игры, включая получение прав использования данных и команд, размещенных на серверах Игры, в том числе Прав на неактивированные данные и команды.</p>
+                <p>1.4. Права на неактивированные данные и команды – предусмотренные настоящим Соглашением права на использование данных, команд (в частности, внутриигровой валюты, других данных, команд) и порождаемых ими аудиовизуальных отображений Игры, активируемых последовательно для получения Пользователем определенного результата, предусмотренного сценарием Игры, приобретаемые Пользователем после внесения платежа.</p>
+                <p>1.5. Правила Игры – документ, устанавливающий правила участия и поведения Пользователя в отдельных Играх, а также ответственность Пользователя за нарушения. Правила Игры расположены по адресу:</p>
+                <p>Правила игры ссылка на страницу</p>
+                <p>1.6. Правила Форума – документ, устанавливающий правила поведения Пользователя на официальном форуме Игры (далее – «Форум Игры»). Правила Форума Игры расположены по адресу:</p>
+                <p>1.7. Сайт Игры – соответствующий интернет-сайт, относящийся к Игре, включая (но не ограничиваясь)</p>
+
+                <h4 class="modal__heading">2. Условия заключения Соглашения</h4>
+                <p>2.1. Обязательные документы. Перед тем как начать использовать Игру, Пользователь обязан ознакомиться и принять условия настоящего Соглашения, а также условия следующих документов:</p>
+                <p>Правила Игры,</p>
+                <p>Правила Форума</p>
+                <p>(далее совместно с настоящим Соглашением именуемые «Ключевые документы»).</p>
+                <p>2.2. Момент заключения Соглашения. Настоящее Соглашение заключается в момент принятия Пользователем условий Соглашения и Ключевых документов. Фактическое использование Игры Пользователем также означает принятие им условий Соглашения и Ключевых документов и приравнивается к заключению настоящего Соглашения. Пользователь принимает на себя обязательство соблюдать условия Соглашения и Ключевых документов с момента заключения Соглашения.</p>
+
+                <h4 class="modal__heading">3. Предмет Соглашения</h4>
+                <p>3.1. Права использования Игры. В соответствии с настоящим Соглашением NEXT RP предоставляет Пользователю право использования Игры в объеме, способами, на срок и в пределах территории, указанных в Соглашении, при условии соблюдения Пользователем Соглашения и Ключевых документов.</p>
+                <p>3.2. Территория. NEXT RP вправе по своему усмотрению определять территорию, в пределах которой предоставляются права использования Игры в соответствии с настоящим Соглашением.</p>
+
+                <h4 class="modal__heading">4. Пределы использования Игры</h4>
+                <p>4.1. Объем прав Пользователя. Пользователь вправе использовать Игру в пределах, разрешенных NEXT RP, в том числе:</p>
+                <p>4.1.1. Воспроизводить Клиентскую часть Игры путем ее установки на персональный компьютер или иное устройство, обладающее необходимыми техническими характеристиками, либо иным допустимым способом;</p>
+                <p>4.1.2. Использовать Игру в целях, установленных Ключевыми Документами, с соблюдением условий Ключевых документов, для чего Пользователь вправе: (а) создавать и удалять Аккаунт в соответствии с Соглашением; (б) устанавливать и удалять Игру; (в) использовать программные возможности Игры или активированные данные и команды для достижения определенного сценарием Игры результата на безвозмездной основе (если изначально за получение прав и использование Игры не установлена плата); (г) получать Права на неактивированные данные и команды после внесения лицензионного платежа, использовать их в том числе для получения результата, определенного сценарием Игры; (д) вносить изменения в персональные настройки Игры, предусмотренные NEXT RP, и (е) использовать Игру другими способами, разрешёнными в настоящем Соглашении.</p>
+                <p>4.2. Ограничения. Пользователь не вправе:</p>
+                <p>4.2.1. Копировать, транслировать, рассылать, публиковать и иным образом распространять и воспроизводить текстовые, графические, аудио- или видеоматериалы Игры без письменного согласия NEXT RP;</p>
+                <p>4.2.2. Исследовать программный код, декомпилировать, дизассемблировать, модифицировать Игру, ее части и элементы, а также создавать производные продукты на базе Игры, ее частей и элементов без письменного согласия NEXT RP;</p>
+                <p>4.2.3. Переводить Игру на другие языки без согласования с NEXT RP;</p>
+                <p>4.2.4. Распространять в коммерческих или некоммерческих целях Игру или ее копии, как путем распространения на материальных носителях, так и посредством размещения в интернете для доступа или скачивания определенными лицами либо неограниченным кругом лиц;</p>
+                <p>4.2.5. Распространять в коммерческих или некоммерческих целях активированные и/или неактивированные данные и команды, аудиовизуальные элементы, изображения, а также иные объекты интеллектуальной собственности, присутствующие в Игре (кроме случаев, разрешенных NEXT RP);</p>
+                <p>4.2.6. Передавать права в отношении Игры, включая Права на неактивированные данные и команды, в коммерческих или некоммерческих целях третьим лицам, в том числе путем передачи Аккаунта, заключения какого-либо договора или иным способом;</p>
+                <p>4.2.7. Использовать Аккаунт другого пользователя;</p>
+                <p>4.2.8. Отчуждать и иным образом передавать свой Аккаунт, приобретать Аккаунт другого пользователя, в том числе путём обмена или дарения;</p>
+                <p>4.2.9. Использовать Игру способами, не предусмотренными настоящим Соглашением и выходящими за рамки обычного игрового процесса или использования программы для ЭВМ.</p>
+                <p>Нарушение Пользователем исключительных прав NEXT RP является основанием для прекращения предоставления прав использования Игры,</p>
+
+                <h4 class="modal__heading">5. Условия и требования при использовании Игры</h4>
+                <p>5.1. Дееспособность. Пользователь настоящим подтверждает, что обладает дееспособностью, достаточной для заключения настоящего Соглашения. Если Пользователь не достиг совершеннолетия (18 лет) или является полностью либо частично недееспособным согласно законодательству, Пользователь подтверждает, что получил разрешение родителей или законных представителей на заключение настоящего Соглашения в установленной законодательством форме.</p>
+                <p>5.2. Отсутствие медицинских противопоказаний. Пользователь соглашается с тем, что Игра может содержать звуковые и видеоэффекты, которые при определенных обстоятельствах могут вызывать обострение эпилептических и иных расстройств неврологического характера у склонных к ним лиц, и подтверждает, что не страдает указанными расстройствами, а в противном случае не будет использовать Игру.</p>
+                <p>5.3. Разумность использования. Пользователь понимает и соглашается с тем, что регулярное длительное нахождение у персонального компьютера или иного технического устройства может вызывать различные нарушения здоровья, в том числе ослабление зрения, сколиоз, различные формы неврозов и тому подобное. Пользователь гарантирует, что он будет использовать Игру исключительно на протяжении разумного времени с перерывами на отдых и профилактику нарушений здоровья.</p>
+                <p>5.4. Использование материалов третьих лиц. Игра может содержать ссылки на интернет-сайты, программы, фото-, видео-, аудио-, графические и текстовые материалы, принадлежащие третьим лицам. Пользователь понимает и настоящим соглашается с тем, что размещение ссылок на интернет-сайты или материалы третьих лиц в Игре и связанных с Игрой ресурсах не означает, что NEXT RP поддерживает, одобряет или рекомендует указанные сайты или материалы. Пользователь использует сайты, программное обеспечение и материалы третьих лиц исключительно на свой риск, в том числе во время игрового процесса.</p>
+                <p>5.5. Законодательные ограничения. Пользователь не вправе использовать Игры, если законодательство территории его местонахождения запрещает использование Игры или устанавливает иные, в том числе возрастные, ограничения на использование соответствующих Игр. В этом случае ответственность за использование соответствующей Игры несет Пользователь.</p>
+                <p>5.6. Материалы Пользователя. Пользователь понимает и соглашается, что он самостоятельно несёт ответственность за любые материалы или иную информацию, которые он размещает в Игре, Форуме Игры, в чатах или иным образом сообщает другим пользователям или доводит до всеобщего сведения.</p>
+                <p>5.7. Технические условия использования Игры:</p>
+                <p>Клиентская часть Игры. Для получения права использования Игры Пользователю в зависимости от технических особенностей Игры необходимо самостоятельно установить Игру на персональный компьютер или иное устройство, обладающее необходимыми техническими характеристиками, зайти на Сайт Игры либо совершить другие необходимые действия.</p>
+                <p>Требование подключения к сети Интернет. В соответствии с установленными техническими требованиями использование Пользователем Игры возможно исключительно в интерактивном (онлайн) режиме, в связи с чем Пользователю необходимо обеспечить подключение к интернету для использования соответствующей Игры.</p>
+
+                <h4 class="modal__heading">6. Обязанности Пользователя</h4>
+                <p>6.1. Пользователь обязан:</p>
+                <p>6.1.1. Соблюдать условия Ключевых документов. В случае несогласия Пользователя с действующим Соглашением Пользователь обязан прекратить использование Игры, в том числе деинсталлировать ее Клиентскую часть.</p>
+                <p>6.1.2. Использовать Игру и неактивированные данные и команды исключительно в пределах, установленных Соглашением.</p>
+                <p>6.1.3. При создании Аккаунта предоставлять соответствующую действительности информацию.</p>
+                <p>6.1.4. Самостоятельно принимать меры по обеспечению безопасности Аккаунта и предотвращению его несанкционированного использования третьими лицами. Пользователь обязуется не раскрывать и не передавать третьим лицам свои данные, с помощью которых возможна авторизация (аутентификация) Пользователя в Игре.</p>
+                <p>6.1.5. Выполнять указания NEXT RP, полученные в индивидуальном или общем порядке в Игре, Сайт Игры, Форум Игры и другие способы коммуникации. NEXT RP вправе приостанавливать, ограничивать или прекращать действие настоящего Соглашения, доступ к Аккаунту в случае несоблюдения таких указаний.</p>
+                <p>6.1.6. По требованию предоставить или подтвердить информацию, необходимую для выполнения условий Соглашения и соблюдения законодательства.</p>
+                <p>6.1.7. Возместить, другим пользователям и иным третьим лицам любые убытки, возникшие у них в связи с действиями Пользователя, в том числе из-за нарушения настоящего Соглашения, прав интеллектуальной собственности и иных прав.</p>
+                <p>6.1.8. Незамедлительно сообщить NEXT RP о любых фактах несанкционированного использования Аккаунта, взлома и совершения иных подобных действий.</p>
+                <p>6.1.9. Соблюдать иные требования и обязательства, предусмотренные Ключевыми документами.</p>
+                <p>6.2. Пользователь не вправе:</p>
+                <p>6.2.1. Использовать автоматизированные скрипты для сбора информации или другого рода взаимодействия с Игрой.</p>
+                <p>6.2.2. Использовать информацию других пользователей для рассылки нежелательной информации (спама).</p>
+                <p>6.2.3. Размещать в Игре объекты интеллектуальной собственности без согласия их правообладателей.</p>
+                <p>6.2.4. Размещать в Игре личную информацию третьих лиц без их согласия, в том числе домашние адреса, телефоны и паспортные данные.</p>
+                <p>6.2.5. Размещать в Игре рекламу, коммерческие предложения, агитационную и любую другую навязчивую информацию, кроме случаев, разрешенных NEXT RP.</p>
+                <p>6.2.6. Размещать в Игре материалы, оскорбляющие или унижающие честь и достоинство других пользователей либо третьих лиц, а также ссылки на такие материалы.</p>
+                <p>6.2.7. Размещать и иным образом использовать в Игре нецензурные, бранные и оскорбительные слова и словосочетания, в том числе в имени Пользователя (никнейм).</p>
+                <p>6.2.8. Размещать вредоносные программы или ссылки на ресурсы, которые содержат или могут содержать такие программы.</p>
+                <p>6.2.9. Размещать в Игре материалы порнографического или эротического характера, а также ссылки на них.</p>
+                <p>6.2.10. Размещать в Игре угрозы, а также призывы к насилию и совершению иных противоправных действий.</p>
+                <p>6.2.11. Размещать в Игре материалы с элементами насилия, жестокости, расовой, межнациональной или межрелигиозной розни, а также ссылки на такие материалы.</p>
+                <p>6.2.12. Пропагандировать и демонстрировать в Игре нацистскую, экстремистскую или иную приравненную к ним атрибутику, символику и иные объекты.</p>
+                <p>6.2.13. Пропагандировать в Игре преступную и иную противоправную деятельность, а также размещать руководства по совершению противоправных действий.</p>
+                <p>6.2.14. Размещать в Игре любую другую информацию, которая, по мнению NEXT RP, нарушает законодательство, нормы морали и этики или является нежелательной.</p>
+                <p>6.2.15. Совершать преступные и иные противоправные действия.</p>
+
+                <h4 class="modal__heading">7. Права и Обязанности NEXT RP</h4>
+                <p>7.1. NEXT RP обязуется:</p>
+                <p>7.1.1. Обеспечить Пользователю возможность использовать Игру на условиях, изложенных в настоящем Соглашении, при условии соблюдения Пользователем Ключевых документов.</p>
+                <p>7.1.2. В отношении Игры – предоставить Пользователю возможность получения (скачивания) Клиентской части Игры с Сайта Игры либо иным разрешенным NEXT RP способом.</p>
+                <p>7.1.3. Если внесение платы не является обязательным условием использования Игры, предоставить Пользователю право безвозмездно использовать активированные данные и команды, если настоящим Соглашением не предусмотрено иное.</p>
+                <p>7.1.4. Предоставить Пользователю Права на неактивированные данные и команды при условии внесения Пользователем платежа, установленного NEXT RP.</p>
+                <p>7.1.5. Уведомлять Пользователя об изменении условий настоящего Соглашения в соответствии с пунктом 12.2.</p>
+                <p>7.2. NEXT RP вправе:</p>
+                <p>7.2.1. В любое время без предварительного уведомления Пользователя в одностороннем порядке ограничивать, расширять, дополнять, модифицировать и иным образом изменять Игру, любые ее элементы и части, а также изменять Ключевые документы.</p>
+                <p>Модификация Игры и ее элементов может осуществляться посредством создания и установки новых частей программного обеспечения (патчей). Их целью может являться, например, усовершенствование или изменение игрового процесса (геймплея) либо добавление в Игру новых данных и команд («features»), что может привести к прекращению или приостановлению прав использования определённых игровых элементов и Прав на неактивированные данные и команды.</p>
+                <p>Пользователь понимает и настоящим признает, что указанные действия являются неотъемлемой частью процесса создания и функционирования Игры, а также дает согласие на их совершение NEXT RP без предварительного уведомления Пользователя.</p>
+                <p>7.2.2. Без предварительного уведомления Пользователя изменять по своему усмотрению технические и иные характеристики любой части Игры, используемой Пользователем, включая, в числе прочего, активированные и неактивированные команды и данные; изменять сценарии работы Игры, включая изменения игрового процесса, и пр.</p>
+                <p>7.2.3. В любое время изменять или удалять любую информацию, размещенную Пользователем в Игре, включая высказывания и объявления Пользователя в чатах или на Форуме Игры.</p>
+                <p>7.2.4. Ограничить или прекратить предоставление Пользователю прав использования Игры (включая доступ к Аккаунту) в соответствии с настоящим Соглашением, в частности, в случае нарушения Пользователем условий Ключевых документов. При реализации данного права NEXT RP не обязан предоставлять Пользователю доказательства, свидетельствующие о нарушении Пользователем условий Соглашения, в результате которого Пользователю был прекращен или ограничен доступ.</p>
+                <p>7.2.5. Делать замечания, предупреждать, уведомлять, информировать Пользователей о несоблюдении условий Ключевых документов. Пользователь обязан незамедлительно выполнять указания NEXT RP, полученные в ходе использования Игры.</p>
+                <p>7.2.6. В любой момент полностью прекратить предоставление прав использования Игры, в том числе Прав на неактивированные данные и команды, с учетом положений настоящего Соглашения.</p>
+                <p>7.2.7. В любой момент приостановить, ограничить и/или прекратить действие настоящего Соглашения в одностороннем порядке в отношении Игры для любого или всех пользователей, в том числе при несоблюдении Пользователем условий Ключевых документов.</p>
+                <p>7.2.8. Во время использования Пользователем Игры, предупреждать, уведомлять, информировать о несоблюдении Пользователем условий предоставленной лицензии, а также Ключевых документов, либо иных условий настоящего Соглашения.</p>
+
+                <h4 class="modal__heading">8. Ограничение ответственности NEXT RP</h4>
+                <p>8.1. Отсутствие ответственности за действия Пользователя или третьих лиц. NEXT RP не несет ответственности за:</p>
+                <p>8.1.1. Противоправные и иные действия Пользователя или третьих лиц, препятствующие использованию Игры другими пользователями.</p>
+                <p>8.1.2. Поведение и высказывания Пользователя в Игре, в том числе за неуважительное отношение к другим пользователям.</p>
+                <p>8.1.3. Утрату Пользователем доступа к созданному им Аккаунту, в том числе из-за утери логина, пароля или иной необходимой информации.</p>
+                <p>8.1.4. Неполное, неточное или некорректное указание Пользователем данных при создании Аккаунта.</p>
+                <p>8.1.5. Отсутствие у Пользователя доступа в интернет и качество услуг интернет-провайдеров.</p>
+                <p>8.1.6. Материалы третьих лиц, размещённые в Игре или на сайтах третьих лиц, доступных по ссылкам из Игры.</p>
+                <p>8.2. Отсутствие гарантий. Пользователь понимает и соглашается с тем, что NEXT RP предоставляет Игру в состоянии «как есть» («as is») и не дает гарантий в отношении Игры, кроме прямо указанных в данном Соглашении или применимом законодательстве. NEXT RP не гарантирует, что:</p>
+                <p>8.2.1. Игра будет удовлетворять субъективным требованиям и ожиданиям Пользователя.</p>
+                <p>8.2.2. Процессы в Игре будут протекать непрерывно, быстро, надежно, без технических сбоев и ошибок.</p>
+                <p>8.2.3. Результаты, которые могут быть получены при использовании Игры будут безошибочными и корректными.</p>
+                <p>8.2.4. Качество игрового процесса, аспекты Игры, неактивированные данные и команды, а также информация, полученная в ходе использования Игры, будут соответствовать ожиданиям Пользователя.</p>
+                <p>8.2.5. Игра будет доступна для использования круглосуточно, в определенный момент времени или в течение определенного периода.</p>
+                <p>8.3. Ограничение ответственности. NEXT RP не несет ответственности за прямой или косвенный ущерб, а также упущенную выгоду Пользователя или третьих лиц в результате:</p>
+                <p>8.3.1. Использования либо невозможности использования Игры.</p>
+                <p>8.3.2. Заявлений или поведения третьих лиц в Игре.</p>
+                <p>При любых обстоятельствах ответственность NEXT RP перед Пользователем ограничена суммой лицензионных платежей, полученных NEXT RP от Пользователя до момента наступления обстоятельств, повлекших возникновение ответственности NEXT RP.</p>
+                <p>8.4. Форс-мажор и действия третьих лиц. Стороны освобождаются от ответственности за полное или частичное неисполнение обязательств по настоящему Соглашению, если такое неисполнение является следствием действия непреодолимой силы (форс-мажор), в том числе массовых беспорядков, запретительных действий властей, стихийных бедствий, пожаров, катастроф, сбоев в телекоммуникационных и электрических сетях, действий вредоносных программ, а также недобросовестных действий третьих лиц, направленных на получение несанкционированного доступа или выведение из строя программного либо аппаратного комплекса.</p>
+
+                <h4 class="modal__heading">9. Порядок и способы оплаты</h4>
+                <p>Платежи осуществляются Пользователем путем перечисления денежных средств в пользу NEXT RP через поддерживаемые платежные методы. Перечень доступных платежных методов определяется NEXT RP в одностороннем порядке. При осуществлении платежей Пользователь обязуется следовать инструкциям соответствующих платежных методов и установленным правилам оплаты. Права предоставляются Пользователю исключительно при условии правильного исполнения им платежных инструкций и соблюдения правил оплаты. NEXT RP не несет ответственности за отклонение платежа.</p>
+                <p>Пользователь обязуется указывать достоверные данные при совершении платежей. Пользователь самостоятельно несет все риски возникновения негативных последствий, связанных с указанием некорректных данных при осуществлении платежа.</p>
+                <p>9.1. Платежные методы. По вопросам правил и порядка использования платежных методов Пользователю необходимо обращаться напрямую к операторам выбранных им платежных методов. NEXT RP может, по своему усмотрению и при наличии такой возможности, проконсультировать Пользователя по вопросам, связанным с использованием тех или иных методов оплаты. Однако Пользователь настоящим понимает и соглашается с тем, что в большинстве случаев NEXT RP не имеет возможности предоставить Пользователю исчерпывающие разъяснения в части использования платежных методов. По вопросам возврата денежных средств, уплаченных Пользователем ошибочно либо с нарушением правил платежных методов или законодательства, Пользователю необходимо обращаться напрямую к операторам соответствующих платежных методов.</p>
+                <p>9.2. Последствия неправомерных действий при совершении платежа. Пользователь настоящим подтверждает, что он имеет право использовать выбранные им платежные методы, не нарушая при этом права третьих лиц и законодательство страны, на территории которой используется Игра или совершается платеж.</p>
+                <p>Пользователь обязуется компенсировать NEXT RP, другим пользователям и иным третьим лицам все убытки, возникшие у них в связи с неправомерным поведением Пользователя, в том числе использованием для оплаты не принадлежащих ему денежных средств.</p>
+                <p>Если иное не предусмотрено настоящим Соглашением или применимым законодательством, NEXT RP оставляет за собой право в одностороннем порядке по любым причинам приостановить или полностью прекратить действие настоящего Соглашения, в том числе если у NEXT RP есть основание подозревать Пользователя в совершении неправомерных действий, связанных с выплатой лицензионного вознаграждения. При этом NEXT RP не обязан выплачивать такому Пользователю какие-либо компенсации, включая возмещение потраченных денежных средств, если иное не предусмотрено настоящим Соглашением или применимым законодательством.</p>
+                <p>В случае если NEXT RP имеет основания полагать, что Пользователь совершает неправомерные действия, связанные с выплатой вознаграждения, NEXT RP имеет право передать соответствующую информацию в правоохранительные органы для проведения проверки.</p>
+                <p>9.3. Недопустимость приобретения прав у третьих лиц. Права использования Игры и Права на неактивированные данные и команды могут быть предоставлены только NEXT RP, в связи с чем никакие предложения третьих лиц (кроме лиц, уполномоченных NEXT RP) о представлении прав использования Игр или Прав на неактивированные данные и команды не должны расцениваться Пользователем как предложения, исходящие от NEXT RP.</p>
+                <p>Пользователь обязан незамедлительно уведомлять NEXT RP об известных ему случаях предоставления прав на неактивированные данные и команды либо получения связанных с этим предложений от лиц, не уполномоченных NEXT RP.</p>
+                <p>Если Пользователь в нарушение настоящего Соглашения произвел оплату лицам, не уполномоченным NEXT RP, претензии Пользователя не принимаются. NEXT RP не компенсирует денежные средства, потраченные Пользователем при таких обстоятельствах, а также не предоставляет Права на неактивированные данные и команды.</p>
+                <p>В случае если NEXT RP будет установлено, что Пользователь получает Права на неактивированные данные и команды от третьих лиц, не уполномоченных NEXT RP, NEXT RP вправе по своему усмотрению приостановить, ограничить либо прекратить настоящее Соглашение.</p>
+                <p>9.4. Отслеживание состояния Аккаунта. Пользователь обязан самостоятельно отслеживать состояние созданного им Аккаунта, в частности в отношении корректного отображения неактивированных данных и команд, Права на которые были приобретены Пользователем.</p>
+                <p>9.5. Прекращение права использования. Пользователь понимает и настоящим соглашается с тем, что в ходе игрового процесса Права на неактивированные данные и команды предоставляются до момента использования по назначению, в том числе в связи с реализацией сценария Игры; истечения срока предоставления Прав на неактивированные данные и команды или платную Игру; приостановления или прекращения предоставления прав использования Игры в соответствии с Соглашением или по иным причинам. Прекращение Прав на неактивированные данные и команды не дает Пользователю основания требовать от NEXT RP возмещения лицензионного вознаграждения за Права на неактивированные данные и команды, за исключением случаев, предусмотренных настоящим Соглашением и применимым законодательством.</p>
+                <p>Если в результате технической ошибки, сбоя или действий Пользователя им были получены Права на неактивированные данные и команды или платную Игру без оплаты, Пользователь обязуется сообщить об этом NEXT RP и выплатить причитающееся NEXT RP лицензионное вознаграждение, если Пользователь начал их использование. NEXT RP вправе самостоятельно, без уведомления Пользователя и без какой-либо компенсации устранить последствия, в том числе прекратить предоставление Прав на неактивированные данные и команды путем удаления соответствующих неактивированных данных и команд с Аккаунта.</p>
+                <p>9.6. Обмен. NEXT RP не осуществляет обмен Прав на неактивированные данные и команды и игровые элементы на другие Права на неактивированные данные и команды, игровые элементы, наличные или безналичные деньги, если иное прямо не разрешено Соглашением.</p>
+                <p>9.7. Возмещение расходов. NEXT RP не возмещает Пользователю расходы, связанные с совершением платежей, за исключением случаев, прямо предусмотренных настоящим Соглашением или применимым законодательством.</p>
+                <p>9.8. Подарки. В том случае, если такая возможность предусмотрена NEXT RP, Пользователь вправе делать подарки другим пользователям Игры. Правила дарения подарков предусмотрены в Ключевых документах и обязательны для соблюдения.</p>
+
+                <h4 class="modal__heading">10. Права интеллектуальной собственности</h4>
+                <p>10.1. Исключительное право в отношении Игры. Исходный и объектный код (включая активированные и неактивированные данные и команды), геймплей, пользовательский интерфейс, графические изображения, фотографии, анимации, видеоизображения, видеоклипы, звуковые записи, звуковые эффекты, музыка, текстовое наполнение и содержание Игры, также любые другие элементы Игры являются или содержат объекты интеллектуальной собственности, исключительное право на которые принадлежит их законным правообладателям.</p>
+                <p>Пользователь соглашается с тем, что любая часть и любой элемент Игры, ее активированные и неактивированные данные и команды, являются составной частью Игры и охраняются законом. Несмотря на то, что Пользователю предоставляются права использования Игры, само по себе использование Игры не может быть расценено как передача или уступка исключительного права в отношении Игры, ее частей и элементов, в том числе неактивированных данных и команд, от NEXT RP к Пользователю.</p>
+                <p>Пользователь также понимает и соглашается, что все исключительные права на локализованную (переведенную на соответствующий язык) Игру принадлежат законным правообладателям.</p>
+
+                <h4 class="modal__heading">11. Срок действия, изменение и расторжение Соглашения</h4>
+                <p>11.1. Срок действия Соглашения. Настоящее Соглашение вступает в силу в момент принятия его условий Пользователем и действует в течение двенадцати (12) месяцев. Действие настоящего Соглашения автоматически продлевается на каждые следующие шесть (6) месяцев, если оно не было расторгнуто по инициативе одной из Сторон путем направления в адрес другой Стороны письменного уведомления не менее чем за тридцать (30) календарных дней до истечения текущего срока действия Соглашения. В случае расторжения Соглашения в указанном порядке NEXT RP не осуществляет возврат каких-либо денежных средств и не производит иных возмещений, в том числе убытков любого рода.</p>
+                <p>11.2. Изменение Соглашения. Настоящее Соглашение может быть изменено NEXT RP в одностороннем порядке. Изменения вступают в силу с момента их публикации на сайте либо по истечении 10 календарных дней с момента их публикации, если это прямо указано NEXT RP.</p>
+                <p>Использование Игры, либо авторизация в Игре после вступления изменений в силу означает согласие Пользователя с такими изменениями. Пользователь не освобождается от обязательств, предусмотренных настоящим Соглашением с учетом внесенных в него изменений, если Пользователь не ознакомился с изменениями в Соглашении.</p>
+                <p>11.3. Несогласие Пользователя с изменениями Соглашения. Пользователь не вправе использовать Игру, если он не согласен с изменениями, внесенными в Соглашение. В этом случае Пользователь может расторгнуть Соглашение в одностороннем порядке в течение десяти (10) календарных дней после размещения публикации об изменениях в Соглашении на Сайте Игры и/или направления уведомления по электронной почте. В случае принятия решения о расторжении Соглашения Пользователь обязан направить NEXT RP уведомление о расторжении Соглашения по электронной почте. Если в течение указанного выше срока в десять (10) календарных дней Пользователь не изъявил желания расторгнуть настоящее Соглашение, Пользователь считается принявшим условия настоящего Соглашения с учетом внесенных в него изменений.</p>
+                <p>После получения от Пользователя уведомления о расторжении NEXT RP приостанавливает доступ Пользователя к Аккаунту. При этом NEXT RP не осуществляет возврат каких-либо денежных средств и не производит иных возмещений, в том числе убытков любого рода.</p>
+                <p>11.4. Расторжение Соглашения по инициативе NEXT RP. NEXT RP вправе в любое время расторгнуть настоящее Соглашение в одностороннем внесудебном порядке с прекращением возможности использовать Игру, включая активированные и неактивированные данные и команды, а также другие составляющие Игры в следующих случаях:</p>
+                <p>11.4.1. В случае закрытия Игры.</p>
+                <p>NEXT RP обязан не менее чем за сто восемьдесят (180) календарных дней до даты закрытия Игры направить в адрес Пользователя соответствующее уведомление. В остальных случаях такое уведомление направляется за девяносто (90) календарных дней. При этом NEXT RP не выплачивает каких-либо компенсаций и помимо прочего не возмещает Пользователю денежный эквивалент приобретенных Прав на неактивированные данные и команды.</p>
+                <p>11.4.2. В случае любого, в том числе однократного, нарушения Пользователем условий настоящего Соглашения или Ключевых документов, а также условий использования игры NEXT RP. В этом случае NEXT RP не возвращает Пользователю денежные средства и не возмещает убытки.</p>
+                <p>11.5. Расторжение Соглашения по инициативе Пользователя. Пользователь вправе в любое время без уведомления NEXT RP и без объяснения причин расторгнуть настоящее Соглашение в одностороннем внесудебном порядке путем удаления Аккаунта или путем удаления самой Игры с сохранением обязательств и ответственности Пользователя, возникших до удаления. В этом случае все активированные и неактивированные данные и команды, привязанные к этому Аккаунту, могут быть удалены без права на восстановление. Также NEXT RP не обязан выплачивать Пользователю какую-либо компенсацию.</p>
+                <p>11.6. Изменения Ключевых документов. Пользователь подтверждает, что NEXT RP имеет безусловное право на одностороннее изменение условий Ключевых документов и что такие изменения не являются изменениями настоящего Соглашения.</p>
+
+                <h4 class="modal__heading">12. Заключительные положения</h4>
+                <p>12.1. Недействительность. Если одно или несколько положений настоящего Соглашения будут в установленном порядке признаны недействительными в соответствии со вступившим в силу судебным решением, остальные положения настоящего Соглашения останутся в силе, а Стороны продолжат исполнять свои обязательства способом, максимально соответствующим намерениям Сторон в момент заключения или изменения настоящего Соглашения.</p>
+                <p>12.2. Разрешение споров. Все споры Сторон в отношении данного Соглашения подлежат разрешению путем переписки и переговоров с использованием обязательного досудебного (претензионного) порядка. В случае невозможности достичь согласия между Сторонами путем переговоров в течение шестидесяти (60) календарных дней с момента получения другой Стороной письменной претензии, рассмотрение спора может быть передано любой заинтересованной стороной в суд в соответствии с процессуальным и материальным правом государства регистрации за исключением коллизионных норм.</p>
+                <p>Техническая поддержка: +7 915 449 1160</p>
+                <p>Адрес электронной почты: lawyer@nextrp.ru</p>
+                <p>Адрес для направления обращений в письменном виде: 125167, г. Москва, Ленинградский проспект, 56, а/я №3</p>
+            </div>
         </div>
     </div>
 
+    <!-- МОДАЛКА: Согласие на обработку данных -->
+    <div class="modal modal--text" id="personalDataModal">
+        <div class="modal__content">
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Согласие на обработку данных</h3>
+            <div class="modal__text">
+                <p class="modal__dates"><strong>Дата опубликования:</strong> 01.10.2020 г.</p>
+
+                <p>Настоящим я даю свое согласие Индивидуальному предпринимателю Миллеру Вячеславу Евгеньевичу и третьим лицам, осуществляющим обработку моих персональных данных по поручению Индивидуального предпринимателя Миллера Вячеслава Евгеньевича, на обработку моих персональных данных (фамилия, имя, дата рождения, номер телефона, адрес электронной почты, сведения об адресе аккаунта в социальных сетях, пользовательские данные (MAC-адрес, тип и версия ОС, тип и версия браузера, тип устройства и разрешение его экрана и т.д.)), в том числе на их сбор, запись, систематизацию, накопление, хранение, уточнение (обновление, изменение), извлечение, использование, передачу (предоставление, доступ), блокирование, удаление, уничтожение, совершаемых с использованием средств автоматизации или без использования таких средств.</p>
+
+                <p>Я проинформирован, что обработка моих персональных данных осуществляется в целях регистрации и авторизации Пользователя на Сервисе; предоставления доступа к Сервису; установления и поддержание связи с Пользователем; работоспособности и безопасности Сервиса; исполнение требований российского законодательства; предоставления мне справочной информации, получения обратной связи в отношении, улучшения качества обслуживания, изучения и анализа, изучения потребностей, проведения маркетинговых и иных исследований, направления мне рекламных и информационных сообщений, о проведении стимулирующих мероприятий рекламного характера, по электронной почте, посредством смс-сообщений, телефонных звонков и иных способов связи, подтвержденных мною, а также в целях обеспечения соблюдения законов, иных нормативных правовых актов РФ.</p>
+
+                <p>Я соглашаюсь на трансграничную передачу моих персональных данных на территорию стран, ратифицировавших «Конвенцию о защите физических лиц при автоматизированной обработке персональных данных» от 28.01.1981г.</p>
+
+                <p>Настоящее согласие дано мною лично и добровольно. Настоящее согласие действует в течение 20 лет и может быть отозвано мной в письменной форме в любой момент путем направления письменного уведомления Индивидуальному предпринимателю Миллеру Вячеславу Евгеньевичу</p>
+
+                <p>Более полная информация о политике в отношении обработки персональных данных приведена здесь.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА: Политика возвратов платежей -->
+    <div class="modal modal--text" id="refundPolicyModal">
+        <div class="modal__content">
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Политика возвратов платежей</h3>
+            <div class="modal__text">
+                <p>Уважаемые Клиенты, информируем Вас о том, что при запросе возврата денежных средств при отказе от покупки, возврат производится исключительно на ту же банковскую карту, с которой была произведена оплата.</p>
+
+                <h4 class="modal__heading">Политика безопасности</h4>
+
+                <p>При оплате заказа банковской картой, обработка платежа (включая ввод номера карты) происходит на защищенной странице процессинговой системы, которая прошла международную сертификацию. Это значит, что Ваши конфиденциальные данные (реквизиты карты, регистрационные данные и др.) не поступают, их обработка полностью защищена и никто, в том числе наш мы, не можем получить персональные и банковские данные клиента.</p>
+
+                <p>При работе с карточными данными применяется стандарт защиты информации, разработанный международными платёжными системами Visa и Masterсard-Payment Card Industry Data Security Standard (PCI DSS), что обеспечивает безопасную обработку реквизитов Банковской карты Держателя.</p>
+
+                <p>Применяемая технология передачи данных гарантирует безопасность по сделкам с Банковскими картами путем использования протоколов Secure Sockets Layer (SSL), Verifiedby Visa, Secure Code, и закрытых банковских сетей, имеющих высшую степень защиты.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- МОДАЛКА: Политика этичного взаимодействия -->
+    <div class="modal modal--text" id="interactionPolicyModal">
+        <div class="modal__content">
+            <button class="modal__close" data-close aria-label="Закрыть">&times;</button>
+            <h3 class="modal__title">Политика этичного взаимодействия в игровом пространстве</h3>
+            <div class="modal__text">
+                <p class="modal__dates">
+                    <strong>Дата опубликования:</strong> 16.08.2024 г.<br>
+                    <strong>Дата последнего обновления:</strong> 27.06.2024 г.
+                </p>
+
+                <p>NEXTRP - https://nextrp.ru/ (по тексту также называемое "мы", "нас", "наш", "нами" "NEXTRP" или "Игра") стремится бороться с недопустимым и незаконным поведением в нашем сообществе. В рамках этой постоянной работы мы внедрили настоящую политику, которая объясняет, какое поведение мы считаем неприемлемым, и что вы можете сделать, если столкнулись с подобными проявлениями в отношении вас или других пользователей NEXTRP (далее - Политика).</p>
+
+                <p>Политика является неотъемлемой частью Правил игровых серверов и Лицензионного соглашения, опубликованного по адресу: https://nextrp.ru/agreement.</p>
+
+                <p>Пожалуйста, ознакомьтесь с ней, чтобы помочь нам оперативно реагировать на неприемлемое и недопустимое поведение.</p>
+
+                <p>Обратите внимание, что правила, изложенные в настоящей Политике не являются исчерпывающими и не описывают всех возможных ситуаций недопустимого поведения. Во всех случаях последнее слово остается за модераторами Игры.</p>
+
+                <p><strong>ЕСЛИ ВЫ СТОЛКНУЛИСЬ С НЕДОПУСТИМЫМ ПОВЕДЕНИЕМ В ОТНОШЕНИИ СЕБЯ ИЛИ ДРУГИХ ПОЛЬЗОВАТЕЛЕЙ, А ТАКЖЕ ИНФОРМАЦИЕЙ, ЗАПРЕЩЕННОЙ К РАСПРОСТРАНЕНИЮ В СООТВЕТСТВИИ С НАСТОЯЩЕЙ ПОЛИТИКОЙ, ПОЖАЛУЙСТА, ДАЙТЕ НАМ ЗНАТЬ С ПОМОЩЬЮ КНОПКИ "ПОЖАЛОВАТЬСЯ" В ЧАТЕ, РАСПОЛОЖЕННОЙ НА СООБЩЕНИИ, КОТОРОЕ КАЖЕТСЯ ВАМ НЕДОПУСТИМЫМ ИЛИ НАПРАВЬТЕ ОБРАЩЕНИЕ В СЛУЖБУ ПОДДЕРЖКИ, ЕСЛИ НАРУШЕНИЕ ОБНАРУЖЕНО ВАМИ ВНЕ ИГРОВЫХ ЧАТОВ. НАШИ МОДЕРАТОРЫ РАССМОТРЯТ ОБРАЩЕНИЕ И ПРИМУТ НЕОБХОДИМЫЕ МЕРЫ.</strong></p>
+
+                <p>Под Игрой в настоящей Политике понимается все игровое пространство NEXTRP, как определено в п.1.2 Лицензионного соглашения, включая все его части, внутриигровые чаты, текстовые и голосовые чаты, форум, все возможные каналы для обмена информацией, существующие внутри Игры, а также официальные сайты и страницы в социальных сетях (далее по тексту - "Пространство NEXTRP").</p>
+
+                <p>Недопустимое, нежелательное поведение и информация, запрещенная для распространения в соответствии с Политикой, запрещены во всем Пространстве NEXTRP в любой форме, включая текстовые упоминания, изображения, видео, устные высказывания, ссылки и иные формы и способы распространения информации, за исключением случаев, описанных в настоящей Политике и осуществляемых в рамках Правил серверов и Лицензионного соглашения.</p>
+
+                <p>Помимо нижеперечисленных правил, запрещается публичное обсуждение данной Политики, Правил серверов и Лицензионного соглашения, побуждение и подстрекательство к нарушению данных документов.</p>
+
+                <h4 class="modal__heading">Основные принципы игрового сообщества</h4>
+                <p>Администрация NEXTRP призывает относиться с уважением ко всем участникам игрового сообщества.</p>
+                <p>В Игре запрещены травля и/или преследования, включая уничижительные, оскорбительные комментарии в адрес пользователей, в том числе на почве расы, возраста, культуры, веры, умственных или физических возможностей, а также страны происхождения.</p>
+                <p>В Игре недопустима пропаганда отдельных лиц, повестки, движения, которые поощряют дискриминацию и/или насилие, разжигание конфликтов на почве расы, возраста, культуры, веры, умственных или физических возможностей, а также страны происхождения, любые форм буллинга, клеветы, ложных обвинений.</p>
+                <p>Язык ненависти и дискриминации является оскорбительным и неприемлемым, равно как и домогательства и угрозы в адрес другого игрока.</p>
+
+                <h4 class="modal__heading">Недопустимость рекламы, не связанной с игровым процессом</h4>
+                <p>Мы просим пользователей воздерживаться от размещения ссылок на иные проекты и сайты, ресурсы, не имеющие отношения к Игре, а также от размещения любых сообщений, объявлений рекламного характера, направленных на привлечение внимания к каким-либо объектам, товарам, работам, услугам, мероприятиям, информационным ресурсам, сайтам и страницам в сети "Интернет", к ресурсам, предлагающим продажу, доставку, возможность приобретения и/или распространяющим информацию, материалы в том числе:</p>
+                <p>● об алкогольной продукции и/или спиртосодержащей продукции;</p>
+                <p>● о лекарственных препаратах;</p>
+                <p>● о деятельности, связанной с организацией и проведением азартных игр и лотерей, а также о возможности совершения действий по переводу денежных средств и приему платежей при осуществлении деятельности по организации и проведению азартных игр.</p>
+                <p>Размещение вышеуказанной информации является неприемлемым и недопустимым во всем Пространстве NEXTRP, если такие сообщения не направлены на реализацию внутриигровых объектов в Игре в рамках Правил серверов и Лицензионного соглашения.</p>
+
+                <h4 class="modal__heading">Недопустимость пропаганды и рекламы наркотикотических средств, психотропных и психоактивных веществ</h4>
+                <p>В целях поддержания безопасной игровой среды, во всем Пространстве NEXTRP запрещается распространение информации о:</p>
+                <p>● наркотикотических средствах, психотропных и психоактивных веществах и/или их аналогах ("наркотические средства"), их названий, разновидностей;</p>
+                <p>● методах и способах изготовления, разработки, использования наркотических средств;</p>
+                <p>● каналах и местах приобретения и распространения, культивирования наркотических средств;</p>
+                <p>● способах и возможностях доступа к наркотическим средствам;</p>
+                <p>● сообществах и/или отдельных лицах, информационных ресурсах, сайтах, страницах в сети "Интернет", оффлайн и онлайн-магазинах прямо или косвенно связанных с деятельностью по изготовлению, реализации или использованию наркотических средств и/или аналогов;</p>
+                <p>● преимуществах в использовании отдельных наркотических средств;</p>
+                <p>● любой другой информации, направленной на популяризацию наркотических средств и вовлечение кого-либо в использование, распространение, изготовление наркотических средств или их аналогов.</p>
+
+                <h4 class="modal__heading">Недопустимость пропаганды или оправдания терроризма, экстремизма, а также распространения иной запрещенной информации</h4>
+                <p>Как описано в настоящей Политике в соответствии с основными принципами игрового сообщества, а также действующим законодательством Российской Федерации во всем Пространстве NEXTRP также запрещается:</p>
+
+                <h4 class="modal__heading">Оправдание терроризма</h4>
+                <p>● призывы, обращения к пользователям Игры с целью побудить их к осуществлению террористической деятельности;</p>
+                <p>● оправдание или пропаганда терроризма, формирование привлекательности или представлений о допустимости террористической деятельности;</p>
+                <p>● распространение ложных сообщений об актах терроризма и иной информации, которая может создать угрозу имуществу, массовому нарушению общественного порядка и/или общественной безопасности, жизни и/или здоровью людей;</p>
+                <p>● любые упоминания, распространение или публикация информации, касающейся наименований организаций, их деятельности, символики, а также любых других аспектов, связанных с организациями, включенными в Единый Федеральный список организаций, в том числе международных признанных в соответствии с законодательством Российской Федерации террористическими, опубликованный по адресу: http://www.fsb.ru/fsb/npd/terror.htm. Это включает, но не ограничивается, любыми прямыми или косвенными ссылками на данные организации, обсуждение их целей, методов, программ, мероприятий или иной связанной информации.</p>
+                <p>Распространение вышеуказанной информации и действий является неприемлемым и недопустимым во всем Пространстве NEXTRP, если такие сообщения не направлены на реализацию Игрового сценария и осуществляются в рамках Правил серверов и Лицензионного соглашения.</p>
+
+                <h4 class="modal__heading">Оправдание экстремизма</h4>
+                <p>● призывы к осуществлению экстремистской деятельности, заявления о признании экстремистской деятельности правильной и нуждающийся в поддержке;</p>
+                <p>● призывы к массовым беспорядкам, участию в массовых (публичных) мероприятиях, проводимых с нарушением установленного порядка;</p>
+                <p>● любые упоминания, распространение или публикация информации, касающейся наименований организаций, их деятельности, символики, а также любых других аспектов, связанных с организациями, включенными в Перечень экстремистских организаций, опубликованный по адресу: https://minjust.gov.ru/ru/documents/7822/. Это включает, но не ограничивается, любыми прямыми или косвенными ссылками на данные организации, обсуждение их целей, методов, программ, мероприятий или иной связанной информации.</p>
+
+                <h4 class="modal__heading">Иная запрещенная деятельность и информация</h4>
+                <p>● распространение информации о способах, методах самодельного изготовления взрывчатых веществ и взрывных устройств; о способах, методах незаконного изготовления или переделки оружия, основных частей огнестрельного оружия, незаконного изготовления боеприпасов, если такая информация не направлена на реализацию Игрового сценария, предусмотренного разработчиками Игры и осуществляется в рамках Правил серверов и Лицензионного соглашения;</p>
+                <p>● распространение информации или материалов порнографического характера (18+), а также описание, изображение и/или побуждение к применению сексуального насилия или насильственных действий;</p>
+                <p>● пропаганда и/или любое упоминание педофилии, смены пола, изменения сексуальной ориентации;</p>
+                <p>● распространение информации, о способах, методах обеспечения доступа к информационным ресурсам, доступ к которым ограничен органами государственной власти;</p>
+                <p>● Осуществление иной деятельности или распространение материалов и/или информации, запрещенных действующим законодательством Российской Федерации;</p>
+
+                <h4 class="modal__heading">Дискуссии на чувствительные темы</h4>
+                <p>В целях поддержания дружественной и безопасной игровой среды для всех участников, запрещаются дискуссии на политические, военные, религиозные и другие темы, перечисленные в данном разделе, включая, но не ограничиваясь:</p>
+                <p>● высказывания о религии, расе, национальности, личностных характеристиках, в том числе высказывания, совершенные в завуалированном формате, которые могут вызвать разногласия или конфликт в игровом сообществе;</p>
+                <p>● осуждение или противопоставление игроков по их религиозным убеждениям, разжигание национальной, расовой или религиозной ненависти и вражды, конфликтов;</p>
+                <p>● оправдание или пропаганда этнического неравенства, оскорбление игроков или группы игроков за принадлежность их к какой-либо этнической группе, противопоставление этнических групп(ы) другим(ой), приводящих к негативным отношениям;</p>
+                <p>● дискуссии на тему политических партий, лидеров, идеологий или, действий политиков, позиции государств или органов государственной власти, некоммерческих организаций, общественных объединений, принятии политических, экономических мер в отношении государств, реальных политических событиях, действиях или намерениях государственных органов, вооруженных сил или других официальных организаций в отношении осуществления государственной политики и реализации соответствующих полномочий;</p>
+                <p>● распространение сведений, касающихся осуществления финансирования политических и/или религиозных, военных организаций, вооруженных формирований, международных организаций, государств.</p>
+
+                <h4 class="modal__heading">Перенос конфликтов из Игрового мира в реальный</h4>
+                <p>Любые угрозы в реальной жизни запрещены, в том числе публикация и распространение информации, которые прямо или косвенно:</p>
+                <p>● содержат угрозы и/или намеки на насильственные действия в любой сфере, не относящейся к Игре;</p>
+                <p>● содержат угрозы и/или намеки на применение в реальной жизни насильственных действий любого характера в связи с действиями игрового персонажа или иными действиями Игрока;</p>
+                <p>● сбор и/или разглашение, предоставление доступа к личной информации об Игроках, распространение в любой форме в любой части игры, на форуме, в игровых чатах, официальных сайтах, социальных сетях Игры и любых других источниках сообщений о реальной жизни и данных игрока (в отсутствие его разрешения), в том числе фото, номера телефонов, места проживания, место работы и другие данные;</p>
+                <p>● вовлечение в совершение противоправных, насильственных действий в реальном мире или распространение информации, направленной на склонение пользователей в совершение таких действий, представляющих угрозу для их жизни и/или здоровья либо для жизни и/или здоровья иных лиц, за пределами игрового пространства, распространение информации о способах и методах совершения самоубийства, а также призывов к совершению самоубийства.</p>
+
+                <p>Для получения дополнительных подробностей, разъяснений, связанных с применением, действием настоящей Политики, пожалуйста, свяжитесь с технической поддержкой NEXTRP любым из следующих способов:</p>
+                <p>- Виджет справа внизу на официальном сайте nextrp.ru</p>
+                <p>- Почта: support@nextrp.ru</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <div class="CookiesBlock_wrapper__hi1Rf" id="cookies">
+        <p class="CookiesBlock_text__Bb7Hz">Мы <a href="https://nextrp.ru/cookies-info">используем cookies</a>. Оставаясь на сайте, вы соглашаетесь с нашей <a href="https://nextrp.ru/policy-privacy">политикой конфиденциальности</a>.</p>
+        <button class="CookiesBlock_btn__iG6tx" id="cookiesAccept" type="button">Принять</button>
+    </div>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-    <script>
-        const LAUNCHER_URL = 'https://nextrp.ru/download/launcher.exe';
-        const TRAILER_URL = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
 
-        const developData = [
-            { title: 'Работы', desc: 'Выбери занятие себе по душе', info: '+50 видов деятельности и развлечений', earn: 2, time: 4, diff: 3 },
-            { title: 'Бизнес', desc: 'Поднимайся с низов в топы', info: 'Строй империю и управляй финансами', earn: 5, time: 3, diff: 4 },
-            { title: 'Гонки', desc: 'Сможешь занять первое место в наших турнирах?', info: 'Соревнуйся с лучшими гонщиками', earn: 3, time: 2, diff: 2 }
-        ];
-
-        function renderRating(el, value) {
-            el.innerHTML = '';
-            for (let i = 1; i <= 5; i++) {
-                const icon = document.createElement('span');
-                icon.className = 'develop-rating__icon' + (i <= value ? ' develop-rating__icon--filled' : '');
-                el.appendChild(icon);
-            }
-        }
-
-        function updateDevelopInfo(index) {
-            const d = developData[index];
-            document.getElementById('developRatingTitle').textContent = d.title;
-            document.getElementById('developRatingDesc').textContent = d.desc;
-            document.getElementById('developInfoTitle').textContent = d.title;
-            document.getElementById('developInfoDesc').textContent = d.info;
-            renderRating(document.getElementById('ratingEarn'), d.earn);
-            renderRating(document.getElementById('ratingTime'), d.time);
-            renderRating(document.getElementById('ratingDiff'), d.diff);
-            document.querySelectorAll('.develop__thumb').forEach((t, i) => {
-                t.classList.toggle('develop__thumb--active', i === index);
-            });
-        }
-
-        function openLauncher() {
-            const iframe = document.createElement('iframe');
-            iframe.style.display = 'none';
-            iframe.src = 'nextrp://open';
-            document.body.appendChild(iframe);
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-                window.location.href = LAUNCHER_URL;
-            }, 2000);
-        }
-
-        function openModal(id) {
-            document.getElementById(id).classList.add('modal--open');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal(id) {
-            const modal = document.getElementById(id);
-            modal.classList.remove('modal--open');
-            document.body.style.overflow = '';
-            if (id === 'trailerModal') {
-                document.getElementById('trailerFrame').src = '';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cookies
-            const cookies = document.getElementById('cookies');
-            if (!localStorage.getItem('cookies_accepted')) {
-                cookies.classList.add('cookies--visible');
-            }
-            document.getElementById('cookiesAccept').onclick = () => {
-                localStorage.setItem('cookies_accepted', 'true');
-                cookies.classList.add('cookies--hidden');
-                setTimeout(() => cookies.classList.remove('cookies--visible'), 600);
-            };
-
-            // Header scroll
-            const header = document.getElementById('header');
-            window.addEventListener('scroll', () => {
-                header.classList.toggle('header--scrolled', window.scrollY > 50);
-            });
-
-            // Mobile menu
-            const burger = document.getElementById('burgerBtn');
-            const mobileMenu = document.getElementById('mobileMenu');
-            burger.onclick = () => {
-                burger.classList.toggle('header__burger--active');
-                mobileMenu.classList.toggle('header__mobile--open');
-            };
-            mobileMenu.querySelectorAll('a').forEach(link => {
-                link.onclick = () => {
-                    burger.classList.remove('header__burger--active');
-                    mobileMenu.classList.remove('header__mobile--open');
-                };
-            });
-
-            // Swipers
-            new Swiper('.updates__slider', {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                freeMode: true,
-                scrollbar: { el: '.updates__slider .swiper-scrollbar', draggable: true },
-                breakpoints: { 768: { slidesPerView: 2 }, 1024: { slidesPerView: 3 } }
-            });
-
-            const developThumbs = new Swiper('#developThumbs', {
-                slidesPerView: 3,
-                spaceBetween: 12,
-                watchSlidesProgress: true
-            });
-
-            const developSlider = new Swiper('.develop__slider', {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                navigation: { nextEl: '.develop__next', prevEl: '.develop__prev' },
-                thumbs: { swiper: developThumbs },
-                on: {
-                    slideChange(s) { updateDevelopInfo(s.activeIndex); }
-                }
-            });
-
-            developThumbs.on('click', (s) => {
-                developSlider.slideTo(s.clickedIndex);
-            });
-
-            updateDevelopInfo(0);
-
-            const exploreThumbs = new Swiper('.explore__thumbs', {
-                slidesPerView: 4,
-                spaceBetween: 10,
-                watchSlidesProgress: true,
-                breakpoints: { 768: { slidesPerView: 6 } }
-            });
-
-            new Swiper('.explore__main', {
-                slidesPerView: 1,
-                spaceBetween: 20,
-                navigation: { nextEl: '.explore__next', prevEl: '.explore__prev' },
-                thumbs: { swiper: exploreThumbs }
-            });
-
-            // Parallax
-            const parallaxItems = document.querySelectorAll('.parallax__item');
-            document.addEventListener('mousemove', (e) => {
-                const x = (e.clientX / window.innerWidth) * 100;
-                const y = (e.clientY / window.innerHeight) * 100;
-                parallaxItems.forEach((item, i) => {
-                    const speed = 0.06 + i * 0.015;
-                    const moveX = (x - 50) * speed;
-                    const moveY = (y - 50) * speed;
-                    item.style.transform = `translate(${moveX}px, ${moveY}px) skew(-23deg) rotate(-15deg)`;
-                });
-            });
-
-            // Side nav scroll spy
-            const sections = ['welcome', 'updates', 'develop', 'fight', 'explore', 'stand-out', 'win'];
-            const sideItems = document.querySelectorAll('.side-nav__item');
-
-            sideItems.forEach(item => {
-                item.onclick = () => {
-                    const id = item.dataset.section;
-                    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-                };
-            });
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        sideItems.forEach(item => {
-                            item.classList.toggle('side-nav__item--active', item.dataset.section === entry.target.id);
-                        });
-                    }
-                });
-            }, { threshold: 0.4 });
-
-            sections.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) observer.observe(el);
-            });
-
-            // Play / CTA buttons
-            ['playBtn', 'fightBtn', 'exploreBtn', 'standoutBtn', 'winBtn'].forEach(id => {
-                document.getElementById(id)?.addEventListener('click', openLauncher);
-            });
-
-            // Modals
-            document.getElementById('trailerBtn').onclick = () => {
-                document.getElementById('trailerFrame').src = TRAILER_URL;
-                openModal('trailerModal');
-            };
-            document.getElementById('systemBtn').onclick = () => openModal('systemModal');
-
-            document.querySelectorAll('[data-close]').forEach(el => {
-                el.onclick = () => {
-                    el.closest('.modal').classList.remove('modal--open');
-                    document.body.style.overflow = '';
-                    document.getElementById('trailerFrame').src = '';
-                };
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    document.querySelectorAll('.modal--open').forEach(m => {
-                        m.classList.remove('modal--open');
-                        document.getElementById('trailerFrame').src = '';
-                    });
-                    document.body.style.overflow = '';
-                }
-            });
-        });
-    </script>
+    <script src="js/config.js"></script>
+    <script src="js/launcher.js"></script>
+    <script src="js/cookies.js"></script>
+    <script src="js/header.js"></script>
+    <script src="js/swipers.js"></script>
+    <script src="js/parallax.js"></script>
+    <script src="js/side-nav.js"></script>
+    <script src="js/modals.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>

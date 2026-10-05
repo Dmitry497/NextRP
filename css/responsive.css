@@ -1,0 +1,16 @@
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1200px) {
+    .Navigation_wrapper__GWxO6 { display: none; }
+}
+@media (max-width: 960px) {
+    .Navigation_wrapper__GWxO6 { display: none; }
+    .NavBar_nav__rNNWg { display: none; }
+    .Socials_socials__nN8pJ { display: none; }
+    .Divider_wrapper__R1uUp { display: none; }
+    .BurgerMenu_wrapper__YQoUZ { display: block; }
+}
+@media (max-width: 768px) {
+    .Header_header__T4nh2 { padding: 0 12px; gap: 16px; }
+    .ratingsBlock { display: none; }
+    .Footer_container__rvM4J { padding: 20px 12px 30px !important; }
+}

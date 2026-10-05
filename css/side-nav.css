@@ -1,0 +1,93 @@
+/* ===== SIDE NAV ===== */
+.Navigation_wrapper__GWxO6 {
+    position: fixed;
+    right: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
+    display: block;
+}
+@media screen and (max-width: 1440px) { .Navigation_wrapper__GWxO6 { right: 20px; } }
+@media screen and (max-width: 960px) { .Navigation_wrapper__GWxO6 { display: none; } }
+.Navigation_wrapper__GWxO6:after,
+.Navigation_wrapper__GWxO6:before {
+    content: "";
+    position: absolute;
+    background: #f4e9e9;
+    opacity: .1;
+    right: -2px;
+    width: 2px;
+    height: 2px;
+    border-radius: 2px;
+    z-index: 99;
+}
+.Navigation_wrapper__GWxO6:before { top: -6px; }
+.Navigation_wrapper__GWxO6:after { bottom: -6px; }
+
+.Navigation_list__F3L80 {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+.Navigation_item__9Y5Ky {
+    height: 24px;
+    justify-content: flex-end;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    position: relative;
+    color: inherit;
+    background: transparent;
+}
+.Navigation_item__9Y5Ky:after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    border-radius: 2px;
+    transition: all .3s ease;
+    background: hsla(0,33%,94%,.2);
+    cursor: pointer;
+}
+.Navigation_item__9Y5Ky.Navigation_active__II_5V .Navigation_link__tBcOj,
+.Navigation_item__9Y5Ky:hover .Navigation_link__tBcOj {
+    opacity: 1;
+    cursor: pointer;
+}
+.Navigation_item__9Y5Ky.Navigation_active__II_5V,
+.Navigation_item__9Y5Ky:hover {
+    background: linear-gradient(90deg, rgba(153,35,35,0), rgba(255,58,58,.15));
+}
+.Navigation_item__9Y5Ky.Navigation_active__II_5V:after,
+.Navigation_item__9Y5Ky:hover:after { background: #ff3a3a; }
+
+.Navigation_link__tBcOj {
+    padding: 8px 8px 8px 0;
+    opacity: 0;
+    transition: opacity .3s ease;
+}
+
+.Navigation_lineUpper__V7Sd0,
+.Navigation_lineLower__9nhId {
+    width: 2px;
+    height: 64px;
+    border-radius: 2px;
+    position: absolute;
+    right: -2px;
+    opacity: .1;
+}
+.Navigation_lineUpper__V7Sd0 {
+    background: linear-gradient(180deg, hsla(0,33%,94%,0), #f4e9e9);
+    top: -74px;
+}
+.Navigation_lineLower__9nhId {
+    background: linear-gradient(180deg, #f4e9e9, hsla(0,33%,94%,0));
+    bottom: -74px;
+}
